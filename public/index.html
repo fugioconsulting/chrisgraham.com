@@ -119,7 +119,7 @@
 <link rel="modulepreload" as="script" href="/assets/projects/user_pages/chunk-YNQPYXFA.js" integrity="sha256-x/HdZLQESPTc/h0ztdV4gkvTjWtDAHkT8F+/GpZQ37Q=">
 <link rel="modulepreload" as="script" href="/assets/projects/user_pages/chunk-IF35HPMH.js" integrity="sha256-lTEWE+urQSy2dpODKL1T74MBoRB91JB9pMZNH92A/wc=">
 <link rel="modulepreload" as="script" href="/assets/projects/user_pages/chunk-XDBWEWVZ.js" integrity="sha256-2hBsAOq4lcyEDJD7YWkDFWy+si0HfEd4FIobkBbkrz0=">
-    <link rel="stylesheet" href="/assets/projects/user_pages/user_pages-FQBR7CYO.css" integrity="sha256-cGrxbI+0yirKSshNk1bcsCsRZeIUJcuKrCres8SyYLw=">
+    <link rel="stylesheet" href="/assets/projects/user_pages/user_pages-FQBR7CYO.css" integrity="sha256-DjBnijb5qnaQYrQSKpRSkqoDbMWc8SduFhE/j4Q8U8A=" crossorigin="anonymous">
     
     <style id="universal-block-css">
         [data-page-element="UniversalBlock/20693681"] .id-6Z-b94aX5-73 {
@@ -4429,87 +4429,45 @@ padding-bottom: 150px;
 </style>
 
 
-<!-- deploy-check: 1778098509-6ca7e6ed -->
+<!-- deploy-check: 1778099203-bce4c56c -->
 <style id="static-clone-mobile-fix">
-/* Universal: belt-and-suspenders against horizontal overflow */
-html, body { overflow-x: hidden !important; max-width: 100vw !important; }
+/* Belt-and-suspenders against horizontal overflow on the document */
+html, body { overflow-x: hidden !important; }
 img, picture, video, iframe { max-width: 100% !important; height: auto !important; }
 
-/* Re-assert framework's show-only hiding so our mobile rules can't accidentally unhide it.
-   Also re-assert with !important since the animation system can otherwise set display on
-   data-show-only="none" elements that should always be hidden. */
+/* Re-assert framework's show-only hiding so our width/wrap rules can't unhide
+   anything. Also re-assert with !important for data-show-only="none" because
+   the animation system can otherwise override the framework's plain
+   display: none (no !important). */
 [data-show-only="none"] { display: none !important; }
 
 @media (max-width: 770px) {
-  [data-show-only="desktop"],
-  [data-show-only="desktop"][data-page-element="RowContainer/V1"],
-  [data-show-only="desktop"][data-page-element="ColContainer/V1"],
-  [data-show-only="desktop"][data-page-element="SectionContainer/V1"] {
-    display: none !important;
-  }
+  [data-show-only="desktop"] { display: none !important; }
 }
 @media (min-width: 771px) {
   [data-show-only="mobile"] { display: none !important; }
 }
 
 @media (max-width: 991px) {
-  /* Universal cap so nothing exceeds viewport. Doesn't touch display, so it
-     can't unhide elements that the framework hides via display:none. */
-  * { max-width: 100vw !important; }
-
-  /* Constrain widths on visible (non-desktop-only) layout containers */
-  [data-page-element="RowContainer/V1"]:not([data-show-only="desktop"]),
-  [data-page-element="ColContainer/V1"]:not([data-show-only="desktop"]),
-  [data-page-element="SectionContainer/V1"]:not([data-show-only="desktop"]),
-  .row:not([data-show-only="desktop"]),
-  .col:not([data-show-only="desktop"]),
-  [class*="col-md-"]:not([data-show-only="desktop"]),
-  [class*="col-sm-"]:not([data-show-only="desktop"]),
-  [class*="col-xs-"]:not([data-show-only="desktop"]),
-  [class*="col-lg-"]:not([data-show-only="desktop"]) {
+  /* Per-id width rules in <style id="page-style"> set explicit widths like
+     1170px / 1200px on layout containers, which would overflow on phones.
+     Override to fit the viewport without touching display state. */
+  [class*="id-"][data-page-element="RowContainer/V1"]:not([data-show-only="desktop"]),
+  [class*="id-"][data-page-element="ColContainer/V1"]:not([data-show-only="desktop"]),
+  [class*="id-"][data-page-element="SectionContainer/V1"]:not([data-show-only="desktop"]) {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
-    flex: 0 0 auto !important;
     box-sizing: border-box !important;
   }
 
-  /* Per-id width rules set explicit widths like 1170px on layout containers;
-     override at !important without touching display. */
-  [class*="id-"][data-page-element="RowContainer/V1"]:not([data-show-only="desktop"]),
-  [class*="id-"][data-page-element="ColContainer/V1"]:not([data-show-only="desktop"]),
-  [class*="id-"][data-page-element="SectionContainer/V1"]:not([data-show-only="desktop"]),
-  [class*="id-"].row:not([data-show-only="desktop"]),
-  [class*="id-"].col:not([data-show-only="desktop"]),
-  [class*="id-"].containerInner:not([data-show-only="desktop"]),
-  [class*="id-"].containerInnerV2:not([data-show-only="desktop"]) {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  .row:not([data-show-only="desktop"]),
-  .col:not([data-show-only="desktop"]) {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-
-  /* Force every text element to wrap, including long words */
-  p, span, h1, h2, h3, h4, h5, h6, a, li,
-  .elHeadline, .elText, .elTextWrap, .elParagraph,
-  [data-page-element*="Headline"]:not([data-show-only="desktop"]),
-  [data-page-element*="Paragraph"]:not([data-show-only="desktop"]),
-  [data-page-element*="Text"]:not([data-show-only="desktop"]) {
-    word-break: break-word !important;
+  /* Allow long words (URLs, hashtags) to wrap so they can't push the parent wider */
+  p, span, h1, h2, h3, h4, h5, h6, li,
+  .elHeadline, .elText, .elTextWrap, .elParagraph {
     overflow-wrap: anywhere !important;
-    white-space: normal !important;
-    max-width: 100% !important;
+    word-break: break-word !important;
   }
 }
-
-/* Font sizes: let the framework's own style-guide CSS handle scaling.
-   The framework defines responsive font sizes via CSS variables; overriding here
-   shrinks headlines that the framework intentionally renders large on mobile. */
 </style>
 
 </head>

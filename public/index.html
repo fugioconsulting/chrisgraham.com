@@ -4413,6 +4413,21 @@ padding-bottom: 150px;
 </script>
 
   
+
+<style id="static-clone-popup-suppress">
+[data-page-element="Modal/V1"],
+[data-page-element="ModalContainer/V1"],
+.elModal,
+.modal-wrapper,
+.cf-modal,
+[class*="popup-overlay"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+</style>
+
 </head>
 <body>
 <script id="__cf_fetcher" data-turbo-eval="false">
@@ -4657,10 +4672,17 @@ window.fetch = async (request, init) => {
   
 
 
+
+
+
 <script>
 (function(){
   var ACUITY_URL = "https://chrisgraham.as.me/Weekly1to1";
-  function go(name, email){
+  function go(){
+    var nameEl  = document.querySelector('input[name="name"], input#cf_contact_name, input#cf_contact_first_name');
+    var emailEl = document.querySelector('input[name="email"], input#cf_contact_email');
+    var name  = nameEl  ? (nameEl.value  || "") : "";
+    var email = emailEl ? (emailEl.value || "") : "";
     var first="", last="";
     if (name) { var parts = String(name).trim().split(/\s+/); first = parts.shift() || ""; last = parts.join(" "); }
     var p = new URLSearchParams();
@@ -4670,23 +4692,25 @@ window.fetch = async (request, init) => {
     var qs = p.toString();
     window.location.href = ACUITY_URL + (qs ? "?" + qs : "");
   }
-  function harvest(){
-    var nameEl  = document.querySelector('input[name="name"], input#cf_contact_name, input#cf_contact_first_name');
-    var emailEl = document.querySelector('input[name="email"], input#cf_contact_email');
-    return { name: nameEl ? nameEl.value : "", email: emailEl ? emailEl.value : "" };
-  }
-  document.addEventListener("submit", function(e){
-    e.preventDefault();
-    var v = harvest(); go(v.name, v.email);
-  }, false);
+  // Any form submission -> Acuity
+  document.addEventListener("submit", function(e){ e.preventDefault(); go(); }, false);
+  // Any click on a CTA targeting #open-popup, #submit-form, or any anchor
+  // pointing at the (now-hidden) popup -> Acuity
   document.addEventListener("click", function(e){
-    var a = e.target.closest('a[href="#submit-form"], a[href="#open-popup"]');
+    var a = e.target.closest('a[href="#open-popup"], a[href="#submit-form"], a[href*="popup"], button[data-page-element*="SubmitButton"]');
     if (!a) return;
     e.preventDefault();
-    var v = harvest();
-    if (v.email || v.name) go(v.name, v.email);
-    else window.location.href = ACUITY_URL;
+    go();
   }, false);
+  // Belt-and-suspenders: also nuke any Modal/popup containers that exist.
+  function purge(){
+    document.querySelectorAll('[data-page-element="Modal/V1"], [data-page-element="ModalContainer/V1"], .elModal, .modal-wrapper').forEach(function(el){ el.remove(); });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", purge);
+  } else {
+    purge();
+  }
 })();
 </script>
 

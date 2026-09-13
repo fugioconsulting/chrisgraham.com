@@ -17,6 +17,11 @@ app.get("/health", (_req, res) => {
   res.json({ status: "ok", app: "hello-there", ts: new Date().toISOString() });
 });
 
+// Side page: /coaching (also /coaching/ and any casing) -> public/coaching.html
+app.get(/^\/coaching\/?$/i, (_req, res) => {
+  res.sendFile(path.join(__dirname, "public", "coaching.html"));
+});
+
 // Anything else falls back to index.html so deep links work.
 app.get("*", (_req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));

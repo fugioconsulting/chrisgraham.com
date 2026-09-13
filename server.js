@@ -10,6 +10,13 @@ app.use(
   express.static(path.join(__dirname, "public"), {
     extensions: ["html"],
     maxAge: "1h",
+    // HTML revalidates on every load so a deploy shows up immediately.
+    // Hashed assets (/assets, /img) keep the 1h cache.
+    setHeaders(res, filePath) {
+      if (filePath.endsWith(".html")) {
+        res.setHeader("Cache-Control", "no-cache");
+      }
+    },
   })
 );
 

@@ -117,14 +117,14 @@
     /* ---------- video / VSL ---------- */
     .vsl {
       margin: 56px auto 0;
-      max-width: 860px;
+      max-width: 420px;
     }
 
-    /* 16:9 responsive frame. Drop the VSL embed inside .vsl-frame. */
+    /* 9:16 portrait frame. Drop the VSL embed inside .vsl-frame. */
     .vsl-frame {
       position: relative;
       width: 100%;
-      padding-top: 56.25%;
+      padding-top: 177.78%;
       background: #0b0b0b;
       border: 1px solid var(--hairline);
       border-radius: 4px;
@@ -222,15 +222,12 @@
     </section>
 
     <!-- ============================================================
-         VSL SLOT
-         Replace the .vsl-placeholder block below with your video embed.
-         Anything dropped inside .vsl-frame is stretched to fill 16:9.
-         e.g.  <iframe src="https://player.vimeo.com/video/XXXX" allowfullscreen></iframe>
+         VSL SLOT — portrait 9:16. Anything dropped inside .vsl-frame
+         is stretched to fill the frame.
          ============================================================ -->
     <section class="vsl wrap">
       <div class="vsl-frame">
-        <div class="vsl-placeholder">Video coming soon</div>
-        <!-- <iframe src="" title="Chris Graham" allowfullscreen></iframe> -->
+        <iframe src="https://www.youtube.com/embed/0p35Qcr3rP4" title="Chris Graham" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
     </section>
 

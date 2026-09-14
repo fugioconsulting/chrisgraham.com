@@ -141,6 +141,58 @@
       border: 0;
     }
 
+    /* Bare-bones facade: opaque poster over the player until click, so no
+       YouTube title bar, logo, or end-screen grid is ever visible. */
+    .vsl-poster {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      border: 0;
+      background: #0b0b0b;
+      cursor: pointer;
+      display: block;
+    }
+
+    .vsl-poster img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .vsl-poster.is-hidden { display: none; }
+
+    .vsl-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+      transition: transform 0.15s ease;
+    }
+
+    .vsl-play::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-36%, -50%);
+      border-style: solid;
+      border-width: 13px 0 13px 21px;
+      border-color: transparent transparent transparent #0b0b0b;
+    }
+
+    .vsl-poster:hover .vsl-play { transform: translate(-50%, -50%) scale(1.06); }
+
     .vsl-placeholder {
       position: absolute;
       inset: 0;
@@ -216,24 +268,27 @@
 
   <main>
     <section class="hero wrap">
-      <p class="eyebrow">Hello there. My name is Chris Graham.</p>
       <h1>AI Coaching for Leaders</h1>
-      <p class="lede">I'm a strategic consultant trusted by Emmy®, Grammy®, Oscar® &amp; Tony® winners, legislators, advocates &amp; employee owners.</p>
+      <p class="lede">Working smarter, not harder with AI to accomplish your mission.</p>
     </section>
 
     <!-- ============================================================
-         VSL SLOT — portrait 9:16. Anything dropped inside .vsl-frame
-         is stretched to fill the frame.
+         VSL SLOT — portrait 9:16, bare-bones YouTube. Poster facade
+         covers the player until click; the embed then runs with
+         modestbranding + rel=0, and the end-screen grid is suppressed
+         by the script at the bottom of the page.
          ============================================================ -->
     <section class="vsl wrap">
-      <div class="vsl-frame">
-        <iframe src="https://www.youtube.com/embed/0p35Qcr3rP4" title="Chris Graham" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <div class="vsl-frame" id="vsl">
+        <button class="vsl-poster" id="vslPoster" type="button" aria-label="Play video">
+          <img id="vslPosterImg" src="https://i.ytimg.com/vi/0p35Qcr3rP4/maxresdefault.jpg" alt="">
+          <span class="vsl-play" aria-hidden="true"></span>
+        </button>
       </div>
     </section>
 
     <section class="booking wrap">
       <h2>Pick a time that works for you</h2>
-      <p class="sub">Choose a slot below and you'll get a confirmation with the call details.</p>
 
       <div class="booking-frame">
         <!-- Google Calendar Appointment Scheduling begin -->
@@ -248,6 +303,71 @@
       © Chris Graham · <a href="/">chrisgraham.com</a>
     </div>
   </footer>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    (function () {
+      var VIDEO_ID = "0p35Qcr3rP4";
+      var frame = document.getElementById("vsl");
+      var poster = document.getElementById("vslPoster");
+      var img = document.getElementById("vslPosterImg");
+      var player = null;
+
+      img.addEventListener("error", function () {
+        img.src = "https://i.ytimg.com/vi/" + VIDEO_ID + "/hqdefault.jpg";
+      });
+
+      function embed() {
+        if (!(window.YT && window.YT.Player)) {
+          // API blocked — plain iframe, still chrome-light.
+          var f = document.createElement("iframe");
+          f.className = "vsl-embed";
+          f.title = "Chris Graham";
+          f.allow = "autoplay; encrypted-media; picture-in-picture";
+          f.allowFullscreen = true;
+          f.src = "https://www.youtube.com/embed/" + VIDEO_ID +
+            "?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1";
+          frame.appendChild(f);
+          return;
+        }
+        var mount = document.createElement("div");
+        frame.appendChild(mount);
+        player = new YT.Player(mount, {
+          videoId: VIDEO_ID,
+          playerVars: {
+            autoplay: 1,
+            modestbranding: 1,
+            rel: 0,
+            iv_load_policy: 3,
+            playsinline: 1,
+            disablekb: 1
+          },
+          events: {
+            onStateChange: function (e) {
+              // "Videos after it plays": reset to the poster instead of
+              // letting YouTube paint its related-video grid.
+              if (e.data === YT.PlayerState.ENDED) {
+                player.pauseVideo();
+                player.seekTo(0, true);
+                poster.classList.remove("is-hidden");
+              }
+            }
+          }
+        });
+      }
+
+      poster.addEventListener("click", function (e) {
+        e.preventDefault();
+        poster.classList.add("is-hidden");
+        if (player) {
+          player.seekTo(0, true);
+          player.playVideo();
+          return;
+        }
+        embed();
+      });
+    })();
+  </script>
 
 </body>
 </html>

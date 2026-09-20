@@ -5,7 +5,7 @@
    export that should not be hand-edited more than it has to be. */
 (function () {
   var LINKS = [
-    { label: 'Podcasting', href: '/pete#podcast' },
+    { label: 'Podcasting', href: 'https://champeonsofemployeeownership.com' },
     { label: 'AI Coaching', href: '/coaching' },
     { label: 'Employee Ownership', href: '/pete#employee-ownership' },
     { label: 'Pete the Pigeon', href: '/pete' }

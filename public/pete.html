@@ -1,152 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/img/c2e3b450f67cc23d729637b56ec75c23.png" rel="shortcut icon">
-
-  <title>Pete the Pigeon &middot; Chris Graham</title>
-  <meta name="description" content="Chris Graham is building an advocacy AI company in Ohio, 100% employee owned. Pete the Pigeon is the product.">
-
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://chrisgraham.com/pete">
-  <meta property="og:title" content="I am building an advocacy AI company, 100% employee owned.">
-  <meta property="og:description" content="Pete the Pigeon is the product. Ohio is the place. The people who build it will own it.">
-  <meta property="og:image" content="/img/pete-the-pigeon.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="I am building an advocacy AI company, 100% employee owned.">
-  <meta name="twitter:description" content="Pete the Pigeon is the product. Ohio is the place. The people who build it will own it.">
-  <meta name="twitter:image" content="/img/pete-the-pigeon.png">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=EB+Garamond:regular,bold,900,100,400,500|Open+Sans:regular,bold,500|">
-
-  <style>
-    :root {
-      --purple: #a686c8;
-      --lavender: rgb(193, 151, 238);
-      --ink: #000;
-      --paper: #fff;
-      --muted: rgba(255, 255, 255, 0.62);
-      --hairline: rgba(255, 255, 255, 0.14);
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: var(--ink); color: var(--paper); }
-    body {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 20px; line-height: 1.55; -webkit-font-smoothing: antialiased;
-    }
-    .wrap { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 24px; }
-    a { color: var(--lavender); }
-
-    .hero { padding: 120px 0 10px; }
-    .eyebrow {
-      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-      font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
-      color: var(--muted); margin: 0 0 20px;
-    }
-    h1 { font-size: clamp(34px, 6vw, 56px); font-weight: 400; line-height: 1.12; margin: 0 0 24px; text-wrap: balance; }
-    h2 { font-size: clamp(26px, 4vw, 34px); font-weight: 400; line-height: 1.2; margin: 0 0 18px; text-wrap: balance; }
-    p { margin: 0 0 20px; }
-    .lede { color: var(--muted); }
-
-    section { padding: 54px 0; border-top: 1px solid var(--hairline); }
-    section:first-of-type { border-top: 0; }
-
-    .pete-portrait { display: block; width: 150px; height: auto; margin: 0 0 26px; }
-
-    .facts { list-style: none; margin: 0 0 22px; padding: 0; }
-    .facts li { padding: 12px 0; border-top: 1px solid var(--hairline); }
-    .facts li:last-child { border-bottom: 1px solid var(--hairline); }
-
-    .btn {
-      display: inline-block;
-      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-      font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
-      color: #14031f; background: var(--lavender);
-      padding: 14px 28px; border-radius: 2px; text-decoration: none;
-    }
-    .btn.ghost { background: transparent; color: var(--lavender); border: 1px solid var(--lavender); }
-    .btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
-
-    .booking-frame { margin-top: 24px; border: 1px solid var(--hairline); border-radius: 4px; overflow: hidden; background: #0b0b0b; }
-    .booking-frame iframe { display: block; width: 100%; height: 620px; border: 0; }
-
-    .site-footer {
-      padding: 40px 0 70px; border-top: 1px solid var(--hairline);
-      font-family: 'Open Sans', Helvetica, Arial, sans-serif; font-size: 13px; color: var(--muted);
-    }
-    .site-footer a { color: var(--muted); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pete the Pigeon · Chris Graham</title>
+<meta name="description" content="Chris Graham is building Pete the Pigeon, Ohio's Statehouse AI, as a 100% employee-owned company.">
+<meta property="og:title" content="Pete the Pigeon · Chris Graham">
+<meta property="og:description" content="Chris Graham is building Pete the Pigeon, Ohio's Statehouse AI, as a 100% employee-owned company.">
+<meta property="og:image" content="https://chrisgraham.com/img/db94ef689a40893f7c2f06e3bbd460e9.webp">
+<link rel="icon" href="/img/c2e3b450f67cc23d729637b56ec75c23.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-
-  <main>
-    <section class="hero wrap">
-      <p class="eyebrow">Chris Graham here</p>
-      <h1>I am building an advocacy AI company in Ohio, and the people who build it will own it.</h1>
-      <p class="lede">One hundred percent employee owned. The product is Pete the Pigeon. The place is Ohio.
-        The point is that a regular person should be able to walk into their own government and know as much
-        as the lobbyist sitting across from them.</p>
-      <div class="btns">
-        <a class="btn" href="/coaching">Grab a time on my calendar</a>
-        <a class="btn ghost" href="https://petethepigeon.com">Meet Pete</a>
+<main class="wrap">
+  <header class="hero">
+    <div>
+      <div class="eyebrow">What I'm building</div>
+      <h1>An advocacy AI company in Ohio, owned by the people who build it.</h1>
+      <p class="lead">The product is Pete the Pigeon. The place is Ohio. The point is that a regular person should be able to walk into their own government and know as much as the lobbyist sitting across from them.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://petethepigeon.com">Go ask Pete something</a>
+        <a class="btn ghost" href="/#book">Book a demo</a>
       </div>
-    </section>
+    </div>
+    <img src="/img/pete-the-pigeon.png" alt="Pete the Pigeon" style="max-width:320px;margin:0 auto">
+  </header>
 
-    <section class="wrap" id="pete">
-      <img class="pete-portrait" src="/img/pete-the-pigeon.png" alt="Pete the Pigeon" width="150" height="139">
-      <h2>Pete the Pigeon</h2>
-      <p>Pete is an AI who knows the Ohio Statehouse the way a twenty-year veteran staffer knows it, and answers
-        anybody who asks, for free.</p>
-      <ul class="facts">
-        <li>Over a million lines of code.</li>
-        <li>Sixteen years of building agentic AI, here in Ohio.</li>
-        <li>Every legislator, every lobbyist, every bill, every vote, every hearing, every campaign dollar.</li>
-        <li>A source on every answer, so you can check his work.</li>
-      </ul>
-      <p>I believe he is the most powerful advocacy technology Ohio has ever had. He is built to help every
-        Ohioan, to make advocacy easier, and to make Ohio's government run better.</p>
-      <div class="btns"><a class="btn ghost" href="https://petethepigeon.com">Go ask Pete something</a></div>
-    </section>
+  <section>
+    <div class="eyebrow">Meet Pete</div>
+    <h2>Pete the Pigeon</h2>
+    <p>Pete is an AI who knows the Ohio Statehouse the way a twenty-year veteran staffer knows it, and answers anybody who asks, for free. Over a million lines of code. Sixteen years of building agentic AI, here in Ohio.</p>
+    <ul class="ticks">
+      <li>Every legislator, every lobbyist, every bill, every vote, every hearing, every campaign dollar</li>
+      <li>A source on every answer, so you can check his work</li>
+      <li>Works inside ChatGPT, Claude and Outlook</li>
+    </ul>
+    <p>I believe he is the most powerful advocacy technology Ohio has ever had. He is built to help every Ohioan, to make advocacy easier, and to make Ohio's government run better.</p>
+  </section>
 
-    <section class="wrap" id="employee-ownership">
-      <h2>One hundred percent employee owned</h2>
-      <p>I am not building this to flip it. I am building it so the people who do the work own the thing they
-        made. Employee ownership is the whole design, not a perk bolted on at the end.</p>
-      <p>That is also why the work is public. If the plan is to hand the company to the people who build it,
-        the plan should be something you can read.</p>
-    </section>
+  <section id="employee-ownership">
+    <div class="eyebrow">One hundred percent employee owned</div>
+    <h2>I'm not building this to flip it.</h2>
+    <p>I am building it so the people who do the work own the thing they made. Employee ownership is the whole design, not a perk bolted on at the end. That is also why the work is public. If the plan is to hand the company to the people who build it, the plan should be something you can read.</p>
+    <div class="grid2">
+      <div class="card"><h3>I podcast about it</h3><p><em>Champeons of Employee Ownership</em> is the show I make with Tim Rettig about companies owned by the people who work in them, and what it takes to build one.</p><p style="margin-top:10px"><a href="https://champeonsofemployeeownership.com">Listen</a></p></div>
+      <div class="card"><h3>I teach it out loud</h3><p>I teach AI for the public good, in a room, with anybody who wants to come.</p><p style="margin-top:10px"><a href="https://www.youtube.com/channel/UCHMlIDbKT86qGk4LGvBfD_g">Watch on YouTube</a></p></div>
+    </div>
+  </section>
 
-    <section class="wrap" id="podcast">
-      <h2>I podcast about it</h2>
-      <p><a href="https://champeonsofemployeeownership.com">Champions of Employee Ownership</a> is the show I
-        make with Tim Rettig about companies owned by the people who work in them, and what it takes to build
-        one. The first episode is on its way.</p>
-      <p>I also teach AI for the public good, out loud, in a room, with anybody who wants to come.</p>
-      <div class="btns">
-        <a class="btn ghost" href="https://champeonsofemployeeownership.com">The ChampEOns</a>
-        <a class="btn ghost" href="https://www.youtube.com/channel/UCHMlIDbKT86qGk4LGvBfD_g">Watch on YouTube</a>
-      </div>
-    </section>
+  <section class="book" id="book">
+    <div class="eyebrow">20 minutes</div>
+    <h2>See Pete for yourself</h2>
+    <p>A 20-minute demo and a personal AI strategy audit.</p>
+    <iframe class="cal" title="Book a time with Chris Graham" loading="lazy" src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ10SsalUOGGpzSoOXuZ3v7gF1d3zU4MYZzFTYRjQ_7vG8WL_9Gnl7pk6asMU6KB5RCKDi5oAPMR?gv=true"></iframe>
+  </section>
 
-    <section class="wrap" id="coaching">
-      <h2>AI coaching for leaders</h2>
-      <p>I have helped Emmy&reg;, Grammy&reg;, Oscar&reg; and Tony&reg; winners, business leaders and state
-        legislators do the impossible with AI. If you want that for your own work, pick a time.</p>
-      <div class="booking-frame">
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1-VGVWWYNfrSQrDKYHftvYSVGdpfXllBoDmyraeJPamM7YJJi-oJP6w_nvDw68OPglKfl-gIrf?gv=true"
-          title="Book a time with Chris Graham" loading="lazy"></iframe>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="wrap">&copy; Chris Graham &middot; <a href="/">chrisgraham.com</a> &middot;
-      <a href="https://petethepigeon.com">petethepigeon.com</a></div>
-  </footer>
-
-  <script src="/assets/site-nav.js"></script>
+</main>
+<footer>Chris Graham · AI Coach · Fugio Consulting · Granville, Ohio<br>
+<a href="/coaching">AI Coaching</a> · <a href="/pete">Pete the Pigeon</a> · <a href="/about">About</a> · <a href="https://petethepigeon.com">PeteThePigeon.com</a> · <a href="https://x.com/chrisgraham">X</a> · <a href="https://www.youtube.com/channel/UCHMlIDbKT86qGk4LGvBfD_g">YouTube</a></footer>
+<script src="/assets/site-nav.js"></script>
 </body>
 </html>

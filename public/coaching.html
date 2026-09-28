@@ -1,373 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/img/c2e3b450f67cc23d729637b56ec75c23.png" rel="shortcut icon">
-
-  <title>AI Coaching for Leaders</title>
-  <meta name="description" content="Schedule a discovery call with Chris Graham — coach &amp; consultant trusted by Emmy®, Grammy®, Oscar® &amp; Tony® winners, creative leaders, &amp; legislators.">
-
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://chrisgraham.com/coaching">
-  <meta property="og:title" content="AI Coaching for Leaders">
-  <meta property="og:description" content="Coach &amp; consultant trusted by Emmy®, Grammy®, Oscar® &amp; Tony® winners, creative leaders, &amp; legislators.">
-  <meta property="og:image" content="/img/ab17fb0ba68068fead4afcd7e8b7734d.jpg">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AI Coaching for Leaders">
-  <meta name="twitter:description" content="Coach &amp; consultant trusted by Emmy®, Grammy®, Oscar® &amp; Tony® winners, creative leaders, &amp; legislators.">
-  <meta name="twitter:image" content="/img/ab17fb0ba68068fead4afcd7e8b7734d.jpg">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=EB+Garamond:regular,bold,900,100,400,500|Open+Sans:regular,bold,500|">
-
-  <style>
-    :root {
-      --purple: #a686c8;
-      --lavender: rgb(193, 151, 238);
-      --ink: #000;
-      --paper: #fff;
-      --muted: rgba(255, 255, 255, 0.62);
-      --hairline: rgba(255, 255, 255, 0.14);
-    }
-
-    * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--ink);
-      color: var(--paper);
-    }
-
-    body {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 20px;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .wrap {
-      width: 100%;
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ---------- header ---------- */
-    .site-header {
-      padding: 28px 0;
-      border-bottom: 1px solid var(--hairline);
-    }
-
-    .site-header .wrap {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .brand {
-      font-size: 22px;
-      letter-spacing: 0.02em;
-      color: var(--paper);
-      text-decoration: none;
-    }
-
-    .site-header nav a {
-      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-    }
-
-    .site-header nav a:hover { color: var(--lavender); }
-
-    /* ---------- hero ---------- */
-    .hero {
-      text-align: center;
-      padding: 76px 0 12px;
-    }
-
-    .eyebrow {
-      font-size: 20px;
-      color: var(--muted);
-      margin: 0 0 18px;
-    }
-
-    .hero h1 {
-      font-size: clamp(34px, 6vw, 60px);
-      font-weight: 400;
-      line-height: 1.15;
-      margin: 0 auto;
-      max-width: 16em;
-    }
-
-    .hero .lede {
-      font-size: 20px;
-      color: var(--muted);
-      max-width: 30em;
-      margin: 22px auto 0;
-    }
-
-    /* ---------- video / VSL ---------- */
-    .vsl {
-      margin: 56px auto 0;
-      max-width: 420px;
-    }
-
-    /* 9:16 portrait frame. Drop the VSL embed inside .vsl-frame. */
-    .vsl-frame {
-      position: relative;
-      width: 100%;
-      padding-top: 177.78%;
-      background: #0b0b0b;
-      border: 1px solid var(--hairline);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .vsl-frame > iframe,
-    .vsl-frame > video,
-    .vsl-frame > .vsl-embed {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    /* Bare-bones facade: opaque poster over the player until click, so no
-       YouTube title bar, logo, or end-screen grid is ever visible. */
-    .vsl-poster {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      width: 100%;
-      height: 100%;
-      padding: 0;
-      border: 0;
-      background: #0b0b0b;
-      cursor: pointer;
-      display: block;
-    }
-
-    .vsl-poster img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .vsl-poster.is-hidden { display: none; }
-
-    .vsl-play {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 76px;
-      height: 76px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.94);
-      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
-      transition: transform 0.15s ease;
-    }
-
-    .vsl-play::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-36%, -50%);
-      border-style: solid;
-      border-width: 13px 0 13px 21px;
-      border-color: transparent transparent transparent #0b0b0b;
-    }
-
-    .vsl-poster:hover .vsl-play { transform: translate(-50%, -50%) scale(1.06); }
-
-    .vsl-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-    }
-
-    /* ---------- booking ---------- */
-    .booking {
-      margin: 72px auto 0;
-      max-width: 860px;
-    }
-
-    .booking h2 {
-      font-size: clamp(26px, 4vw, 38px);
-      font-weight: 400;
-      text-align: center;
-      margin: 0 0 8px;
-    }
-
-    .booking p.sub {
-      text-align: center;
-      color: var(--muted);
-      margin: 0 0 32px;
-    }
-
-    .booking-frame {
-      background: #fff;
-      border-radius: 6px;
-      overflow: hidden;
-      padding: 8px;
-    }
-
-    .booking-frame iframe {
-      display: block;
-      width: 100%;
-      height: 700px;
-      border: 0;
-    }
-
-    /* ---------- footer ---------- */
-    .site-footer {
-      margin-top: 96px;
-      padding: 32px 0 56px;
-      border-top: 1px solid var(--hairline);
-      text-align: center;
-      font-size: 15px;
-      color: var(--muted);
-    }
-
-    .site-footer a { color: var(--muted); text-decoration: none; }
-    .site-footer a:hover { color: var(--lavender); }
-
-    @media (max-width: 640px) {
-      .hero { padding: 52px 0 8px; }
-      .booking-frame iframe { height: 620px; }
-      .booking { margin-top: 56px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Coaching for Leaders · Chris Graham</title>
+<meta name="description" content="AI coaching for leaders from Chris Graham, trusted by Emmy, Grammy, Oscar & Tony winners, legislators and business leaders.">
+<meta property="og:title" content="AI Coaching for Leaders · Chris Graham">
+<meta property="og:description" content="AI coaching for leaders from Chris Graham, trusted by Emmy, Grammy, Oscar & Tony winners, legislators and business leaders.">
+<meta property="og:image" content="https://chrisgraham.com/img/db94ef689a40893f7c2f06e3bbd460e9.webp">
+<link rel="icon" href="/img/c2e3b450f67cc23d729637b56ec75c23.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-
-  <header class="site-header">
-    <div class="wrap">
-      <a class="brand" href="/">Chris Graham</a>
+<main class="wrap">
+  <header class="hero">
+    <div>
+      <div class="eyebrow">AI Coaching for Leaders</div>
+      <h1>Work smarter with AI to accomplish your mission.</h1>
+      <p class="lead">Trusted by Emmy, Grammy, Oscar &amp; Tony winners, legislators &amp; business leaders. I've built AI since 2010, and I use it every day to pass laws and run a company.</p>
+      <div class="cta-row"><a class="btn" href="#book">Pick a time</a></div>
     </div>
+    <img src="/img/611de5c0f12e2f467bffcda6f028cac9.jpg" alt="Chris Graham coaching" loading="lazy" style="border-radius:12px">
   </header>
 
-  <main>
-    <section class="hero wrap">
-      <h1>AI Coaching for Leaders</h1>
-      <p class="lede">Working smarter, not harder with AI to accomplish your mission.</p>
-    </section>
-
-    <!-- ============================================================
-         VSL SLOT — portrait 9:16, bare-bones YouTube. Poster facade
-         covers the player until click; the embed then runs with
-         modestbranding + rel=0, and the end-screen grid is suppressed
-         by the script at the bottom of the page.
-         ============================================================ -->
-    <section class="vsl wrap">
-      <div class="vsl-frame" id="vsl">
-        <button class="vsl-poster" id="vslPoster" type="button" aria-label="Play video">
-          <img id="vslPosterImg" src="https://i.ytimg.com/vi/tSjhGT-T8XM/maxresdefault.jpg" alt="">
-          <span class="vsl-play" aria-hidden="true"></span>
-        </button>
-      </div>
-    </section>
-
-    <section class="booking wrap">
-      <h2>Pick a time that works for you</h2>
-
-      <div class="booking-frame">
-        <!-- Google Calendar Appointment Scheduling begin -->
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1-VGVWWYNfrSQrDKYHftvYSVGdpfXllBoDmyraeJPamM7YJJi-oJP6w_nvDw68OPglKfl-gIrf?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
-        <!-- end Google Calendar Appointment Scheduling -->
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="wrap">
-      © Chris Graham · <a href="/">chrisgraham.com</a>
+  <section>
+    <div class="eyebrow">How it works</div>
+    <h2>A personal AI strategy, built around your work</h2>
+    <div class="grid3">
+      <div class="card"><h3>Audit</h3><p>We look at how you spend your time and where AI can take work off your plate.</p></div>
+      <div class="card"><h3>Build</h3><p>We set up the tools and workflows that fit you, not a generic playbook.</p></div>
+      <div class="card"><h3>Coach</h3><p>When obstacles show up, the path forward is the same: do the next scary thing.</p></div>
     </div>
-  </footer>
+    <div class="video"><iframe src="https://www.youtube.com/embed/tSjhGT-T8XM" title="Chris Graham on AI" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+  </section>
 
-  <script src="https://www.youtube.com/iframe_api"></script>
-  <script>
-    (function () {
-      var VIDEO_ID = "tSjhGT-T8XM";
-      var frame = document.getElementById("vsl");
-      var poster = document.getElementById("vslPoster");
-      var img = document.getElementById("vslPosterImg");
-      var player = null;
+  <section class="book" id="book">
+    <div class="eyebrow">Discovery call</div>
+    <h2>Pick a time that works for you</h2>
+    <p>Tell me what you're working on and we'll figure out where AI fits.</p>
+    <iframe class="cal" title="Book a time with Chris Graham" loading="lazy" src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1-VGVWWYNfrSQrDKYHftvYSVGdpfXllBoDmyraeJPamM7YJJi-oJP6w_nvDw68OPglKfl-gIrf?gv=true"></iframe>
+  </section>
 
-      img.addEventListener("error", function () {
-        img.src = "https://i.ytimg.com/vi/" + VIDEO_ID + "/hqdefault.jpg";
-      });
-
-      function embed() {
-        if (!(window.YT && window.YT.Player)) {
-          // API blocked — plain iframe, still chrome-light.
-          var f = document.createElement("iframe");
-          f.className = "vsl-embed";
-          f.title = "Chris Graham";
-          f.allow = "autoplay; encrypted-media; picture-in-picture";
-          f.allowFullscreen = true;
-          f.src = "https://www.youtube.com/embed/" + VIDEO_ID +
-            "?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1";
-          frame.appendChild(f);
-          return;
-        }
-        var mount = document.createElement("div");
-        frame.appendChild(mount);
-        player = new YT.Player(mount, {
-          videoId: VIDEO_ID,
-          playerVars: {
-            autoplay: 1,
-            modestbranding: 1,
-            rel: 0,
-            iv_load_policy: 3,
-            playsinline: 1,
-            disablekb: 1
-          },
-          events: {
-            onStateChange: function (e) {
-              // "Videos after it plays": reset to the poster instead of
-              // letting YouTube paint its related-video grid.
-              if (e.data === YT.PlayerState.ENDED) {
-                player.pauseVideo();
-                player.seekTo(0, true);
-                poster.classList.remove("is-hidden");
-              }
-            }
-          }
-        });
-      }
-
-      poster.addEventListener("click", function (e) {
-        e.preventDefault();
-        poster.classList.add("is-hidden");
-        if (player) {
-          player.seekTo(0, true);
-          player.playVideo();
-          return;
-        }
-        embed();
-      });
-    })();
-  </script>
-
-  <script src="/assets/site-nav.js"></script>
+</main>
+<footer>Chris Graham · AI Coach · Fugio Consulting · Granville, Ohio<br>
+<a href="/coaching">AI Coaching</a> · <a href="/pete">Pete the Pigeon</a> · <a href="/about">About</a> · <a href="https://petethepigeon.com">PeteThePigeon.com</a> · <a href="https://x.com/chrisgraham">X</a> · <a href="https://www.youtube.com/channel/UCHMlIDbKT86qGk4LGvBfD_g">YouTube</a></footer>
+<script src="/assets/site-nav.js"></script>
 </body>
 </html>

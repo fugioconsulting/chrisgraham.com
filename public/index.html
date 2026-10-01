@@ -4431,9 +4431,11 @@ padding-bottom: 150px;
 
 <!-- deploy-check: 1778099203-bce4c56c -->
 <style id="static-clone-mobile-fix">
+.id-6Z-9WmmGA-80.id-6Z-9WmmGA-80 { padding-bottom: 30px !important; }
 /* Belt-and-suspenders against horizontal overflow on the document */
 html, body { overflow-x: hidden !important; }
-img, picture, video, iframe { max-width: 100% !important; height: auto !important; }
+img, picture, video { max-width: 100% !important; height: auto !important; }
+iframe { max-width: 100% !important; }
 
 /* Re-assert framework's show-only hiding so our width/wrap rules can't unhide
    anything. Also re-assert with !important for data-show-only="none" because
@@ -4759,35 +4761,7 @@ window.fetch = async (request, init) => {
 })();
 </script>
 
-<script>
-/* AI coaching, dead centre of the page (Chris, 2026-09-20): the hero is about
-   who he is; the offer meets you halfway down. Placed by measuring the page and
-   inserting before whichever section straddles the middle, so it stays centred
-   if the page above it grows. */
-(function(){
-  function place(){
-    if (document.getElementById('cg-mid-coaching')) return;
-    var sections = Array.prototype.slice.call(document.querySelectorAll('.container'));
-    if (!sections.length) return;
-    var middle = document.body.scrollHeight / 2;
-    var host = null;
-    for (var i = 0; i < sections.length; i++) {
-      var top = sections[i].getBoundingClientRect().top + window.scrollY;
-      if (top >= middle) { host = sections[i]; break; }
-    }
-    if (!host) host = sections[sections.length - 1];
-    var block = document.createElement('div');
-    block.id = 'cg-mid-coaching';
-    block.style.cssText = 'text-align:center;padding:64px 20px;';
-    block.innerHTML =
-      '<h2 style="font-family:&#39;EB Garamond&#39;,Georgia,serif;font-weight:400;font-size:clamp(28px,4vw,44px);margin:0 0 18px;color:#fff;line-height:1.15;">AI Coaching for Leaders</h2>' +
-      '<a href="/coaching" style="display:inline-block;font-family:&#39;Open Sans&#39;,Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:#14031f;background:rgb(193,151,238);padding:14px 28px;border-radius:2px;text-decoration:none;">Grab a time on my calendar</a>';
-    host.parentNode.insertBefore(block, host);
-  }
-  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', place); }
-  else { window.setTimeout(place, 250); }
-})();
-</script>
+
 <script>
 /* Pete perches near the bottom of the page. Not above the fold -- he is a wink,
    not a pitch. Tapping him goes to petethepigeon.com. */
@@ -4807,6 +4781,20 @@ window.fetch = async (request, init) => {
     else { host.parentNode.insertBefore(wrap, host.nextSibling); }
   }
   if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', perch); } else { perch(); }
+})();
+</script>
+
+<script>
+/* Caret/"Learn More" anchors: this page scrolls the <body>, not the window, so the
+   funnel's own scroll-id handler never lands. Scroll the target section to the top. */
+(function(){
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#scroll-id-"]'); if (!a) return;
+    var t = document.querySelector('.id-' + a.getAttribute('href').slice('#scroll-id-'.length));
+    if (!t) return;
+    e.preventDefault();
+    t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, true);
 })();
 </script>
 </body>

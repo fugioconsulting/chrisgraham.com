@@ -22,6 +22,11 @@ app.get(/^\/coaching\/?$/i, (_req, res) => {
   res.sendFile(path.join(__dirname, "public", "coaching.html"));
 });
 
+// Side page: /group -> public/group.html
+app.get(/^\/group\/?$/i, (_req, res) => {
+  res.sendFile(path.join(__dirname, "public", "group.html"));
+});
+
 // Anything else falls back to index.html so deep links work.
 app.get("*", (_req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));

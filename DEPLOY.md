@@ -2,51 +2,42 @@
 
 ## How it works
 
-The VM deploys itself. A systemd timer on `pete` (GCP project
-`pete-new-albany`, zone `us-east5-a`) runs `deploy/autodeploy.sh` every
-minute. If GitHub `main` has a new commit, it pulls, rebuilds the
-`chrisgraham` Docker image, restarts the `chrisgraham` service, and checks
-`/health`. Log: `/var/log/chrisgraham-autodeploy.log` on the VM.
+GitHub Pages serves the `docs/` folder of `main`. Merge to `main`, wait
+about a minute, hard refresh. That is the whole deploy.
 
-So: merge to `main`, wait about a minute, hard refresh. No GitHub Actions,
-no secrets stored in GitHub, no Mac.
+## One-time setup (done once, in the browser)
 
-## One-time install (from the Mac, once)
+1. **Repo visibility.** Pages on a private repo needs GitHub Pro. Either
+   upgrade, or make the repo public at
+   https://github.com/fugioconsulting/chrisgraham.com/settings
+   (Danger Zone, Change visibility). The site is public anyway.
+2. **Enable Pages.** https://github.com/fugioconsulting/chrisgraham.com/settings/pages
+   Source: Deploy from a branch. Branch: `main`, folder `/docs`. Save.
+3. **Custom domain.** Same page, Custom domain: `chrisgraham.com`. Save.
+   Tick Enforce HTTPS once the DNS check passes.
+4. **DNS** at the registrar for chrisgraham.com:
 
-```
-gcloud compute ssh pete --project pete-new-albany --zone us-east5-a
-sudo -i
-# first run prints a deploy key
-bash <(curl -fsSL https://raw.githubusercontent.com/fugioconsulting/chrisgraham.com/main/deploy/install.sh)
-```
+   | Type  | Host | Value                       |
+   |-------|------|-----------------------------|
+   | A     | @    | 185.199.108.153             |
+   | A     | @    | 185.199.109.153             |
+   | A     | @    | 185.199.110.153             |
+   | A     | @    | 185.199.111.153             |
+   | CNAME | www  | fugioconsulting.github.io   |
 
-The repo is private, so the first run will fail to fetch the script unless
-you copy it over instead:
+   Remove the old A record that points at the `pete` VM.
 
-```
-gcloud compute scp deploy/install.sh pete:/tmp/install.sh --project pete-new-albany --zone us-east5-a
-gcloud compute ssh pete --project pete-new-albany --zone us-east5-a -- sudo bash /tmp/install.sh
-```
-
-1. First run prints an ed25519 public key. Add it as a **read-only deploy
-   key** at https://github.com/fugioconsulting/chrisgraham.com/settings/keys
-2. Run the script again. It clones to `/opt/chrisgraham`, installs the
-   timer, and deploys once.
-
-If the existing checkout on the VM is somewhere other than
-`/opt/chrisgraham`, or the systemd unit is not named `chrisgraham`, edit
-the three constants at the top of `deploy/autodeploy.sh` and the
-`ExecStart` path in the service file before installing. Check
-`bin/chrisgraham-deploy` in the Bonnie ops repo for the truth.
-
-## Manual fallback
-
-From the Mac: `bin/chrisgraham-deploy` in the Bonnie ops repo. Or on the
-VM: `sudo /opt/chrisgraham/deploy/autodeploy.sh`.
+5. **Retire the VM service.** On `pete`: `sudo systemctl disable --now chrisgraham`.
+   Delete `bin/chrisgraham-deploy` from the Bonnie ops repo or mark it dead.
 
 ## Verify
 
 ```
-curl -s https://chrisgraham.com/health
+curl -sI https://chrisgraham.com/ | head -1
 curl -s https://chrisgraham.com/ | grep -c fugio-framework
+curl -sI https://chrisgraham.com/coaching | head -1
 ```
+
+## Local preview
+
+`npm start`, then http://localhost:3000. Serves the same `docs/` folder.

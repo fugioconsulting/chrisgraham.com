@@ -1,0 +1,57 @@
+# Deploys main to the GCP VM "pete" on every push, replacing the manual
+# bin/chrisgraham-deploy run from the Bonnie ops repo.
+#
+# Required repo secret: GCP_SA_KEY, a JSON key for a service account in
+# project pete-new-albany that can run gcloud compute ssh/scp against pete.
+#
+# Optional repo variable: CHRISGRAHAM_VM_DIR, the path on pete where the
+# app lives. Defaults to /opt/chrisgraham.
+name: Deploy to pete
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-pete
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: pete-new-albany
+
+      - name: Ship archive to the VM
+        run: |
+          git archive --format=tar.gz -o /tmp/chrisgraham.tar.gz HEAD
+          gcloud compute scp /tmp/chrisgraham.tar.gz pete:/tmp/chrisgraham.tar.gz \
+            --zone us-east5-a --quiet
+
+      - name: Rebuild image and restart service
+        env:
+          VM_DIR: ${{ vars.CHRISGRAHAM_VM_DIR || '/opt/chrisgraham' }}
+        run: |
+          gcloud compute ssh pete --zone us-east5-a --quiet --command "
+            set -e
+            mkdir -p '$VM_DIR'
+            tar -xzf /tmp/chrisgraham.tar.gz -C '$VM_DIR'
+            cd '$VM_DIR'
+            docker build -t chrisgraham .
+            systemctl restart chrisgraham
+          "
+
+      - name: Verify
+        run: |
+          sleep 10
+          curl -fsS https://chrisgraham.com/health
+          test "$(curl -s https://chrisgraham.com/ | grep -c 'fugio-framework')" -gt 0

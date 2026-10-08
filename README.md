@@ -1,6 +1,6 @@
 # hello-there
 
-Static clone of `chrisgraham.com/hello-there`. Self-contained: HTML, CSS, JS bundles, and all images live in `public/`.
+Static clone of `chrisgraham.com/hello-there`. Self-contained: HTML, CSS, JS bundles, and all images live in `docs/` (served by GitHub Pages).
 
 ## Local
 

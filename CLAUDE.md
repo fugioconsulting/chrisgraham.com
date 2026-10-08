@@ -1,13 +1,20 @@
 # chrisgraham.com
 
-Static Express clone of the ClickFunnels "hello-there" site (`server.js` serves `public/` with `extensions: ["html"]`, `maxAge: "1h"`).
+Static site, served by GitHub Pages from the `docs/` folder on `main`. `server.js` is only for local preview (`npm start`, then http://localhost:3000).
 
-## Deploy — NOT Railway
+## Deploy
 
-This site moved off Railway in the 2026-09-11/12 New Albany cutover. `git push origin main` deploys nothing by itself.
+Merge to `main`. GitHub Pages rebuilds in about a minute. No Railway, no VM, no Actions workflow, no Mac. The site left Railway in the 2026-09-11/12 New Albany cutover and left the `pete` VM for Pages on 2026-10-08.
 
-**To ship:** `bin/chrisgraham-deploy` in the Bonnie ops repo (`/Users/claw/Documents/Claude/Projects/💁🏿‍♀️ Bonnie/bin/chrisgraham-deploy`). It archives `main`, scp's it to GCP VM `pete` (project `pete-new-albany`, zone `us-east5-a`), rebuilds the `chrisgraham` Docker image there, and restarts the `chrisgraham` systemd service. `bin/chrisgraham-deploy --restart` for a plain restart with no rebuild.
+**Verify after merge:** `curl -s https://chrisgraham.com/ | grep -c fugio-framework` (expect > 0). Hard refresh client-side.
 
-**Verify after deploy:** `curl -s https://chrisgraham.com/health` and check the specific page (e.g. `curl -s https://chrisgraham.com/coaching | wc -c`) — a hard refresh may be needed client-side because of the 1h `maxAge`.
+Details and one-time setup: `DEPLOY.md`.
 
-Details: [[reference_chrisgraham_com_deploy]] memory, and `CUTOVER_NEW_ALBANY.md` in the Bonnie project dir.
+## Layout
+
+- `docs/index.html` homepage, `docs/coaching.html`, `docs/pete.html`. Pages resolves `/coaching` to `coaching.html`.
+- `docs/404.html` redirects unknown paths to `/`.
+- `docs/CNAME` holds the custom domain. Do not delete it.
+- `docs/.nojekyll` stops Pages from running Jekyll. Keep it.
+- `docs/assets`, `docs/img`, `docs/fonts` are the ClickFunnels export. Root-relative paths.
+- `signature/` is the email signature HTML, not part of the site.

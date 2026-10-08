@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(
-  express.static(path.join(__dirname, "public"), {
+  express.static(path.join(__dirname, "docs"), {
     extensions: ["html"],
     maxAge: "1h",
     // HTML revalidates on every load so a deploy shows up immediately.

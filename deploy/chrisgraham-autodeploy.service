@@ -1,0 +1,8 @@
+[Unit]
+Description=Pull chrisgraham.com main from GitHub and redeploy if it changed
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/chrisgraham/deploy/autodeploy.sh

@@ -1,27 +1,48 @@
 # Deploying chrisgraham.com
 
-## Automatic (preferred)
+## How it works
 
-Every push to `main` runs `.github/workflows/deploy.yml`, which archives the
-repo, copies it to the GCP VM `pete` (project `pete-new-albany`, zone
-`us-east5-a`), rebuilds the `chrisgraham` Docker image, restarts the
-`chrisgraham` systemd service, and checks `/health`.
+The VM deploys itself. A systemd timer on `pete` (GCP project
+`pete-new-albany`, zone `us-east5-a`) runs `deploy/autodeploy.sh` every
+minute. If GitHub `main` has a new commit, it pulls, rebuilds the
+`chrisgraham` Docker image, restarts the `chrisgraham` service, and checks
+`/health`. Log: `/var/log/chrisgraham-autodeploy.log` on the VM.
 
-One-time setup, done from the Mac:
+So: merge to `main`, wait about a minute, hard refresh. No GitHub Actions,
+no secrets stored in GitHub, no Mac.
 
-1. Create a service account in `pete-new-albany` that can run
-   `gcloud compute ssh` and `gcloud compute scp` against `pete`.
-2. Download a JSON key and add it as the repo secret `GCP_SA_KEY` on
-   `fugioconsulting/chrisgraham.com`. Never paste the key into a chat.
-3. If the app does not live at `/opt/chrisgraham` on the VM, set the repo
-   variable `CHRISGRAHAM_VM_DIR` to the real path. Check
-   `bin/chrisgraham-deploy` in the Bonnie ops repo for the truth.
-4. Run the workflow once by hand (Actions, Deploy to pete, Run workflow).
+## One-time install (from the Mac, once)
+
+```
+gcloud compute ssh pete --project pete-new-albany --zone us-east5-a
+sudo -i
+# first run prints a deploy key
+bash <(curl -fsSL https://raw.githubusercontent.com/fugioconsulting/chrisgraham.com/main/deploy/install.sh)
+```
+
+The repo is private, so the first run will fail to fetch the script unless
+you copy it over instead:
+
+```
+gcloud compute scp deploy/install.sh pete:/tmp/install.sh --project pete-new-albany --zone us-east5-a
+gcloud compute ssh pete --project pete-new-albany --zone us-east5-a -- sudo bash /tmp/install.sh
+```
+
+1. First run prints an ed25519 public key. Add it as a **read-only deploy
+   key** at https://github.com/fugioconsulting/chrisgraham.com/settings/keys
+2. Run the script again. It clones to `/opt/chrisgraham`, installs the
+   timer, and deploys once.
+
+If the existing checkout on the VM is somewhere other than
+`/opt/chrisgraham`, or the systemd unit is not named `chrisgraham`, edit
+the three constants at the top of `deploy/autodeploy.sh` and the
+`ExecStart` path in the service file before installing. Check
+`bin/chrisgraham-deploy` in the Bonnie ops repo for the truth.
 
 ## Manual fallback
 
-From the Mac: `bin/chrisgraham-deploy` in the Bonnie ops repo. Add
-`--restart` for a plain restart with no rebuild.
+From the Mac: `bin/chrisgraham-deploy` in the Bonnie ops repo. Or on the
+VM: `sudo /opt/chrisgraham/deploy/autodeploy.sh`.
 
 ## Verify
 
@@ -29,5 +50,3 @@ From the Mac: `bin/chrisgraham-deploy` in the Bonnie ops repo. Add
 curl -s https://chrisgraham.com/health
 curl -s https://chrisgraham.com/ | grep -c fugio-framework
 ```
-
-Hard refresh in the browser; assets cache for an hour.

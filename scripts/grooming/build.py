@@ -30,6 +30,10 @@ resolved = [c for c in cases if c["resolved"]]
 hands = [c for c in cases if c["companion"] == "hands-on"]
 expl = [c for c in cases if c["companion"] == "exploitation"]
 unspec = [c for c in cases if c["companion"] == "unspecified"]
+alone = [c for c in cases if c["companion"] == "none"]
+with_comp = n - len(alone)
+def lastname(c):
+    p = c["name"].split(); return p[-2] if p[-1] in ("Jr.",) else p[-1]
 open_cases = [c for c in cases if not c["resolved"]]
 counties = {}
 for c in cases: counties[c["county"]] = counties.get(c["county"], 0) + 1
@@ -42,12 +46,13 @@ def badge_status(c):
     r = c["resolved"]
     if r == "convicted": return '<span class="badge red">Convicted</span>'
     if r == "pleaded guilty": return '<span class="badge red">Pleaded guilty</span>'
-    if r: return '<span class="badge amber">Plea, grooming dropped</span>'
+    if r: return '<span class="badge amber">Plea on other counts</span>'
     return '<span class="badge blue">Charged, pending</span>'
 def badge_comp(c):
     k = c["companion"]
     if k == "hands-on": return '<span class="badge dark">+ hands-on abuse charged</span>'
     if k == "exploitation": return '<span class="badge dark">+ exploitation charged</span>'
+    if k == "none": return '<span class="badge gray">grooming only</span>'
     return '<span class="badge dark">+ other child sex felonies</span>'
 
 def card(c):
@@ -102,7 +107,7 @@ page = f'''<!DOCTYPE html>
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chrisgraham.com/grooming">
 <meta property="og:title" content="Charged With Grooming in Ohio: {n} cases, every one sourced">
-<meta property="og:description" content="A running public record of every person charged under Ohio's grooming statute, ORC 2907.071. In all {n} cases the grooming count sits beside other child-abuse charges.">
+<meta property="og:description" content="A running public record of every person charged under Ohio's grooming statute, ORC 2907.071. In {with_comp} of {n} cases the grooming count sits beside other child-abuse charges.">
 <meta property="og:image" content="https://chrisgraham.com/grooming/img/ohio_map.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -173,21 +178,21 @@ td.n {{ text-align:right; white-space:nowrap; }}
   <div class="tiles">
     <div class="tile"><p class="n">{n}</p><p class="l">Charged with grooming</p></div>
     <div class="tile"><p class="n">{len(resolved)}</p><p class="l">Convicted or pleaded</p></div>
-    <div class="tile"><p class="n">{n} of {n}</p><p class="l">Also face other child-abuse charges</p></div>
+    <div class="tile"><p class="n">{with_comp} of {n}</p><p class="l">Also face other child-abuse charges</p></div>
     <div class="tile"><p class="n">{len(open_cases)}</p><p class="l">Open cases, presumed innocent</p></div>
   </div>
   <p class="stamp">Page built {built}.{(" Last news sweep " + last_sweep + ".") if last_sweep else ""} The crawler runs every six hours. Count as of the latest confirmed case.</p>
 </section>
 
 <section class="wrap" id="bigger-win">
-  <h2>Grooming has not stood alone once</h2>
-  <p>In all {n} cases the grooming count sits beside other child-abuse charges. The grooming statute is working as a door: the pattern-of-conduct charge gets investigators into a case that then surfaces the abuse itself. Grooming convictions matter. A grooming charge that delivers rape, sexual battery, or abuse-material convictions matters more, and that is the pattern so far.</p>
+  <h2>{"Grooming has not stood alone once" if not alone else ("Grooming has stood alone only once" if len(alone) == 1 else f"Grooming stands alone in only {len(alone)} cases")}</h2>
+  <p>In {with_comp} of {n} cases the grooming count sits beside other child-abuse charges. The grooming statute is working as a door: the pattern-of-conduct charge gets investigators into a case that then surfaces the abuse itself. Grooming convictions matter. A grooming charge that delivers rape, sexual battery, or abuse-material convictions matters more, and that is the pattern so far.</p>
   <table>
     <tr><th>Companion charges beside grooming</th><th>Cases</th><th>Who</th></tr>
-    <tr><td>Hands-on abuse (rape, sexual battery, gross sexual imposition, unlawful sexual conduct)</td><td class="n">{len(hands)}</td><td>{H(", ".join(c["name"].split()[-1] if c["name"].split()[-1] not in ("Jr.",) else c["name"].split()[-2] for c in hands))}</td></tr>
-    <tr><td>Exploitation (abuse material, pandering, importuning, trafficking, hidden camera)</td><td class="n">{len(expl)}</td><td>{H(", ".join(c["name"].split()[-1] if c["name"].split()[-1] not in ("Jr.",) else c["name"].split()[-2] for c in expl))}</td></tr>
+    <tr><td>Hands-on abuse (rape, sexual battery, gross sexual imposition, unlawful sexual conduct)</td><td class="n">{len(hands)}</td><td>{H(", ".join(lastname(c) for c in hands))}</td></tr>
+    <tr><td>Exploitation (abuse material, pandering, importuning, trafficking, hidden camera)</td><td class="n">{len(expl)}</td><td>{H(", ".join(lastname(c) for c in expl))}</td></tr>
     <tr><td>Unspecified child sex felonies</td><td class="n">{len(unspec)}</td><td>{H(", ".join(c["name"].split()[-1] for c in unspec))}</td></tr>
-    <tr><td>Grooming only</td><td class="n">{n - len(hands) - len(expl) - len(unspec)}</td><td>none</td></tr>
+    <tr><td>Grooming only</td><td class="n">{len(alone)}</td><td>{H(", ".join(lastname(c) for c in alone)) or "none"}</td></tr>
   </table>
   <p>Resolved so far: {H("; ".join(f'{c["name"]} ({c["status"].lower()})' for c in resolved))}.</p>
 </section>

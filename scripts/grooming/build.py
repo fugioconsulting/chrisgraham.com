@@ -19,6 +19,8 @@ if os.path.exists(p):
 known_urls = {c["source_url"].rstrip("/") for c in cases} | {e["source_url"].rstrip("/") for e in excluded}
 candidates = [c for c in candidates if c.get("id") not in dismissed and c.get("url","").rstrip("/") not in dismissed and c.get("url","").rstrip("/") not in known_urls]
 candidates.sort(key=lambda c: c.get("published") or c.get("found_at") or "", reverse=True)
+coverage = [c for c in candidates if c.get("matches")]
+candidates = [c for c in candidates if not c.get("matches")]
 try: last_sweep = open(os.path.join(D, "last_sweep.txt")).read().strip()
 except Exception: last_sweep = ""
 built = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
@@ -87,6 +89,7 @@ def exrow(e):
     return f'<li><a href="{H(e["source_url"])}" rel="noopener">{H(e["name"])}</a>, {H(e["age"])}, {H(e["county"])} County: {H(e["charges"])}. {H(e["why"])}</li>'
 
 cands_html = "\n".join(cand(c) for c in candidates[:40]) if candidates else '<li class="empty">Nothing new since the last sweep.</li>'
+cov_html = "\n".join(f'<li><a href="{H(c["url"])}" rel="noopener">{H(c["title"])}</a> <span class="meta">{H(c.get("source",""))}, {H((c.get("published") or "")[:10])}, on {H(c["matches"])}</span></li>' for c in coverage[:40])
 
 page = f'''<!DOCTYPE html>
 <html lang="en">
@@ -151,6 +154,8 @@ td.n {{ text-align:right; white-space:nowrap; }}
 .empty {{ color:var(--muted); padding:12px 0; }}
 .ex {{ margin:0; padding-left:20px; }}
 .ex li {{ margin:0 0 10px; font-size:18px; }}
+.covh {{ margin:28px 0 10px; font-size:20px; color:var(--muted); font-weight:400; }}
+.cov li {{ font-size:17px; }} .cov .meta {{ color:var(--muted); font-size:15px; }}
 .btns {{ display:flex; flex-wrap:wrap; gap:12px; margin-top:8px; }}
 .btn {{ display:inline-block; font-family:'Open Sans',Helvetica,Arial,sans-serif; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#14031f; background:var(--lavender); padding:14px 28px; border-radius:2px; text-decoration:none; }}
 .btn.ghost {{ background:transparent; color:var(--lavender); border:1px solid var(--lavender); }}
@@ -207,6 +212,7 @@ td.n {{ text-align:right; white-space:nowrap; }}
   <ul class="cands">
 {cands_html}
   </ul>
+  {('<h3 class="covh">More coverage of listed cases</h3><ul class="ex cov">' + cov_html + '</ul>') if coverage else ''}
 </section>
 
 <section class="wrap" id="not-counted">

@@ -128,7 +128,14 @@ def main():
     cases = list(csv.DictReader(open(os.path.join(D, "cases.csv"), encoding="utf-8")))
     excluded = list(csv.DictReader(open(os.path.join(D, "excluded.csv"), encoding="utf-8")))
     known_urls = {c["source_url"].rstrip("/") for c in cases} | {e["source_url"].rstrip("/") for e in excluded}
-    known_names = {c["name"].split()[-1].lower() for c in cases if c["name"].split()[-1] != "Jr."} | {c["name"].lower() for c in cases + excluded}
+    # alias -> person: surnames, full names, and the hand-kept "aka" phrases (e.g. "deshler pastor")
+    aliases = {}
+    for c in cases + excluded:
+        last = c["name"].split()[-1].lower()
+        if last != "jr." and len(last) > 4: aliases[last] = c["name"]
+        aliases[c["name"].lower()] = c["name"]
+        for a in (c.get("aka") or "").split(";"):
+            if a.strip(): aliases[a.strip().lower()] = c["name"]
     try: cands = json.load(open(os.path.join(D, "candidates.json")))
     except Exception: cands = []
     try: seen = json.load(open(os.path.join(D, "seen.json")))
@@ -154,12 +161,13 @@ def main():
                       or OHIO_COUNTY.search(blob) and any(o in it["url"].lower() or o in it["source"].lower() for o in OHIO_OUTLETS)
                       or any(o in it["url"].lower() for o in OHIO_OUTLETS)): reason = "not ohio"
             elif it["url"].rstrip("/") in known_urls: reason = "known url"
-            elif any(n and n in it["title"].lower() for n in known_names if len(n) > 4): reason = "known name"
+            matched = next((who for a, who in aliases.items() if a in blob.lower()), None)
             if reason:
                 seen[i] = {"url": it["url"], "title": it["title"], "first_seen": NOW.isoformat(), "reason": reason}
                 continue
             text, formal_hint = "", None
-            if "news.google.com" not in it["url"]:
+            if matched: pass
+            elif "news.google.com" not in it["url"]:
                 try:
                     text = strip_html(get(it["url"]).decode("utf-8", "ignore"))
                     formal_hint = bool(FORMAL.search(text))
@@ -171,7 +179,8 @@ def main():
                 ai = ai_read(text, it["title"], it["url"]); ai_budget -= 1
                 time.sleep(1)
             c = {"id": i, "title": it["title"], "url": it["url"], "source": it["source"], "published": iso(it["published_raw"]),
-                 "found_at": NOW.strftime("%Y-%m-%d"), "snippet": it["snippet"][:300], "formal_hint": formal_hint, "ai": ai, "status": "new"}
+                 "found_at": NOW.strftime("%Y-%m-%d"), "snippet": it["snippet"][:300], "formal_hint": formal_hint, "ai": ai,
+                 "status": "coverage" if matched else "new", "matches": matched}
             by_id[i] = c; found += 1
             print(f"+ {it['title']} [{it['source']}] formal_hint={formal_hint} ai={(ai or {}).get('formal_2907071')}")
     cands = list(by_id.values())

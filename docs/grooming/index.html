@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/img/c2e3b450f67cc23d729637b56ec75c23.png">
+<title>Charged With Grooming in Ohio &middot; Chris Graham</title>
+<meta name="description" content="Every Ohioan criminally charged under Ohio's new grooming law, ORC 2907.071, with a source on every case. Updated automatically.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chrisgraham.com/grooming">
+<meta property="og:title" content="Charged With Grooming in Ohio: 23 cases, every one sourced">
+<meta property="og:description" content="A running public record of every person charged under Ohio's grooming statute, ORC 2907.071. In all 23 cases the grooming count sits beside other child-abuse charges.">
+<meta property="og:image" content="https://chrisgraham.com/grooming/img/ohio_map.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=EB+Garamond:regular,bold,500|Open+Sans:regular,bold,500|">
+<style>
+:root { --purple:#a686c8; --lavender:rgb(193,151,238); --ink:#000; --paper:#fff; --muted:rgba(255,255,255,.62); --hairline:rgba(255,255,255,.14); --card:#0b0b0b; }
+* { box-sizing:border-box; }
+html,body { margin:0; padding:0; background:var(--ink); color:var(--paper); }
+body { font-family:'EB Garamond',Georgia,serif; font-size:20px; line-height:1.55; -webkit-font-smoothing:antialiased; }
+.wrap { width:100%; max-width:860px; margin:0 auto; padding:0 24px; }
+a { color:var(--lavender); }
+.hero { padding:110px 0 10px; }
+.eyebrow { font-family:'Open Sans',Helvetica,Arial,sans-serif; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin:0 0 20px; }
+h1 { font-size:clamp(34px,6vw,56px); font-weight:400; line-height:1.12; margin:0 0 20px; text-wrap:balance; }
+h2 { font-size:clamp(26px,4vw,34px); font-weight:400; line-height:1.2; margin:0 0 18px; text-wrap:balance; }
+h3 { font-size:22px; font-weight:500; margin:0 0 4px; line-height:1.25; }
+p { margin:0 0 18px; }
+.lede { color:var(--muted); }
+section { padding:48px 0; border-top:1px solid var(--hairline); }
+section:first-of-type { border-top:0; }
+.tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; margin:26px 0 10px; }
+.tile { border:1px solid var(--hairline); border-radius:4px; padding:16px 16px 12px; background:var(--card); }
+.tile .n { font-size:44px; line-height:1; margin:0 0 6px; }
+.tile .l { font-family:'Open Sans',Helvetica,Arial,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:0; }
+.stamp { font-family:'Open Sans',Helvetica,Arial,sans-serif; font-size:12px; color:var(--muted); margin:8px 0 0; }
+.cases { list-style:none; margin:0; padding:0; }
+.case { display:grid; grid-template-columns:34px 96px 1fr; gap:14px; padding:18px 0; border-top:1px solid var(--hairline); align-items:start; }
+.case .num { color:var(--muted); font-size:18px; padding-top:4px; }
+.case img, .noimg { width:96px; height:96px; object-fit:cover; border-radius:3px; background:#1a1a1a; filter:grayscale(100%); }
+.case .meta, .cand .meta { color:var(--muted); font-size:17px; margin:0 0 6px; }
+.case .sum { margin:0; font-size:18px; }
+.badges { margin:0 0 8px; display:flex; flex-wrap:wrap; gap:6px; }
+.badge { display:inline-block; font-family:'Open Sans',Helvetica,Arial,sans-serif; font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:4px 8px; border-radius:2px; border:1px solid var(--hairline); color:var(--paper); }
+.badge.red { background:#7a1b1b; border-color:#7a1b1b; }
+.badge.blue { background:#1d3a6b; border-color:#1d3a6b; }
+.badge.amber { background:#7a5a12; border-color:#7a5a12; }
+.badge.gray { color:var(--muted); }
+.badge.dark { background:#222; }
+.map { display:block; width:100%; height:auto; border-radius:4px; border:1px solid var(--hairline); margin:10px 0 12px; }
+.cap { color:var(--muted); font-size:16px; }
+table { width:100%; border-collapse:collapse; font-size:18px; margin:6px 0 18px; }
+th,td { text-align:left; padding:8px 10px; border-top:1px solid var(--hairline); vertical-align:top; }
+th { font-family:'Open Sans',Helvetica,Arial,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:500; }
+td.n { text-align:right; white-space:nowrap; }
+.cands { list-style:none; margin:0; padding:0; }
+.cand { padding:16px 0; border-top:1px solid var(--hairline); }
+.cand h3 { font-size:20px; }
+.empty { color:var(--muted); padding:12px 0; }
+.ex { margin:0; padding-left:20px; }
+.ex li { margin:0 0 10px; font-size:18px; }
+.btns { display:flex; flex-wrap:wrap; gap:12px; margin-top:8px; }
+.btn { display:inline-block; font-family:'Open Sans',Helvetica,Arial,sans-serif; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#14031f; background:var(--lavender); padding:14px 28px; border-radius:2px; text-decoration:none; }
+.btn.ghost { background:transparent; color:var(--lavender); border:1px solid var(--lavender); }
+.site-footer { padding:40px 0 70px; border-top:1px solid var(--hairline); font-family:'Open Sans',Helvetica,Arial,sans-serif; font-size:13px; color:var(--muted); }
+.site-footer a { color:var(--muted); }
+@media (max-width:560px) { .case { grid-template-columns:26px 72px 1fr; gap:10px; } .case img,.noimg { width:72px; height:72px; } body { font-size:18px; } }
+</style>
+</head>
+<body>
+<main>
+<section class="hero wrap">
+  <p class="eyebrow">A public record, kept current by a crawler</p>
+  <h1>Charged With Grooming in Ohio</h1>
+  <p class="lede">Every Ohioan criminally charged under Ohio's new grooming law, <a href="https://codes.ohio.gov/ohio-revised-code/section-2907.071" rel="noopener">ORC 2907.071</a>, with a source on every case. Ohio made grooming its own crime with <a href="https://www.legislature.ohio.gov/legislation/135/hb322" rel="noopener">House Bill 322</a>, signed January 8, 2025 and in force April 9, 2025. Before that date nobody could be charged with grooming by name, so this page counts only people carrying the actual charge.</p>
+  <div class="tiles">
+    <div class="tile"><p class="n">23</p><p class="l">Charged with grooming</p></div>
+    <div class="tile"><p class="n">4</p><p class="l">Convicted or pleaded</p></div>
+    <div class="tile"><p class="n">23 of 23</p><p class="l">Also face other child-abuse charges</p></div>
+    <div class="tile"><p class="n">19</p><p class="l">Open cases, presumed innocent</p></div>
+  </div>
+  <p class="stamp">Page built 2026-10-10 15:06 UTC. Last news sweep 2026-10-10 15:06 UTC. The crawler runs every six hours. Count as of the latest confirmed case.</p>
+</section>
+
+<section class="wrap" id="bigger-win">
+  <h2>Grooming has not stood alone once</h2>
+  <p>In all 23 cases the grooming count sits beside other child-abuse charges. The grooming statute is working as a door: the pattern-of-conduct charge gets investigators into a case that then surfaces the abuse itself. Grooming convictions matter. A grooming charge that delivers rape, sexual battery, or abuse-material convictions matters more, and that is the pattern so far.</p>
+  <table>
+    <tr><th>Companion charges beside grooming</th><th>Cases</th><th>Who</th></tr>
+    <tr><td>Hands-on abuse (rape, sexual battery, gross sexual imposition, unlawful sexual conduct)</td><td class="n">16</td><td>Behanan, Telford, Walter, Vanwey, Gonzales, Barton, Souza, Helmer, West, Bingle, Rava, Losoya, Smetana, Hauke, Blair, Rivera-Alejandro</td></tr>
+    <tr><td>Exploitation (abuse material, pandering, importuning, trafficking, hidden camera)</td><td class="n">6</td><td>Hartman, Grubbs, Vanderveen, Conley, Banovich, Barnes</td></tr>
+    <tr><td>Unspecified child sex felonies</td><td class="n">1</td><td>Waldron</td></tr>
+    <tr><td>Grooming only</td><td class="n">0</td><td>none</td></tr>
+  </table>
+  <p>Resolved so far: Christopher Helmer (convicted, 9 years); James West (pleaded guilty, sentencing nov 2026); Paul Bingle (pleaded guilty to other counts, 13 to 17 years); James Russell Blair (convicted, 20 years).</p>
+</section>
+
+<section class="wrap" id="map">
+  <h2>Where the cases were brought</h2>
+  <img class="map" src="img/ohio_map.png" alt="Map of Ohio counties with numbered arrest locations" width="1200" height="1100" loading="lazy">
+  <p class="cap">Numbers match the case list. Red is convicted or pleaded guilty. Blue is pending. Leading counties: Clermont (3), Hamilton (3), Wood (3), Franklin (2), Cuyahoga (1). The cluster in southwest Ohio most likely reflects which prosecutors moved fastest to use the new statute, not where grooming happens.</p>
+</section>
+
+<section class="wrap" id="cases">
+  <h2>The 23 cases</h2>
+  <p class="lede">One sentence each. Click a name to open the source story. Every open case is an allegation; the person is presumed innocent unless and until proven guilty.</p>
+  <ul class="cases">
+<li class="case" id="case-1">
+  <div class="num">1</div>
+  <img src="img/01_hartman.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://abc6onyourside.com/news/local/catholic-foundation-executive-arrested-in-franklin-county-icac-online-sex-abuse-probe-scott-richard-hartman-warrant-custody-confessed-senior-vice-president-chief-development-officer-teenager-grooming-pandering-sexually-oriented-matter-obscenity-april" rel="noopener">Scott Richard Hartman</a>, 49 &middot; Franklin County</h3>
+    <p class="meta">Oct 2026 &middot; Grooming, child sexual abuse material &middot; Pending, pleaded not guilty</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ exploitation charged</span></p>
+    <p class="sum">Scott Richard Hartman, 49, a former senior executive at the Catholic Foundation of Ohio, was indicted in Franklin County in October 2026 on a grooming charge and child sexual abuse material counts after a sheriff&#x27;s ICAC investigation, and has pleaded not guilty.</p>
+  </div>
+</li>
+<li class="case" id="case-2">
+  <div class="num">2</div>
+  <img src="img/02_behanan.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://www.wcpo.com/news/local-news/basketball-coach-charged-with-grooming-sexual-battery-of-a-minor" rel="noopener">Keylan Behanan</a>, 26 &middot; Hamilton County</h3>
+    <p class="meta">Mar 2026 &middot; Grooming, 2 sexual battery &middot; Pending</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">Keylan Behanan, 26, a seasonal basketball coach at a Cincinnati charter school, was charged in March 2026 with grooming and two counts of sexual battery involving a minor.</p>
+  </div>
+</li>
+<li class="case" id="case-3">
+  <div class="num">3</div>
+  <img src="img/03_telford.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://local12.com/news/local/joshua-telford-cincinnati-man-arrested-after-traveling-to-sexually-abuse-12-year-old-cleveland-girl-allegations-investigation-launched-crime-criminal-activity-pandering-obscenity-involving-minor-enticement-charges-grooming-unlawful-sexual-conduct-elyria" rel="noopener">Joshua Telford</a>, 35 &middot; Lorain County</h3>
+    <p class="meta">Feb 2026 &middot; Grooming, rape &middot; Pending, held without bond</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">Joshua Telford, 35, of Cincinnati, was indicted in Lorain County in February 2026 on grooming and rape charges for allegedly traveling to abuse a 12-year-old, and is held without bond.</p>
+  </div>
+</li>
+<li class="case" id="case-4">
+  <div class="num">4</div>
+  <img src="img/04_waldron.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://www.fox19.com/2026/03/26/traffic-stop-leads-arrest-warren-county-man-accused-child-sex-crimes/" rel="noopener">Michael Waldron</a>, 56 &middot; Warren County</h3>
+    <p class="meta">Mar 2026 &middot; 12 felonies incl. grooming-related (statute cite unconfirmed) &middot; Pending</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ other child sex felonies</span></p>
+    <p class="sum">Michael Waldron, 56, of Warren County, was arrested in March 2026 after a traffic stop and charged with twelve felony counts including a grooming-related offense (exact statute not confirmed in reporting).</p>
+  </div>
+</li>
+<li class="case" id="case-5">
+  <div class="num">5</div>
+  <img src="img/05_walter.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://tiffinohio.net/posts/deshler-pastor-christopher-walter-charged-sexual-battery-grooming/" rel="noopener">Christopher Walter</a>, 52 &middot; Henry County</h3>
+    <p class="meta">Jun 2026 &middot; Grooming, 2 sexual battery &middot; Pending, pleaded not guilty</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">Christopher Walter, 52, a Deshler pastor, was indicted in Henry County in June 2026 on grooming and two counts of sexual battery, and has pleaded not guilty.</p>
+  </div>
+</li>
+<li class="case" id="case-6">
+  <div class="num">6</div>
+  <img src="img/06_grubbs.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://www.fox19.com/2026/07/15/ex-ohio-softball-coach-accused-grooming-using-spy-camera-photograph-girls/" rel="noopener">James Ryan Grubbs</a>, 48 &middot; Montgomery County</h3>
+    <p class="meta">Jul 2026 &middot; Grooming among 150+ counts &middot; Pending</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ exploitation charged</span></p>
+    <p class="sum">James Ryan Grubbs, 48, a former Valley View softball coach in Germantown, was indicted in Montgomery County in 2026 on a grooming count among more than 150 charges tied to alleged spy-camera recordings of girls.</p>
+  </div>
+</li>
+<li class="case" id="case-7">
+  <div class="num">7</div>
+  <img src="img/07_vanwey.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://www.daytondailynews.com/community/man-accused-of-sexually-assaulting-grooming-juvenile-in-miami-county/article_c879b438-b364-5941-9888-4715a784dfdd.html" rel="noopener">Joshua A. Vanwey</a>, 26 &middot; Miami County</h3>
+    <p class="meta">Jul 2026 &middot; Grooming, child endangering, unlawful sexual conduct &middot; Pending, pleaded not guilty</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">Joshua A. Vanwey, 26, of Miami County, was indicted in July 2026 on grooming, child endangering, and unlawful sexual conduct charges, and has pleaded not guilty.</p>
+  </div>
+</li>
+<li class="case" id="case-8">
+  <div class="num">8</div>
+  <img src="img/08_gonzales.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://myfox28columbus.com/news/local/columbus-man-indicted-on-multiple-charges-including-attempted-rape-child-enticement-franklin-county-grand-jury-diego-montoya-gonzalez-sexual-assault-indictment-tik-tok-pandering-importuning-enticement" rel="noopener">Diego Montoya Gonzales</a> &middot; Franklin County</h3>
+    <p class="meta">Aug 2026 &middot; Grooming, attempted rape, enticement &middot; Pending, pleaded not guilty</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">Diego Montoya Gonzales was indicted in Franklin County in August 2026 on grooming, attempted rape, and child enticement charges tied to alleged TikTok contact with a minor, and has pleaded not guilty.</p>
+  </div>
+</li>
+<li class="case" id="case-9">
+  <div class="num">9</div>
+  <img src="img/09_barton.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://www.hcpros.org/hamilton-county-prosecutor-connie-pillich-announces-aiken-high-school-principal-indicted-on-additional-sexual-battery-charges" rel="noopener">Steven Barton</a>, 43 &middot; Hamilton County</h3>
+    <p class="meta">Aug 2026 &middot; 6 sexual battery, 2 grooming &middot; Pending</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">Steven Barton, 43, an assistant principal at Cincinnati&#x27;s Aiken High School, was indicted in 2026 on six counts of sexual battery and two counts of grooming.</p>
+  </div>
+</li>
+<li class="case" id="case-10">
+  <div class="num">10</div>
+  <img src="img/10_vanderveen.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://www.fox19.com/2026/09/01/former-milford-custodian-posed-teen-snapchat-groom-child-court-records-say/" rel="noopener">Diego Vanderveen</a>, 19 &middot; Hamilton County</h3>
+    <p class="meta">Sep 2026 &middot; Grooming, disseminating &middot; Pending</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ exploitation charged</span></p>
+    <p class="sum">Diego Vanderveen, 19, a former Milford High School custodian, was indicted in Hamilton County in September 2026 on grooming and related charges for allegedly posing as a teenager on Snapchat.</p>
+  </div>
+</li>
+<li class="case" id="case-11">
+  <div class="num">11</div>
+  <img src="img/11_conley.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://www.richlandsource.com/2026/09/18/teen-indicted-on-attempted-murder-from-springmill-street-incident/" rel="noopener">Joshua A. Conley</a>, 39 &middot; Richland County</h3>
+    <p class="meta">Sep 2026 &middot; Grooming, trafficking &middot; Pending</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ exploitation charged</span></p>
+    <p class="sum">Joshua A. Conley, 39, of Richland County, was indicted in September 2026 on grooming alongside human trafficking and prostitution-related counts.</p>
+  </div>
+</li>
+<li class="case" id="case-12">
+  <div class="num">12</div>
+  <img src="img/12_souza.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://marysvillematters.substack.com/p/marysville-man-faces-11-sex-counts" rel="noopener">David Joseph Thomas Souza</a>, 44 &middot; Union County</h3>
+    <p class="meta">Sep 2026 &middot; Grooming, 3 rape, kidnapping &middot; Pending, jailed</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">David Joseph Thomas Souza, 44, of Marysville, was indicted in Union County in September 2026 on eleven counts including grooming, three counts of rape, and kidnapping, for alleged conduct dating to 2024, and remains jailed.</p>
+  </div>
+</li>
+<li class="case" id="case-13">
+  <div class="num">13</div>
+  <img src="img/13_helmer.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://local12.com/news/local/former-clermont-county-day-care-worker-pleads-guilty-inappropriate-behavior-child-5-year-old-grooming-gross-sexual-imposition-jelly-bean-junction-sex-abuse-material-csam-cincinnati-local-12-wkrc-news" rel="noopener">Christopher Helmer</a>, 18 &middot; Clermont County</h3>
+    <p class="meta">2026 &middot; Grooming, gross sexual imposition, CSAM &middot; Convicted, 9 years</p>
+    <p class="badges"><span class="badge red">Convicted</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">Christopher Helmer, 18, a former Clermont County daycare worker, pleaded guilty to grooming and related charges and was sentenced to nine years in September 2026.</p>
+  </div>
+</li>
+<li class="case" id="case-14">
+  <div class="num">14</div>
+  <img src="img/14_west.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://yahoo.com/news/us/articles/austintown-man-pleads-guilty-inappropriately-155735064.html" rel="noopener">James West</a>, 72 &middot; Mahoning County</h3>
+    <p class="meta">2026 &middot; Sexual battery, grooming &middot; Pleaded guilty, sentencing Nov 2026</p>
+    <p class="badges"><span class="badge red">Pleaded guilty</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">James West, 72, of Austintown, pleaded guilty in 2026 to sexual battery and grooming, with sentencing set for November 2026.</p>
+  </div>
+</li>
+<li class="case" id="case-15">
+  <div class="num">15</div>
+  <img src="img/15_banovich.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://www.wkbn.com/news/local-news/brookfield-news/brookfield-man-charged-with-importuning-grooming-following-search/" rel="noopener">Paul Banovich Jr.</a>, 66 &middot; Trumbull County</h3>
+    <p class="meta">Apr 2026 &middot; 2 grooming, 2 importuning &middot; Pending</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ exploitation charged</span></p>
+    <p class="sum">Paul Banovich Jr., 66, of Brookfield, was indicted in Trumbull County in April 2026 on two counts of grooming and two counts of importuning.</p>
+  </div>
+</li>
+<li class="case" id="case-16">
+  <div class="num">16</div>
+  <img src="img/16_bingle.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://dayton247now.com/news/local/preble-county-teacher-indicted-for-alleged-inappropriate-student-relationships-paul-bingle" rel="noopener">Paul Bingle</a>, 49 &middot; Preble County</h3>
+    <p class="meta">2026 &middot; 4 grooming (dropped), sexual battery &middot; Pleaded guilty to other counts, 13 to 17 years</p>
+    <p class="badges"><span class="badge amber">Plea, grooming dropped</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">Paul Bingle, 49, a Preble County teacher, was indicted on four counts of grooming but pleaded guilty to sexual battery and unlawful sexual conduct after the grooming counts were dropped, receiving thirteen to seventeen years.</p>
+  </div>
+</li>
+<li class="case" id="case-17">
+  <div class="num">17</div>
+  <img src="img/17_barnes.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://www.sent-trib.com/2025/10/27/ohio-man-indicted-for-attempted-grooming/" rel="noopener">Mark H. Barnes</a>, 40 &middot; Wood County</h3>
+    <p class="meta">Oct 2025 &middot; Attempted grooming, importuning &middot; Pending</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ exploitation charged</span></p>
+    <p class="sum">Mark H. Barnes, 40, of North Ridgeville, was indicted in Wood County in October 2025 on attempted grooming and related counts in a police sting.</p>
+  </div>
+</li>
+<li class="case" id="case-18">
+  <div class="num">18</div>
+  <img src="img/18_rava.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://bgindependentmedia.org/bg-man-indicted-on-nine-counts-of-sexual-offenses-with-juvenile/" rel="noopener">Matthew Rava</a>, 33 &middot; Wood County</h3>
+    <p class="meta">Jul 2026 &middot; Grooming, 3 rape, 5 sexual battery &middot; Pending, released on bond</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">Matthew Rava, 33, of Bowling Green, was indicted in Wood County in July 2026 on grooming plus three counts of rape and five counts of sexual battery, and was released on bond.</p>
+  </div>
+</li>
+<li class="case" id="case-19">
+  <div class="num">19</div>
+  <img src="img/19_losoya.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://www.sent-trib.com/2026/07/26/bg-man-indicted-for-rape-2-others-indicted-for-pandering/" rel="noopener">Pablo Losoya</a>, 41 &middot; Wood County</h3>
+    <p class="meta">Jul 2026 &middot; Grooming, unlawful sexual conduct, pandering, drugs &middot; Pending</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">Pablo Losoya, 41, of Portage, was indicted in Wood County in July 2026 on grooming alongside unlawful sexual conduct, pandering, and drug counts, and was held on bond.</p>
+  </div>
+</li>
+<li class="case" id="case-20">
+  <div class="num">20</div>
+  <img src="img/20_smetana.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://www.geaugamapleleaf.com/news/grand-jury-indicts-smetana-on-12-charges-including-rape/" rel="noopener">Steven Smetana</a>, 53 &middot; Cuyahoga County</h3>
+    <p class="meta">May 2026 &middot; Grooming, 5 rape, gross sexual imposition &middot; Pending</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">Steven Smetana, 53, of Claridon Township in Geauga County, was indicted in Cuyahoga County in May 2026 on grooming plus five counts of rape and gross sexual imposition.</p>
+  </div>
+</li>
+<li class="case" id="case-21">
+  <div class="num">21</div>
+  <img src="img/21_hauke.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://local12.com/news/local/sexual-contact-minor-clermont-county-13-years-old-grooming-rape-allegedly-charges-indicted-grooming" rel="noopener">Richard Todd Hauke</a>, 57 &middot; Clermont County</h3>
+    <p class="meta">Nov 2025 &middot; 40 counts incl. grooming, rape, GSI &middot; Pending, jailed</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">Richard Todd Hauke, 57, of Clermont County, was indicted in November 2025 on a 40-count indictment including grooming, rape, and gross sexual imposition involving a child under 13, and is jailed.</p>
+  </div>
+</li>
+<li class="case" id="case-22">
+  <div class="num">22</div>
+  <img src="img/22_blair.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://clermontprosecutor.org/press-release/jackson-township-man-indicted-on-44-counts-including-child-rape-and-sexual-exploitation/" rel="noopener">James Russell Blair</a>, 40 &middot; Clermont County</h3>
+    <p class="meta">Jun 24, 2025 &middot; 44 counts incl. 2 grooming, rape &middot; Convicted, 20 years</p>
+    <p class="badges"><span class="badge red">Convicted</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">James Russell Blair, 40, of Jackson Township in Clermont County, was indicted June 24, 2025, the earliest grooming charge found in Ohio, on 44 counts including two grooming counts, and pleaded guilty, receiving 20 years.</p>
+  </div>
+</li>
+<li class="case" id="case-23">
+  <div class="num">23</div>
+  <img src="img/23_rivera.jpg" alt="" loading="lazy" width="96" height="96">
+  <div class="body">
+    <h3><a href="https://mercercountyoutlook.net/2026/07/22/hardin-county-man-indicted-on-48-sexual-charges-with-a-minor/" rel="noopener">Carlos Rivera-Alejandro</a>, 29 &middot; Hardin County</h3>
+    <p class="meta">Jul 2026 &middot; 48 counts incl. grooming, rape, sexual battery &middot; Pending, $750,000 bond</p>
+    <p class="badges"><span class="badge blue">Charged, pending</span> <span class="badge dark">+ hands-on abuse charged</span></p>
+    <p class="sum">Carlos Rivera-Alejandro, 29, of Dunkirk in Hardin County, was indicted in July 2026 on a 48-count indictment including grooming, rape, and sexual battery, and is held on $750,000 bond.</p>
+  </div>
+</li>
+  </ul>
+</section>
+
+<section class="wrap" id="new">
+  <h2>Newly found, awaiting verification</h2>
+  <p class="lede">Stories the crawler found that pair the word grooming with a charge, arrest, indictment, plea, or sentence in Ohio. They are not counted above until a person reads the source and confirms a formal ORC 2907.071 count.</p>
+  <ul class="cands">
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxOWDNDMmxIM0JmQnIzd2JMb054R1kzNlRweHMwd3g5cTEtMjZjSzBKZm01dVlfd3hsVWNUVTYtcjh0UndxYk4zR0NLVUxVS05ENFRiazZ6bG1SVm1YZDlJTXlCbVNBaEMzbTJLbUVpXzczbTVfWWp1ZFNEVExueHYyRWFfdXhmTktOUV9maGJDX2ZrZndSYkNGRy1nSkNFM2I0RW5ZbENjNFNKbmNWOVRiWGxnQQ?oc=5" rel="noopener">Columbus Catholic Foundation Exec Charged After Teen Grooming Probe, Instantly Fired - Hoodline</a></h3>
+  <p class="meta">Hoodline &middot; 2026-10-02</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNaWlucHc5UWtmOGdocVpNNkpqVWF5U3ZPbmdDSnJlLUxjNkhVSU5xZkF3TEtCaE1NU0gxSjMwRVpPaWpoZUJFY0xyY2NnRXJKYUdwbGJmY29NWndGNVUzc3FXQUpZQ19nYzB5S3p5SlZsdXBSX0FzVVFmMEF3N0Z0UGpidjJuazV5SzY2MXlWbnhmZW52UF9EYWtB?oc=5" rel="noopener">Ex-Atlanta minister arrested in multi-state child grooming probe - FOX 5 Atlanta</a></h3>
+  <p class="meta">FOX 5 Atlanta &middot; 2026-09-16</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMijgJBVV95cUxOeGRwalpXNlZuUjEta1RJUWQwbGFmR2xrb0M1QUhFeU5kMnhrbTZ2N3ZGZE84MDhtaWl4dXVrNGpOSWpPUHoyYnB1ckUzS3pDZXEwSTF2UnZ2R2QzVWJQS2pCamgxWVQyZHZlLXdGaUN1Um1UVGIzZFN4VGhxYTFmMVBGdWowa1I1a05KUkl3MlRnZmxWNXI3U011UzJuTktQc2ZMRHNMcVl0RENmSzQwQk1EQTdQay1pSFJjMjFMSXdNZ2JSYjdlZ0Faa3BCdnRVclBfb0VfNG1ta2xER0IwQnMxSy0xVVMxdUJIRl9nYzNZYVhFNGJlVEthVlUyemtGN3pKWERZLWpXZ3A5T3c?oc=5" rel="noopener">Former Stark County youth minister accused of grooming, sexual misconduct involving teens - WKYC</a></h3>
+  <p class="meta">WKYC &middot; 2026-09-03</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxPR3ZjVzhBQ1dHTmszM3Flend6ell4Y01sSkdMOXdWVldHcjRLcUpvdXh2SzhDbXZKTVo4a1NHYUU2MTQ5d1NvZTZTQ1hTSkYtNDVzbnMtOFh1ZmRZVVVldThvUVNxdWhNRzhrX1FoWDd6VGNGTkpmcHJkX1Z2NnlVU21EZGI5SGVKaTlzSTU3Yy1KXzFhT29NS1MzaV9aMUM1VWZqb1JB?oc=5" rel="noopener">Substitute teacher arrested after investigation into grooming incident - WBKO</a></h3>
+  <p class="meta">WBKO &middot; 2026-09-02</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxNdlRDVWpYVnFlYUZ1dXlSTTB6VDlYYThhTmFXSjd6RmVnbzJIOUJ2VHcwaFNWekIzUGpUR3BzRUNxT3pxN3kyeXJMQ0VkMEtHYWNJcHd1TWVJb1NrTGpXS00yQnhVYXBlX2kzeXc5S3JKSC1EUDZfLVBzaHdVRGkxZHUwQXVNREp5bHVmVXY0azdtYWZ4aF9GQU1qQ1czVWs?oc=5" rel="noopener">Fired Cypress Christian School Coach Charged With Grooming Minor - Texas Scorecard</a></h3>
+  <p class="meta">Texas Scorecard &middot; 2026-08-28</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOaGpmcmh1OFROQzl6LWQ4NVgza2puaEw1REl3TGVnUHZwazY0dWNsNGVqWDJ3NlMyVVIxWllORTkxRXhPUGMxaFl0QzdUaEw5U1FhRFUwc25xMXlJYVVTVnlfZnZNSDg5bGVfTmUtRl9yeXB2ZnJoOTM5ZXA2VnQ5WXp3?oc=5" rel="noopener">South Texas pastor charged with grooming two victims - The Roys Report</a></h3>
+  <p class="meta">The Roys Report &middot; 2026-08-27</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTFBxMkR6cHpDNWtkeFhmZE9FTEJraUxCZ3A5QzZQVUhiLVFvMjhubGdrOU1XTzhPSWJwOWt1VVFqRHlTNVpnbk5HcllRZjA5VGwtNXNWbER0UEZYUG9yUWt1UjBlRDJGd3lnMDg2cmNhVkxqdmhLbHFsOFBweGxiZ9IBkgFBVV95cUxON0ZtVHFIc29TWkVZVi1UMTNqTVAycGVhM05kTGViVm1TRWlvNWpGZlFXYmduaGFlRWNjRWtCZk01YUVPbTRxZEJXOEFhT2RkRnhhdm9EZmZOMUUzMEd2b3F2N0dXLV8xR2h5UElrb1BuS3VPWjdrMXIteEZWMmphWjRWaE9CTEZOYjJOZXF4SUcyUQ?oc=5" rel="noopener">Man arrested, charged with grooming child - WTVA</a></h3>
+  <p class="meta">WTVA &middot; 2026-08-26</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxQaGE3bnNTZWVjSWNZYVowQU5oeEItNi1CWDB2TFRCTExIcEh1bTYxTVJnVnhVZFpMZW4zS1hkQ2hoZ25zUVRRWHIxMDJhaEFWWW42SlFuQ1YwaGhyMGo2Q25IYnU3VmFXVkhvREY3ZWxCR3RjU2dlcWMxS1ZjalZRRVA3ZmNUQzNYNzN1dkNnQ2xRX1hw?oc=5" rel="noopener">Man accused of sexually assaulting, grooming juvenile in Miami County - Dayton Daily News</a></h3>
+  <p class="meta">Dayton Daily News &middot; 2026-07-19</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxNTk5RY05fM2FWS1hFS2FzMVFEcDVDeTRSWmR3dmppWndhMDJ3Um9LX1JCc25ZNXlsdmFQb28tNUx0VnBUT2VlZjJPVFFHbzhxTlNtZG1Nanh2ZVVwb2lITEVneGVtZ1NxT3pZbk1nQXM1WDNaUGR1MElmS2pUZE52RTFSNU5zQlU3OEVTZXZFdDR6VndV?oc=5" rel="noopener">Former Valley View softball coach indicted for grooming, voyeurism - Dayton Daily News</a></h3>
+  <p class="meta">Dayton Daily News &middot; 2026-07-15</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQXzdNa3FSdHVYWU1xbGswNVdHV2xkNk5UMFptU1V5RFhQUUtxbGRJcVZXR1pzSWtXeGZLclUwX2NIVXlPYW1iblVEY01ITzZJbE5CR3hJYzk5UC1xeFR3R0dGR3BQTFN2dlI1b09RNzhILWFjQy1KUkp0Q0dJRklzZHBhVmJFbV9nWUVKR3ZUaUNlc1k1NU0w?oc=5" rel="noopener">Former coach, firefighter charged with grooming and secretly recording minors - WLWT</a></h3>
+  <p class="meta">WLWT &middot; 2026-07-14</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxQd0tkc1V2aXUxb0ZoOXFnSWprcW9JcGdVOWNJdG83bzZyclNqTVZ0Q3A1QUhPSzc2bWlibGNTNVZGOHd4eF94ekxBVWEyV3g3S0IxUXRpTnhsdXJNVk5PUjA4Z1dBSzRJR0VNWWxPb0tSdlR6cFNLZTN6NE42XzNLSG5TZWFMdm5YMmNQdU1vWUHSAZYBQVVfeXFMT0V4aktjRXlJcEZSQW0xQVZEVnpFTWZUSHMzcG5jcHdmOFM2RW92TGtGNXBCeWZtcXFPZXlvbFBkQWlOOWpwNExvZHhldmhOWElmRTVhcWFjbTc1NndTTmxPTWdwcmgtSWY5TnRqNXdhczFQeHhrUHoxblN5SkV3X2pnZU1iVHZwQ1dqb2dSZDhtNnE2OUx3?oc=5" rel="noopener">Voyeurism, grooming, ex-softball coach indicted in Ohio - WTRF</a></h3>
+  <p class="meta">WTRF &middot; 2026-07-14</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxOZWJ1eEJ0bDlVYTl6cDMwbnRVVDNyZnkydE5kWEVGMnN0MUFFenlhd1pjOF9Nc0FvaHdpR2d5T19PekhGaE9mOENuWUJiTEdwNDBXa2hvb29DV01JRHBiR0NSM29Pa2RVdFdiU2xPMVF0eUFibXR0VzlaLV9oLWhfam9OS2puV2dPbndiaVJnWDlhUQ?oc=5" rel="noopener">Ex-Valley View softball coach indicted for grooming - WDTN.com</a></h3>
+  <p class="meta">WDTN.com &middot; 2026-07-13</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxPakk2a2pFMkFhRkxfWDBCS0pIU2hQZkcwY19XbW81Um16QTA5VlRKcURMcFJOcGp0Q3M0N01KV2VxTDk5Tl9MTHJ4d0lveTBLaWRIYkFQVTQ2RnJXTm1ya2NCU0k4R2duUW1fTFJzYUc3U0trM05rUjJ0N1BnOXJveEtKR29RT1lLNjJnU0g0YXVXY3B2?oc=5" rel="noopener">Abke sentenced to 17 years for grooming teens, pandering - Sent-trib</a></h3>
+  <p class="meta">Sent-trib &middot; 2026-07-09</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxNb2FITzZPanlSVHZMMGpaUnVidEh4LUNmb25nemdPblU0bFV6anNkTmRMXzZjWmpTRDBLZHpxc0RTanJ5T09UM0pQeHVJU0RKTXp5RkxyTG8yVFEwNEJmaV80U2dSZzI2aHF0cFBqZjVwbHhwVnhnb3hyOWlLNjRkRFMtNEdUdzl6THlSYUZXNA?oc=5" rel="noopener">Deshler pastor indicted on sexual battery, grooming charges - Northwest Signal</a></h3>
+  <p class="meta">Northwest Signal &middot; 2026-06-27</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://www.yahoo.com/news/us/articles/former-deshler-pastor-accused-sexual-120540219.html" rel="noopener">Former Deshler pastor accused of sexual battery, grooming indicted in Henry County</a></h3>
+  <p class="meta">yahoo.com &middot; 2026-06-25</p>
+  
+  <p class="badges"><span class="badge amber">Text pairs grooming with a charge</span></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://www.msn.com/en-us/crime/general/former-deshler-pastor-accused-of-sexual-battery-grooming-indicted-in-henry-county/ar-AA26wQbG" rel="noopener">Former Deshler pastor accused of sexual battery, grooming indicted in Henry County</a></h3>
+  <p class="meta">msn.com &middot; 2026-06-25</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMi9AFBVV95cUxPOVpwU05PTUJrLXhsUjRaWEJuYXRManpNZll3LVltRlA1NjFTLTRfYUhreGU1WTdsR09jdVpxaF9hSnhqcmZzV1JxbzN0alNJUnpkTHptYUt0MVpucUVIc3p2MHdpRnJMaHFtZmd1bHJuY0cwWkU2ZlQ4ZllDUC1IU2NuN0tLUDR0UlRRZEhSeGF5amN3NzV5TlhoYjBWTGNwc3FIc1A0VlpTUjdtMUdrc1JEd0tJbHlsTEszLXdNbldfVnFRREVSWEM3NDR3Rm11ZG5nYUdjVmFFblR0MTM4Ti1ZZTdLZ3BuUGhTVXR4Zm50R0Fy?oc=5" rel="noopener">Former Deshler pastor accused of sexual battery, grooming indicted in Henry County - WTOL</a></h3>
+  <p class="meta">WTOL &middot; 2026-06-25</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxQNTMwT0luNzdwcUN1Q2ZVXzFncUF0NWxTeFRILVFUNnp4UzF3dVVHazM1MGZrYkswRHk5YTIxaFZhQ3FQVEZQSGNXSEkxMDRoQklYR0lTZ2VfTHBIMWYyZUZGejJnSjIza3RGNWI2ZHcwV2piQTV3TmpDQmE2MUViajdLdERYTThHWXNTMWxWMTd6TVkxcEdPRTFFSXJWQ3JibFJEMkFROVh5UGFzQ3NyVXVn0gG6AUFVX3lxTFAzSFQ2WGxQb3I4RXdSSktieXd6eTRMUG5xZEJHUFc1LXZVcDBBRjVQdVowbmtUamdydE5uUFQ4ZEl2dGxhZjNIVEd3MEVrMExmZTMta1V6YkFzNHNLY00zcHlmQk1YcVFrZmFzcnZ4ZXBrRkcxaUMxSlpQTlZJOHd2QnRPbFhEUW1YYjlFMk5hZDE2MVlVWm15UGRwRmVlZzNSaC1VZDByZVJYb2Vma1B1ZHM2S2RBYURNdw?oc=5" rel="noopener">Ohio police chief charged with 70 counts of sex crimes after allegedly grooming 12-year-old - NBC 6 South Florida</a></h3>
+  <p class="meta">NBC 6 South Florida &middot; 2026-06-23</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxPQ3Q4aG5fR2VjRVFITm5WQk0zVnZMTUVqc2pZZmNvRWlUVGo3bEtYQlhVY2ZFdVU2MV9fSFB2T0FBUW1kdllQZkJWRWsyN1BZYmVqZ3VGX0FkMWEzOXpkWkNlR3FLNFd4dFgxWGlPbmNHZENFWl9EbEw1OFlhV0o3NVdvblp2Q1pGWUJqNU1jTndPeS1jUmRFT1liaFZvOWxzbDJSZjIzZkfSAbABQVVfeXFMTTV2VGJiX2tKWl9KTURPUzQwcUtJU2xEQXFVdWxHc1pIVHJwQWZmWEtqWEVIa0dxYm95STJUd0xWcWdZYmZDZzlrTlNOSEQ2TkgwN3ljYWR0VUJBMWd0TklZSVkwRmQ4MlFMZ2ROVE1lZHRqYVhjMG1IUHh5Ni03VldXamo3T1JRVlIyRzV3VjNhUER4RkV5MVlIbm54QTBMc0lfbGJvdko1b3N4dThrYUQ?oc=5" rel="noopener">Ohio police chief indicted on 70 sex abuse charges after allegedly grooming 12-year-old - NBC 5 Chicago</a></h3>
+  <p class="meta">NBC 5 Chicago &middot; 2026-06-23</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxPRXhwZnh4YXVqZjh3UnE0cDFmU0lWY1ZhRUpsVkRMUEI1ZXFwN25OcURmazRlcnBVUXJqS2dpWU42RlR0SEpKOEdIY1ZhOVY5OGM4R1hiQlhwamg3bXZsMHBsNmppcHM2dUszR0FmLWthSVFyQjFiVTJpcS1BakpGLTMzVnhDOWk2V2N6RkN6ZFdZZw?oc=5" rel="noopener">Whitewater Township couple arrested after allegedly grooming 14-year-old for sex - WLWT</a></h3>
+  <p class="meta">WLWT &middot; 2026-06-22</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxQeEExQ05RbENTRUppbHgwNHdka2VFZjc4OENQbzZUbkp3dTZzUWE1b2dfR0JXQzlxQkoxbERHdGZYYjZrOHVGVXJrWm1HOXIyY3p4RzdIUjFFNE9EcVFWSXhmdnVlNjhab1ZEa1N1akJ1Y25lNkhxUjZ4aFpydGlsQ1NiOWo3TC1aTnRXV2kwZGhvMTBkSmFYcXB4Q2M4TVFEQXNoVG1GQTVaY1FnTWl1bFhsNFhQdXp1OXBJWFRKOVN5ZUhKUkdzVmVwUy1zRF9Pb3Y4ZQ?oc=5" rel="noopener">Akron man first to be charged in Richland Co. on new anti-grooming law - Mansfield News Journal</a></h3>
+  <p class="meta">Mansfield News Journal &middot; 2026-06-18</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxPYWpjQ1BCWi1fXzZoaThSb0VIQkpkV3UzV3luMUczZWNWLWVVbEpjYTZBaXZlZkNJWlphQXBYWXVZMTJFdm9BUXppZWlTdEl0ZU9oZEhzZ19fYlAtcTFkdV9RU0VFdFlFTTRLZnJZaUhPaWRsbDB5YXpUdWhSNV84X3ZYRlZDNms5RWdsTHBpaVRNWWxk?oc=5" rel="noopener">Bus driver accused of grooming Eaton student sentenced - Dayton Daily News</a></h3>
+  <p class="meta">Dayton Daily News &middot; 2026-06-14</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQaGlHMG8wMDFjRUxpZElzWDdtNUVBdVUwNVJCYXc2LTR0WHg4aDZyaGJlUnBBdVJfZmZzaGhpdEVNQjQ3a2tudVNDZ1p5cHNJT2hCTVVuaUxYaWRORW9DaFBsVVk2aTQzRUtINnBkX3llN1BOZ3pTb0NMdlpSVFdPbTg3c0hSMHo4SXlyLU9BZERDd0tHb1FWYnotR2dlMmNn?oc=5" rel="noopener">Lutheran pastor and bus driver in Ohio arrested for sexual battery, grooming - The Roys Report</a></h3>
+  <p class="meta">The Roys Report &middot; 2026-06-12</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxOTlRseENVY2FTdG50VmVIemt6eXVZeTZjclV1dkNKelZBb3N5ZGhrV1dsR1BkY3BLMTNvYUlhVUFXSWZJRTN0NzItSDJweVFSaTVEaGtWakpDcFBuTVRIMmQzVkdXQ2RGUDY3S0h6TTRaZ0JZUEwwZFdfWkRYejRPS21hdXhmcXc?oc=5" rel="noopener">Shuttleworth pleads guilty to grooming - Daily Advocate</a></h3>
+  <p class="meta">Daily Advocate &middot; 2026-06-09</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxQTEVISTcwdjVYU1JBV0J4NURhN2NHVFNRUEkxLWlPMlEtTHM4NDctc3lQRGN1NVhnUXk0RFVuSnpINExCSnJQOEJVNWg5eGtuZjNFMXNkelFUZW9vQ3JQMzlpZ0JKNG5fZzQyQko0bjFvMl9mQl9hR1Frb2xsNmhObDVLRQ?oc=5" rel="noopener">Ohio Church Pastor Who Drove School Children Daily Charged With Grooming, Sexually Battering a Child - International Business Times UK</a></h3>
+  <p class="meta">International Business Times UK &middot; 2026-06-05</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNYk9ueThRWmFZc2pUdC1iVlF2WE91TGhOZFNva2FBUFJFaEc4bzVLMS0tTzU1a0JaNTFIQXpadFhhM25xQ1Y0czljX0pOOFpaOFNhb0JfWjNKbklfcF81VnRteGtpQTVHaC0tSHJSQi1zUGk1UlJ5TjdfZndTRWZYb2oyQnVaRHNzTGpHbi1sdU9NYllMR044NC0zS3gtcFJMQ3N3M21R0gGrAUFVX3lxTFBrYkR1SjFZWnpfTmJMdEN4X01hbXB0OWd3R2tYYnF5X0R6X29FN1lZVnQtUV80NUVaSVU0YWRwZ1M1cHVGSlpCakdCTlEwRDJaRWNKSWVxUUQzc2IxYUlYYWJ5MFZNRjQ3R29BaUtkUmduRTQtZ21UY2UzVE9JckdYT3lLTWpTVlZPaUFWVkNCbUZ6NW8tSFZkR0R6MjBKWXB5UlJTVXp1NkZkQQ?oc=5" rel="noopener">Former Berkshire High School coach indicted in grooming, rape of 12-year-old girl - FOX 8 News</a></h3>
+  <p class="meta">FOX 8 News &middot; 2026-06-05</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxPRlVIY2pycDJKWVFyVEc5Ym5XQU9UWE9WRHdsbFQ4dnZNY19famlORDlKVWp2d04ya0xTSWdLaWhjRzVQOGNXWGp6cWJ3M1lCWFBZMXpMeUhXYnREMmVkRHUyT09FTHJRUGRrRjJzX2RoRmxxY2VTSXZZaVlaUUhIaG9pdDQ2bzFkRjZuSG1vcFpxcEQ1QzhETDcyTUpKc3JENnRKeXRJUEZRS3F5a09mcGNBeWNkTHp4MEUwRw?oc=5" rel="noopener">School bus driver, pastor arrested for alleged child sex charges, grooming - USA Today</a></h3>
+  <p class="meta">USA Today &middot; 2026-06-04</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://www.yahoo.com/news/us/articles/school-bus-driver-pastor-arrested-152731203.html" rel="noopener">School bus driver, pastor arrested for alleged child sex charges, grooming</a></h3>
+  <p class="meta">yahoo.com &middot; 2026-06-04</p>
+  
+  <p class="badges"><span class="badge amber">Text pairs grooming with a charge</span></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxNakVKODFKX291aVBPa0RscGdtbGw0bGhCS3ZPTndweGVVNlRuMFB4NkVQRkxsMEdHdjNmdW1JSkFXV0VnOTJObEZMOUJkVVQ0MVJWWHFMYUtudUVGck9WVzl2OXB5eWVJS1FKNHBPdkczOEN4YnF0aVVxeFRERHNJM1VGblJYdzBhN3B1SDRnVQ?oc=5" rel="noopener">Deshler pastor, school bus driver arrested on sexual battery, grooming charges - Northwest Signal</a></h3>
+  <p class="meta">Northwest Signal &middot; 2026-06-03</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMi1gFBVV95cUxNRzByaWd6ay03UVcyaFNIdXZxcGlzTXJQTW54WHN6MjNKMHFlQVFXNDdHS2NJMnluLWtLY205a0J0VW95WDZNUnZHakNYQkJnSFB0RnVWRWVRc0NMRkYxd2tBZ3VLSmIzV1dyeVNZSVB0bEtZdXFkYXh2WDdRV0U1Z3JhZVFBcW1aYjRJOHFJSGNMZTZLZUVwdDN6OW9PY2FfcU9VcGNUOEZXRnZDc0xvMkFtRHo1RFpFXzVLZ0xQM0RyMGZjSjBxZ3BUeUdzenRYNWVlQkFn?oc=5" rel="noopener">Charges allege Aurora man groomed young girls, acquired lewd photos - Record-Courier</a></h3>
+  <p class="meta">Record-Courier &middot; 2026-05-19</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMi-wJBVV95cUxQdEc2N3lpY21lZDB3c2VpaldoYi00WjNFbk1WRzY3c21pbGRPN2ZMR3pYb3BVSlB6LUgxamwzNHBWaVhFWTd4VDZsb2UzNnppSzhpX25odzd5bnlndVZaaEc2bGROLUMyWTdJeF9GMWJfMjgyWUZ0dHpxcTh3SjhySTBOWmhxM3NkdS1oWFA5QU85Qm1lbGRkNXFvRVNfV3ItYWdsU1c3VXp1V1haLTRaeDByVHdGdFJvdkJYbjJ2LWJzYzJjMkQxVWM5emZuLWFFMTF6T00wM3k4QlZPNDRpMWJFWGlsbGNIOENqVmhVSUJQYlFXcmQ5WkdfQlJQMDhuLTA2ZDZFWUhVN1FLZEJNZUxMcExadjRlQTdwRENhUWs1cllycW1VbGFaRFdzUWJmT2EtNzQ5dThrekJYVUxVclRCdldSanVzWTRBWVlsRFF3cW8wbmVuTEdXV05JejVyb2NVUkVkREg0NWY3a2JqdlRYU2pmME9TWHNV?oc=5" rel="noopener">Highland County man accused of grooming girls online, paying them for explicit images - WKEF</a></h3>
+  <p class="meta">WKEF &middot; 2026-05-06</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://www.msn.com/en-us/news/crime/former-clermont-county-daycare-worker-accused-of-kissing-grooming-child-indicted/ar-AA213yaH" rel="noopener">Former Clermont County daycare worker accused of kissing, grooming child indicted</a></h3>
+  <p class="meta">msn.com &middot; 2026-04-16</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMisAJBVV95cUxOVmtaTFdiOVhXMW1jU2l3UzRteE9QeUVjamFxLUdnOThZcnBpWkVhOWswRUw3ZWtqUFVXN2JzajRGSm5KSkx1Z1FEWjZhemVkUFEzVW1VdnZYWTAxc002d3N5dmd0UjlzcHlSc19KZ21XbmtiaHJndU5rQVlkRjBPQmpDSGNESGpWWEtzOUUzQkhmZHY4NkJja0IxNlI1N0Z1SWdBdUlYX3p4Q09TdEpUUzdtZzZ5M0p3ZTh0YVZRbTBJQ3RJZ2tSMUlkYUFMVUVXZlhXakxsQ0JnSHhHMVd3NTZ3TVZjNWx2am1YRW9nMGozY01LMmJtUXhxNG01a2U1czRSQXdsbEVUMDJxLVJ1bnJXMzhNcGJLM2xUbFhfS2NPN3BxdDhSbDNfY0FoaThj?oc=5" rel="noopener">Former Clermont County daycare worker accused of kissing, grooming child indicted - WKRC</a></h3>
+  <p class="meta">WKRC &middot; 2026-04-16</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxPaC1JaVdZMy1ndjRIWHFHY0tBMk9GcnBOdXNma1VPSS1ycGNscnZqR3o3dklCNTBJOEphRHE1V1ZNRXZLZHBaaXNWaGVyQ2k0QVBHNUJFeUN0ck9tYk1qZjZuNnVaRE1PY0pDNWM2bVNzNWRvV0dEY3ExTURKWnYwZ3FWMEtscDI1alpocVJPWXFGbzdRTkE?oc=5" rel="noopener">Cincinnati man charged with grooming, raping Elyria girl - Chronicle Telegram</a></h3>
+  <p class="meta">Chronicle Telegram &middot; 2026-03-29</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxNcHZKckxEaWNzdmJ6NGE2X0VoaDNZeFZKYTdGNVk2T2ZzMS0zMXZrNzgwV0Y3YmRYT1Fkc1ZjM1J2OXBTOUN3ZzI4WmRRYzQ0NjlzYVBpcWt0elhpbk5DY1ZfQU1pX18wMVYtam5meVZpU2g1WDZxbDNaNHRsQzBJaGVHZk5TTHAzT2lUY0RWMVlvb2JGS2c?oc=5" rel="noopener">Warren County man accused of grooming, molesting neighborhood children - WLWT</a></h3>
+  <p class="meta">WLWT &middot; 2026-03-24</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxQNTY5OWZkR0VxN3E0S0hpdmtDRXl4S1hLd0dpcTF5VVh6dl81a3hZZjhDNWNVeDJHcWphRHFCMDN2U2Y5ZW81VzB3am1MNlF3M3RRLW1CQTh6cXhQVUUtWk5iTzN5Wmc1YWZKOHU0QnFmZktXS3k4eUl2X09GMFlSSnNMUmFDUnJPNlh3OXdnT1FlWHdiemVzWVRFQ3VuejhqYzRyUFlQNHprZzNGeXFSc0kybW85dHltVkQ40gHAAUFVX3lxTE5mYUhYZnJOaks3aVJWX05XaE9RTlZ2YU1yRFJXR3BDaUNodk9xZXRZZXJJczNiUE8tM2wwWUZDZE5tbXJ0RU95UGdNM1FVb191cG5QUGQyZFpTYXNrZ1h6Q2dubUZwdm1ZM0JCOFd1b1gySWt5SVA0NEpSa01nWlc4eHNKMTZRdDZweWFlbUU3Unk0eGEwUUVyREFjbGdyZ2tET3BhVGRlcEdKWXVoMERWNUg2NUVXX2J4RXoxSVE3Zw?oc=5" rel="noopener">Brookfield man charged with importuning, grooming following search - WKBN.com</a></h3>
+  <p class="meta">WKBN.com &middot; 2026-03-09</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxNb3VVcW1XMWpuTkczNXZUTXVYRl9uQXBRSXZPU3NWbFA5OVpmVkVVMlg1ZVE0R2dtbmFFU0ZpYmsxRkg5dE1BQkJyelhyZnpmVU1Pa2VyS3Q4eDI1NzB6RjhfTUlOaV9TUGdad1ItNGFGbHZrT1ZMa3o3WjRMdzdFQ24yaEJwYjRTNFIyUkpMRDRqczV6UTZmSGpMVEVRcGdHbDJF?oc=5" rel="noopener">Basketball coach charged with grooming, sexual battery of a minor - WCPO 9 News</a></h3>
+  <p class="meta">WCPO 9 News &middot; 2026-03-02</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMi6AFBVV95cUxQRzJKZVpXMGdBNTRFOVdfcS1FYjJvSU8wYnhfelVXWHFfYl9Fa2NZa2ZCcndJQUl6QVp6cGRUTUw1Nm1vMXotTWRENlN3UVJyeTlRdHVpdnNHblpYZGhhWmV1SFprbU9GYmxJbG5EWDdLSTd4REhIVGg5SEpBRWVlQkFiQTB6bVpILUJtV0k2dXdfMmUyUmVjaUNDaW0xRE9razk4bHluSXBvTGhISHg4dzJLZ1FBSkJKbVF4VDlmbDdodjNoNjNCQ0g0VlRuNEZ0QTlRWWtjYlBiM1kxVVJSWlVvWVp1SDhM?oc=5" rel="noopener">Basketball coach charged with grooming, sex with 16-year-old player - Cincinnati Enquirer</a></h3>
+  <p class="meta">Cincinnati Enquirer &middot; 2026-03-02</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxQejF0QVkxdU5telBZY1lYbl9GOFdGLVl3RERXVWRvZDdFa0pzYk1TQ0FuUm5OZmltUjYtVk5pcnk4NnRMU1EzNl94OFU0UV94RC1BRVFxSE8zeUZRM3FNd2taUW92cllIVjJNbzBKdVJfX0VZUHU3eERPR09XUjhWbFlDYVlvRzBPRHZ0bjlISlBNelZWbS1fQ283YmjSAaIBQVVfeXFMTWZvT00yS29teDdXd2F2ck52a0lVcG1ERmV2Nll1TVo4ekNvOFZZN3lETGkwemdheVlCN2pVZFpPOGV0emZyLXFhbWlhSF9tVE5SMHlPSENoRXRFSlpzM2JOUHg3NmdtWWJBaGN4Qlo3Ym9fUURIOXhUODBHMFgxUWJ4ZzJsUnZoNW84Y0t2VFVBWV9NVUhLQy0zUFZqbHFIMkp3?oc=5" rel="noopener">Ohio man charged with grooming, sexually assaulting child in Elyria: Police - FOX 8 News</a></h3>
+  <p class="meta">FOX 8 News &middot; 2026-02-19</p>
+  
+  <p class="badges"></p>
+  
+</li>
+<li class="cand">
+  <h3><a href="https://news.google.com/rss/articles/CBMiyAFBVV95cUxOLXJST1p5OEZsdzBBRDJEYnYzYjkxek1Rc0dLNDJiVjlrZU00RWJ0Ry1CNkwwWmFYN3hreVZhRFhhY3NTTzdGbC1zXzZ4bWhRV0JMeS1ZVEZKWEk0NXVIYWMxMUpwS2d4U0R2MDRLNlZBSTlzWUhJYUQ3QThlNkVpZ0dzUjlWOENISlRKR2M1MHd4WXdNZnp6Rlh1TWZXOHJDRVFwRWFZblFfbjFqSW5wV09YOThQNWdxQmtnVl9zRmtNc19IdWtTUQ?oc=5" rel="noopener">Elyria Police arrest Cincinnati man accused of grooming, sexually assaulting 12-year-old girl - Cleveland 19 News</a></h3>
+  <p class="meta">Cleveland 19 News &middot; 2026-02-19</p>
+  
+  <p class="badges"></p>
+  
+</li>
+  </ul>
+</section>
+
+<section class="wrap" id="not-counted">
+  <h2>Grooming described, not charged</h2>
+  <p class="lede">The word appears in coverage, but no formal grooming count is confirmed, usually because the conduct predates the April 2025 law or the case was charged under other statutes. Not counted.</p>
+  <ul class="ex">
+<li><a href="https://www.fox19.com/2026/06/23/bethel-police-chiefs-secret-indictment-unsealed/" rel="noopener">Chad Essert</a>, 44, Clermont County: 70 counts of sexual battery and unlawful sexual conduct. Conduct 2005 to 2010, before the law existed. Grooming is described by prosecutors, not charged.</li>
+<li><a href="https://www.nbc4i.com/news/local-news/franklin-county/franklin-county-man-arrested-over-allegations-of-grooming-preschooler/" rel="noopener">Jordan Wheeler</a>, 26, Franklin County: Pandering sexually oriented material. Arrested April 2, 2025, one week before the law took effect. Grooming described his alleged intent, not a charge.</li>
+<li><a href="https://www.sent-trib.com/2026/02/23/bg-man-indicted-for-sex-crimes/" rel="noopener">Thomas Andrew Rich</a>, 29, Wood County: Gross sexual imposition, importuning, disseminating. No grooming count.</li>
+<li><a href="https://www.wtrf.com/top-stories/ohio-man-accused-of-grooming-multiple-teenage-girls-online-paying-for-sexual-pictures-threatening-to-kill-victims-if-reported/" rel="noopener">Mark A. Chandler</a>, 37, Brown County: Federal sexual exploitation and enticement. Federal case. Groomed is narrative, not an Ohio grooming count.</li>
+  </ul>
+</section>
+
+<section class="wrap" id="timing">
+  <h2>The law is being applied backwards</h2>
+  <p>No one was charged in the gap between signing and the effective date. But prosecutors have charged grooming for conduct that predates the statute: James Blair's grooming counts cover abuse reportedly beginning in 2018, and David Souza's cover 2024. Charging a brand-new offense for earlier conduct raises an ex post facto problem under both the Ohio and United States Constitutions. No defense challenge or appellate ruling has tested it yet.</p>
+  <p>The Bethel police chief shows the line. Chad Essert was indicted on 70 felony counts in June 2026 and prosecutors say he began grooming the alleged victim at age 12, yet he was not charged with grooming: the alleged conduct ran from 2005 to 2010, fifteen years before the statute existed.</p>
+</section>
+
+<section class="wrap" id="method">
+  <h2>How this page is kept</h2>
+  <p>There is no official statewide tally of grooming charges, so this is a case-by-case sweep of news and prosecutor releases. Every six hours a crawler searches news feeds for Ohio stories pairing grooming with a charge, drops anything already listed, reads each new story, and posts what passes to the lane above. A person confirms each case before it joins the count. Big multi-agency stings (Operation Next Door, Operation Guardians' Watch, Operation Lifeboat) produced solicitation and importuning counts, not grooming, and are not listed.</p>
+  <p>Corrections and additions: <a href="/">contact Chris Graham</a>. The research brief behind this page is a Fugio Consulting document.</p>
+  <div class="btns">
+    <a class="btn ghost" href="Charged-With-Grooming-in-Ohio-Fugio-Consulting-LLC.pdf">Read the brief (PDF)</a>
+    <a class="btn ghost" href="cases.json">Data (JSON)</a>
+    <a class="btn ghost" href="https://petethepigeon.com">Ask Pete about a bill</a>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">&copy; 2026 Fugio Consulting, LLC. All Rights Reserved. &middot; Prepared by Chris Graham &amp; StatehouseAI &middot; <a href="/">chrisgraham.com</a></div>
+</footer>
+<script src="/assets/site-nav.js"></script>
+</body>
+</html>

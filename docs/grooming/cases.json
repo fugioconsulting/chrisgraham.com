@@ -1,6 +1,6 @@
 {
- "as_of": "2026-10-10 15:22 UTC",
- "last_sweep": "2026-10-10 15:19 UTC",
+ "as_of": "2026-10-10 17:15 UTC",
+ "last_sweep": "2026-10-10 17:15 UTC",
  "count": 33,
  "cases": [
   {
@@ -645,5 +645,19 @@
    "aka": "keesee;megachurch;faith life"
   }
  ],
- "candidates": []
+ "candidates": [
+  {
+   "id": "1c39cf34cecb",
+   "title": "Mad River Schools teacher arrested following online grooming sting",
+   "url": "https://www.aol.com/articles/mad-river-schools-eacher-arrested-223500000.html",
+   "source": "aol.com",
+   "published": "2026-08-07",
+   "found_at": "2026-10-10",
+   "snippet": "RIVERSIDE, Ohio (WDTN) \u2013 A local Mad River Schools teacher was arrested as part of an exploitation investigation by the Miami Valley Human Trafficking Task Force. John Stalcup, 63, is facing a charge ...",
+   "formal_hint": false,
+   "ai": null,
+   "status": "new",
+   "matches": null
+  }
+ ]
 }

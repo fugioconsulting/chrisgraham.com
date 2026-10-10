@@ -136,8 +136,8 @@ def main():
     by_id = {c["id"]: c for c in cands}
     ai_budget = MAX_AI
     found = 0
-    for kind, url in FEEDS:
-        try: items = parse_feed(kind, get(url))
+    for kind, furl in FEEDS:
+        try: items = parse_feed(kind, get(furl))
         except Exception as e:
             print(f"feed error {kind}: {e}", file=sys.stderr); continue
         for it in items:
@@ -150,8 +150,9 @@ def main():
             if pubd and pubd < "2025-04-01": reason = "before the law"
             elif not GROOM.search(blob): reason = "no groom word"
             elif not CHARGE_WORDS.search(blob): reason = "no charge word"
-            elif not (OHIO.search(blob) or "ohio" in url.lower() or OHIO_COUNTY.search(blob) and any(o in url.lower() or o in it["source"].lower() for o in OHIO_OUTLETS)
-                      or any(o in url.lower() for o in OHIO_OUTLETS)): reason = "not ohio"
+            elif not (OHIO.search(blob) or "ohio" in it["url"].lower()
+                      or OHIO_COUNTY.search(blob) and any(o in it["url"].lower() or o in it["source"].lower() for o in OHIO_OUTLETS)
+                      or any(o in it["url"].lower() for o in OHIO_OUTLETS)): reason = "not ohio"
             elif it["url"].rstrip("/") in known_urls: reason = "known url"
             elif any(n and n in it["title"].lower() for n in known_names if len(n) > 4): reason = "known name"
             if reason:

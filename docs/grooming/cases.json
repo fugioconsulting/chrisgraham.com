@@ -52,7 +52,7 @@
    "resolved": "",
    "source_url": "https://local12.com/news/local/joshua-telford-cincinnati-man-arrested-after-traveling-to-sexually-abuse-12-year-old-cleveland-girl-allegations-investigation-launched-crime-criminal-activity-pandering-obscenity-involving-minor-enticement-charges-grooming-unlawful-sexual-conduct-elyria",
    "thumb": "03_telford.jpg",
-   "aka": "elyria;telford",
+   "aka": "elyria;telford;lorain county girl;elyria girl",
    "summary": "Joshua Telford, 35, of Cincinnati, was indicted in Lorain County in February 2026 on grooming and rape charges for allegedly traveling to abuse a 12-year-old, and is held without bond.",
    "lat": "41.3683",
    "lon": "-82.1077"
@@ -88,7 +88,7 @@
    "resolved": "",
    "source_url": "https://tiffinohio.net/posts/deshler-pastor-christopher-walter-charged-sexual-battery-grooming/",
    "thumb": "05_walter.jpg",
-   "aka": "deshler;walter",
+   "aka": "deshler;walter;lutheran pastor;patrick henry;henry county",
    "summary": "Christopher Walter, 52, a Deshler pastor, was indicted in Henry County in June 2026 on grooming and two counts of sexual battery, and has pleaded not guilty.",
    "lat": "41.2064",
    "lon": "-83.8988"
@@ -634,61 +634,18 @@
    "why": "Federal case. Groomed is narrative, not an Ohio grooming count.",
    "source_url": "https://www.wtrf.com/top-stories/ohio-man-accused-of-grooming-multiple-teenage-girls-online-paying-for-sexual-pictures-threatening-to-kill-victims-if-reported/",
    "aka": "chandler;mount orab"
+  },
+  {
+   "name": "Gary Thomas Keesee Jr.",
+   "age": "",
+   "county": "Knox",
+   "charges": "27 counts of rape, sexual imposition, and unlawful sexual conduct",
+   "why": "No grooming count. Conduct dates to about 2002 to 2006, before the law. Grooming is narrative in coverage.",
+   "source_url": "https://www.usatoday.com/story/news/nation/2025/04/22/ohio-megachurch-official-charged-rape/83212851007/",
+   "aka": "keesee;megachurch;faith life"
   }
  ],
  "candidates": [
-  {
-   "id": "125580f88d5d",
-   "title": "Former Stark County youth minister accused of grooming, sexual misconduct involving teens - WKYC",
-   "url": "https://news.google.com/rss/articles/CBMijgJBVV95cUxOeGRwalpXNlZuUjEta1RJUWQwbGFmR2xrb0M1QUhFeU5kMnhrbTZ2N3ZGZE84MDhtaWl4dXVrNGpOSWpPUHoyYnB1ckUzS3pDZXEwSTF2UnZ2R2QzVWJQS2pCamgxWVQyZHZlLXdGaUN1Um1UVGIzZFN4VGhxYTFmMVBGdWowa1I1a05KUkl3MlRnZmxWNXI3U011UzJuTktQc2ZMRHNMcVl0RENmSzQwQk1EQTdQay1pSFJjMjFMSXdNZ2JSYjdlZ0Faa3BCdnRVclBfb0VfNG1ta2xER0IwQnMxSy0xVVMxdUJIRl9nYzNZYVhFNGJlVEthVlUyemtGN3pKWERZLWpXZ3A5T3c?oc=5",
-   "source": "WKYC",
-   "published": "2026-09-03",
-   "found_at": "2026-10-10",
-   "snippet": "Former Stark County youth minister accused of grooming, sexual misconduct involving teens WKYC",
-   "formal_hint": null,
-   "ai": null,
-   "status": "new",
-   "matches": null
-  },
-  {
-   "id": "cc0286cecb17",
-   "title": "Whitewater Township couple arrested after allegedly grooming 14-year-old for sex - WLWT",
-   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPRXhwZnh4YXVqZjh3UnE0cDFmU0lWY1ZhRUpsVkRMUEI1ZXFwN25OcURmazRlcnBVUXJqS2dpWU42RlR0SEpKOEdIY1ZhOVY5OGM4R1hiQlhwamg3bXZsMHBsNmppcHM2dUszR0FmLWthSVFyQjFiVTJpcS1BakpGLTMzVnhDOWk2V2N6RkN6ZFdZZw?oc=5",
-   "source": "WLWT",
-   "published": "2026-06-22",
-   "found_at": "2026-10-10",
-   "snippet": "Whitewater Township couple arrested after allegedly grooming 14-year-old for sex WLWT",
-   "formal_hint": null,
-   "ai": null,
-   "status": "new",
-   "matches": null
-  },
-  {
-   "id": "8158fa062b7c",
-   "title": "Bus driver accused of grooming Eaton student sentenced - Dayton Daily News",
-   "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPYWpjQ1BCWi1fXzZoaThSb0VIQkpkV3UzV3luMUczZWNWLWVVbEpjYTZBaXZlZkNJWlphQXBYWXVZMTJFdm9BUXppZWlTdEl0ZU9oZEhzZ19fYlAtcTFkdV9RU0VFdFlFTTRLZnJZaUhPaWRsbDB5YXpUdWhSNV84X3ZYRlZDNms5RWdsTHBpaVRNWWxk?oc=5",
-   "source": "Dayton Daily News",
-   "published": "2026-06-14",
-   "found_at": "2026-10-10",
-   "snippet": "Bus driver accused of grooming Eaton student sentenced Dayton Daily News",
-   "formal_hint": null,
-   "ai": null,
-   "status": "new",
-   "matches": null
-  },
-  {
-   "id": "077104b68c46",
-   "title": "Lutheran pastor and bus driver in Ohio arrested for sexual battery, grooming - The Roys Report",
-   "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQaGlHMG8wMDFjRUxpZElzWDdtNUVBdVUwNVJCYXc2LTR0WHg4aDZyaGJlUnBBdVJfZmZzaGhpdEVNQjQ3a2tudVNDZ1p5cHNJT2hCTVVuaUxYaWRORW9DaFBsVVk2aTQzRUtINnBkX3llN1BOZ3pTb0NMdlpSVFdPbTg3c0hSMHo4SXlyLU9BZERDd0tHb1FWYnotR2dlMmNn?oc=5",
-   "source": "The Roys Report",
-   "published": "2026-06-12",
-   "found_at": "2026-10-10",
-   "snippet": "Lutheran pastor and bus driver in Ohio arrested for sexual battery, grooming The Roys Report",
-   "formal_hint": null,
-   "ai": null,
-   "status": "new",
-   "matches": null
-  },
   {
    "id": "bcd594ecf3cc",
    "title": "Ohio Church Pastor Who Drove School Children Daily Charged With Grooming, Sexually Battering a Child - International Business Times UK",
@@ -711,45 +668,6 @@
    "found_at": "2026-10-10",
    "snippet": "Add Yahoo as a preferred source to see more of our stories on Google. A school bus driver and church pastor in northwest Ohio has been arrested on child sex charges, including the alleged grooming of ...",
    "formal_hint": true,
-   "ai": null,
-   "status": "new",
-   "matches": null
-  },
-  {
-   "id": "9b7058829ca7",
-   "title": "Cincinnati man accused of grooming, raping 11-year-old Lorain County girl - Cleveland.com",
-   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPeFN5cDJHVHJub2VZZGx5TXFJRXFENEFrb2V0bUFTU0RSbHFpY01WOHVtb3ZzUmY5VUo0azVSeWRkRWg2MVg1a0JQUjJsZjBkSjZ6VnBxYWhrZjFDRkRBeG5sRXBwU3hvSG5nZEgwTS1ienlaNFZmREE4T2JxQ1NOdjhnZlJpME1heUx2Ull3U3ZOOGtjODRnWWxrcE4tMnY1Z0pwU1JHSzVGRWUwcUtlN1JoZHJIeFpw?oc=5",
-   "source": "Cleveland.com",
-   "published": "2026-02-19",
-   "found_at": "2026-10-10",
-   "snippet": "Cincinnati man accused of grooming, raping 11-year-old Lorain County girl Cleveland.com",
-   "formal_hint": null,
-   "ai": null,
-   "status": "new",
-   "matches": null
-  },
-  {
-   "id": "40ee40cd88b5",
-   "title": "Ohio man arrested in Lyon County grooming sting - Dakota News Now",
-   "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNazBGSW5qN3BOVTVIWEVCREt1Z2JwYVBpTTdIU0xZRnRnWEZlcEtDZjhmdENXdVFlbWE0R0E4Yll1VFUxbGdCMFFabDhNeUhFR0hEY1ZkUWlrbWpVNDlGSDdqUTUwY1VoQkdISHlBX0VLZ3lycm13WHV0aTRIWnFLd1FTSFR0VDNHZjRwVUNrONIBowFBVV95cUxNZXNkWlJDdHZzbG1EWXNxaUxlX25vemM5eWpObG0zaHBYaHNVQWZCUlJuLVNFZ1pRNWFmR2YwMURsaWQtblBJb2RnZkprcE9VT0VILU5FTWU0ZThNRDlac05oNjVnSHQyczBaUXNybWZQZ0taX0NrVXFGYzFhVDFmMHNXdHI3Z0lrVXk5N1BKcHFfdnBfSlFsTzhXUEllUm9qNEF3?oc=5",
-   "source": "Dakota News Now",
-   "published": "2026-02-03",
-   "found_at": "2026-10-10",
-   "snippet": "Ohio man arrested in Lyon County grooming sting Dakota News Now",
-   "formal_hint": null,
-   "ai": null,
-   "status": "new",
-   "matches": null
-  },
-  {
-   "id": "d0c0b186bb71",
-   "title": "Ex-church official at Ohio megachurch charged with rape, accused of grooming young girls - USA Today",
-   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOdXZBZmcxQnlxZlNfNXFtWmpodENJdWsxQWdKSnEwYW5DYnNiUkVIMjVOYTkwVzg2cXBMdDJXVzFWbTU1bGQxZGtCa3Z0aHlPc3lCVUg1ejNNTXppdzkxenZLNENPdEhPU296NGtKYzRGd1hxSU5EY0dhTzNKVzRZaTNUd0JVZ3RFUXR2aGNSejJEeVVobkRzck9BakVJaDlFVURCTFZVTWRFZVBKRkNoYktfRWJjTUk?oc=5",
-   "source": "USA Today",
-   "published": "2025-04-22",
-   "found_at": "2026-10-10",
-   "snippet": "Ex-church official at Ohio megachurch charged with rape, accused of grooming young girls USA Today",
-   "formal_hint": null,
    "ai": null,
    "status": "new",
    "matches": null

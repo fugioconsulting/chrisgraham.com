@@ -15,10 +15,21 @@ except Exception: candidates = []
 dismissed = set()
 p = os.path.join(D, "dismissed.txt")
 if os.path.exists(p):
-    dismissed = {l.strip() for l in open(p) if l.strip() and not l.startswith("#")}
+    dismissed = {l.split("#")[0].strip() for l in open(p) if l.split("#")[0].strip()}
 known_urls = {c["source_url"].rstrip("/") for c in cases} | {e["source_url"].rstrip("/") for e in excluded}
 candidates = [c for c in candidates if c.get("id") not in dismissed and c.get("url","").rstrip("/") not in dismissed and c.get("url","").rstrip("/") not in known_urls]
 candidates.sort(key=lambda c: c.get("published") or c.get("found_at") or "", reverse=True)
+aliases = {}
+for c in cases + excluded:
+    last = c["name"].split()[-1].lower()
+    if last != "jr." and len(last) > 4: aliases[last] = c["name"]
+    aliases[c["name"].lower()] = c["name"]
+    for a in (c.get("aka") or "").split(";"):
+        if a.strip(): aliases[a.strip().lower()] = c["name"]
+for c in candidates:
+    if not c.get("matches"):
+        blob = (c.get("title", "") + " " + c.get("snippet", "")).lower()
+        c["matches"] = next((who for a, who in aliases.items() if a in blob), None)
 coverage = [c for c in candidates if c.get("matches")]
 candidates = [c for c in candidates if not c.get("matches")]
 try: last_sweep = open(os.path.join(D, "last_sweep.txt")).read().strip()

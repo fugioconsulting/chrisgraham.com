@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-10 15:20 UTC",
+ "as_of": "2026-10-10 15:22 UTC",
  "last_sweep": "2026-10-10 15:19 UTC",
  "count": 33,
  "cases": [
@@ -88,7 +88,7 @@
    "resolved": "",
    "source_url": "https://tiffinohio.net/posts/deshler-pastor-christopher-walter-charged-sexual-battery-grooming/",
    "thumb": "05_walter.jpg",
-   "aka": "deshler;walter;lutheran pastor;patrick henry;henry county",
+   "aka": "deshler;walter;lutheran pastor;patrick henry;henry county;drove school children;bus driver, pastor;pastor arrested",
    "summary": "Christopher Walter, 52, a Deshler pastor, was indicted in Henry County in June 2026 on grooming and two counts of sexual battery, and has pleaded not guilty.",
    "lat": "41.2064",
    "lon": "-83.8988"
@@ -645,32 +645,5 @@
    "aka": "keesee;megachurch;faith life"
   }
  ],
- "candidates": [
-  {
-   "id": "bcd594ecf3cc",
-   "title": "Ohio Church Pastor Who Drove School Children Daily Charged With Grooming, Sexually Battering a Child - International Business Times UK",
-   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQTEVISTcwdjVYU1JBV0J4NURhN2NHVFNRUEkxLWlPMlEtTHM4NDctc3lQRGN1NVhnUXk0RFVuSnpINExCSnJQOEJVNWg5eGtuZjNFMXNkelFUZW9vQ3JQMzlpZ0JKNG5fZzQyQko0bjFvMl9mQl9hR1Frb2xsNmhObDVLRQ?oc=5",
-   "source": "International Business Times UK",
-   "published": "2026-06-05",
-   "found_at": "2026-10-10",
-   "snippet": "Ohio Church Pastor Who Drove School Children Daily Charged With Grooming, Sexually Battering a Child International Business Times UK",
-   "formal_hint": null,
-   "ai": null,
-   "status": "new",
-   "matches": null
-  },
-  {
-   "id": "6d48e86ee391",
-   "title": "School bus driver, pastor arrested for alleged child sex charges, grooming",
-   "url": "https://www.yahoo.com/news/us/articles/school-bus-driver-pastor-arrested-152731203.html",
-   "source": "yahoo.com",
-   "published": "2026-06-04",
-   "found_at": "2026-10-10",
-   "snippet": "Add Yahoo as a preferred source to see more of our stories on Google. A school bus driver and church pastor in northwest Ohio has been arrested on child sex charges, including the alleged grooming of ...",
-   "formal_hint": true,
-   "ai": null,
-   "status": "new",
-   "matches": null
-  }
- ]
+ "candidates": []
 }

@@ -26,6 +26,19 @@
   "matches": null
  },
  {
+  "id": "2f8c975d27ee",
+  "title": "Grand jury indicts Columbus man on multiple charges including attempted rape, grooming",
+  "url": "https://www.msn.com/en-us/crime/general/grand-jury-indicts-columbus-man-on-multiple-charges-including-attempted-rape-grooming/ar-AA2atBtd",
+  "source": "msn.com",
+  "published": "2026-08-19",
+  "found_at": "2026-10-11",
+  "snippet": "Diego Montoya Gonzalez is facing multiple felony charges after a Franklin County Grand Jury indicted him in connection with an alleged attempt to rape a child in Columbus. Gonzalez was indicted on ...",
+  "formal_hint": null,
+  "ai": null,
+  "status": "coverage",
+  "matches": "Diego Montoya Gonzales"
+ },
+ {
   "id": "1c39cf34cecb",
   "title": "Mad River Schools teacher arrested following online grooming sting",
   "url": "https://www.aol.com/articles/mad-river-schools-eacher-arrested-223500000.html",
@@ -163,6 +176,32 @@
   "published": "2026-06-23",
   "found_at": "2026-10-10",
   "snippet": "Ohio police chief indicted on 70 sex abuse charges after allegedly grooming 12-year-old NBC 5 Chicago",
+  "formal_hint": null,
+  "ai": null,
+  "status": "coverage",
+  "matches": "Chad Essert"
+ },
+ {
+  "id": "c657e033f53f",
+  "title": "Ohio police chief indicted on 70 sex abuse charges after allegedly grooming 12-year-old",
+  "url": "https://www.nbcnewyork.com/news/national-international/bethel-ohio-police-chief-court-appearance/6516892/",
+  "source": "nbcnewyork.com",
+  "published": "2026-06-23",
+  "found_at": "2026-10-11",
+  "snippet": "An Ohio police chief accused of sexually abusing a minor over several years while working as a youth instructor has been charged with 70 counts of sex crimes, authorities said. Chad Essert, 44, was ...",
+  "formal_hint": null,
+  "ai": null,
+  "status": "coverage",
+  "matches": "Chad Essert"
+ },
+ {
+  "id": "5a97837b8023",
+  "title": "Ohio police chief indicted on 70 sex abuse charges after allegedly grooming 12-year-old",
+  "url": "https://ng.headtopics.com/news/ohio-police-chief-indicted-on-70-sex-abuse-charges-after-84836880",
+  "source": "ng.headtopics.com",
+  "published": "2026-06-23",
+  "found_at": "2026-10-11",
+  "snippet": "An Ohio police chief accused of sexually abusing a minor over several years while working as a youth instructor has been charged with 70 counts of sex crimes. Chad Essert, 44, is facing 56 counts of ...",
   "formal_hint": null,
   "ai": null,
   "status": "coverage",

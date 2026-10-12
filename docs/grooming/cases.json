@@ -1,6 +1,6 @@
 {
- "as_of": "2026-10-12 01:14 UTC",
- "last_sweep": "2026-10-12 01:14 UTC",
+ "as_of": "2026-10-12 07:02 UTC",
+ "last_sweep": "2026-10-12 07:02 UTC",
  "count": 33,
  "cases": [
   {
@@ -655,6 +655,19 @@
    "found_at": "2026-10-10",
    "snippet": "RIVERSIDE, Ohio (WDTN) \u2013 A local Mad River Schools teacher was arrested as part of an exploitation investigation by the Miami Valley Human Trafficking Task Force. John Stalcup, 63, is facing a charge ...",
    "formal_hint": false,
+   "ai": null,
+   "status": "new",
+   "matches": null
+  },
+  {
+   "id": "63fd432d228b",
+   "title": "Ohio man arrested in Lyon County grooming sting - KTIV",
+   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQR0QxTTc5LUE1SU5QYmpyY2VqQW1ocDBMZjcxWjVUSFllNXNTQ1Jfa1Z2YUVxYVFDcUhYNWozcDJOV3V1WjZ1azZaM3Q1N2h1b0tRUFVJOE9lcGM4Vi01LVVYMXNHaHBIVlA3NjZLdnZkVHhra2xFQ2lhS3RPcWxZRHRzRdIBlwFBVV95cUxQZ3NBT0lTdm9iOWhWSkM4UWJYZi1sTDRpdTJfRUxMaFNScXhUVXl1bE9GN05SaXZGaFpMenRsa0kzb3pSTU8wTGFhbU5qSmlwc0tMMXF5cFdlb0ZTSEVIdXYzeFhrQzQySEw4UERqZ2hYbHR0RFpGeWRrZFJYQ3kyTnlHckFWYloyY25GMlFkNFp2UG5RNXlv?oc=5",
+   "source": "KTIV",
+   "published": "2026-02-03",
+   "found_at": "2026-10-12",
+   "snippet": "Ohio man arrested in Lyon County grooming sting KTIV",
+   "formal_hint": null,
    "ai": null,
    "status": "new",
    "matches": null

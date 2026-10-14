@@ -1,6 +1,6 @@
 {
- "as_of": "2026-10-13 18:36 UTC",
- "last_sweep": "2026-10-13 18:36 UTC",
+ "as_of": "2026-10-14 00:56 UTC",
+ "last_sweep": "2026-10-14 00:56 UTC",
  "count": 33,
  "cases": [
   {
@@ -654,6 +654,19 @@
    "published": "2026-08-24",
    "found_at": "2026-10-13",
    "snippet": "Dead cats, abandoned animals found inside grooming business; owner charged Cleveland 19 News",
+   "formal_hint": null,
+   "ai": null,
+   "status": "new",
+   "matches": null
+  },
+  {
+   "id": "9a8661011f91",
+   "title": "Middle school teacher charged with grooming student, sheriff\u2019s office says - Cleveland 19 News",
+   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNUkpybkk1TGlkMndMdlZZZXBOZDRnSFdibi1qLTctSTBhUnl5cE00MjNscVJ3YzJta1RtTmEzby1JOVg2SXEwNnFtc0tpSHEwMWZaTDJGNzJoNmxqQXNLQTFHLVlDYWVEb2dMYlY4bTg4RXdSMDJPYzUtSGs2eS1OckZfZ2FFYktOQVZoajBseWI5NTljM0J5bnN1QnUybE0tdmpWLUFEbWxfd0ZBUVMxRHl3?oc=5",
+   "source": "Cleveland 19 News",
+   "published": "2026-08-10",
+   "found_at": "2026-10-14",
+   "snippet": "Middle school teacher charged with grooming student, sheriff\u2019s office says Cleveland 19 News",
    "formal_hint": null,
    "ai": null,
    "status": "new",

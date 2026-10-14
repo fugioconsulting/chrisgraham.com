@@ -1,6 +1,6 @@
 {
- "as_of": "2026-10-14 06:41 UTC",
- "last_sweep": "2026-10-14 06:41 UTC",
+ "as_of": "2026-10-14 12:37 UTC",
+ "last_sweep": "2026-10-14 12:37 UTC",
  "count": 33,
  "cases": [
   {
@@ -681,6 +681,19 @@
    "found_at": "2026-10-10",
    "snippet": "RIVERSIDE, Ohio (WDTN) \u2013 A local Mad River Schools teacher was arrested as part of an exploitation investigation by the Miami Valley Human Trafficking Task Force. John Stalcup, 63, is facing a charge ...",
    "formal_hint": false,
+   "ai": null,
+   "status": "new",
+   "matches": null
+  },
+  {
+   "id": "2162404bc123",
+   "title": "Cincinnati man arrested after grooming, traveling to sexually abuse Cleveland girl: police - WKRC",
+   "url": "https://news.google.com/rss/articles/CBMilwNBVV95cUxPVkJReF9CYTBFTUFpVlVGX2l3RmQ4X3prQ0dwOFREdTRNcVU2clpKZTJadHh3UlRycXdsRjFac0JLSlN0RU11aEdKSzRkb2lxdk9icnF1Z1VydEd0WWhzX3FrQTBzUXRTREVVVXg3d0dCOEphLVlaY3RnUUlmejJwY09fOVRxekVIQjZxM2wzOUI5VGV2NE5HRGRheFpJMUdxcmc1a3FvcGhfb2tyWkRGbEpOa09FSFBPT3pGSkpLdE9xYnJlajVNek41ZnIyOGFCTlhJZ2Q2SVR2MTBWby03RUpyQ3RTTTZOLWlBbnYtRFF2MzdMVG9tLVE1UnV2Q2l2X0JMN1pjWVFOS2QtdmhoNjZMLVg4YmRUU1hfYjVFU1Vfb2V6S3Q2cXQ0UUJpeGN3QTJ0UWVuZDc1VUxOenlISUZlS1N0d0lzNTN1c3BoNXpEdGhfVFJ6MHFlbnJKQXRmQ2F5dlhyUWxuMHliRW9xT0ZOWDhnWkMtMlFVbHdBWndkaEVFaHVKa0UxUklKMzBEQW1tNWhubw?oc=5",
+   "source": "WKRC",
+   "published": "2026-02-20",
+   "found_at": "2026-10-14",
+   "snippet": "Cincinnati man arrested after grooming, traveling to sexually abuse Cleveland girl: police WKRC",
+   "formal_hint": null,
    "ai": null,
    "status": "new",
    "matches": null

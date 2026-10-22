@@ -1,6 +1,6 @@
 {
- "as_of": "2026-10-22 06:42 UTC",
- "last_sweep": "2026-10-22 06:41 UTC",
+ "as_of": "2026-10-22 12:38 UTC",
+ "last_sweep": "2026-10-22 12:38 UTC",
  "count": 33,
  "cases": [
   {
@@ -646,6 +646,19 @@
   }
  ],
  "candidates": [
+  {
+   "id": "7b4e06fa9487",
+   "title": "High-profile sex abuse case brings test for new Ohio anti-grooming law",
+   "url": "https://ohiocapitaljournal.com/2026/10/22/high-profile-sex-abuse-case-brings-test-for-new-ohio-grooming-law/",
+   "source": "ohiocapitaljournal.com",
+   "published": "2026-10-21",
+   "found_at": "2026-10-22",
+   "snippet": "The arrest of a former executive at a Catholic charity organization in Columbus stands as a high-profile test of a law passed just last year by Ohio lawmakers.",
+   "formal_hint": null,
+   "ai": null,
+   "status": "new",
+   "matches": null
+  },
   {
    "id": "cc80a8d011bb",
    "title": "Dead cats, abandoned animals found inside grooming business; owner charged - Cleveland 19 News",

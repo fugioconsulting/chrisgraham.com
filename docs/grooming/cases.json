@@ -1,6 +1,6 @@
 {
- "as_of": "2026-10-26 14:03 UTC",
- "last_sweep": "2026-10-26 14:03 UTC",
+ "as_of": "2026-10-26 18:41 UTC",
+ "last_sweep": "2026-10-26 18:41 UTC",
  "count": 33,
  "cases": [
   {
@@ -720,6 +720,19 @@
    "found_at": "2026-10-12",
    "snippet": "Ohio man arrested in Lyon County grooming sting KTIV",
    "formal_hint": null,
+   "ai": null,
+   "status": "new",
+   "matches": null
+  },
+  {
+   "id": "8b0ffecbbcd6",
+   "title": "Ohio man arrested in Lyon County grooming sting",
+   "url": "https://www.ktiv.com/2026/02/03/ohio-man-arrested-lyon-county-grooming-sting/",
+   "source": "ktiv.com",
+   "published": "2026-02-03",
+   "found_at": "2026-10-26",
+   "snippet": "LYON COUNTY, Iowa (Sioux County Radio) -An Ohio man has been arrested in Lyon County following a sting operation that led to felony and misdemeanor charges involving alleged online communication with ...",
+   "formal_hint": true,
    "ai": null,
    "status": "new",
    "matches": null

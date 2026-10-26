@@ -1,5 +1,18 @@
 [
  {
+  "id": "64e61b0cee7e",
+  "title": "Bail revoked for former local pastor and school bus driver indicted for alleged sex crimes against teen girl",
+  "url": "https://www.msn.com/en-us/news/other/bail-revoked-for-former-local-pastor-and-school-bus-driver-indicted-for-alleged-sex-crimes-against-teen-girl/ar-AA24JLnF",
+  "source": "msn.com",
+  "published": "2026-10-26",
+  "found_at": "2026-10-26",
+  "snippet": "Christopher Walter, 52, of Deshler, is accused of sexual battery and grooming.",
+  "formal_hint": null,
+  "ai": null,
+  "status": "coverage",
+  "matches": "Christopher Walter"
+ },
+ {
   "id": "ef65076a1de7",
   "title": "High-profile sex abuse case brings test for new Ohio anti-grooming law",
   "url": "https://www.msn.com/en-us/news/other/high-profile-sex-abuse-case-brings-test-for-new-ohio-anti-grooming-law/ar-AA2g2nUu",
@@ -494,6 +507,19 @@
   "matches": "Michael Waldron"
  },
  {
+  "id": "bb828ab35cb7",
+  "title": "Warren County man accused of grooming, molesting neighborhood children",
+  "url": "https://www.wlwt.com/article/warren-county-man-accused-grooming-molesting-children/70837397",
+  "source": "wlwt.com",
+  "published": "2026-03-24",
+  "found_at": "2026-10-26",
+  "snippet": "A Warren County man is facing 12 felony charges after prosecutors say he groomed and sexually abused multiple elementary school boys over several years in a Lebanon neighborhood. Investigators ...",
+  "formal_hint": null,
+  "ai": null,
+  "status": "coverage",
+  "matches": "Michael Waldron"
+ },
+ {
   "id": "2b5e72223122",
   "title": "Brookfield man charged with importuning, grooming following search - WKBN.com",
   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQNTY5OWZkR0VxN3E0S0hpdmtDRXl4S1hLd0dpcTF5VVh6dl81a3hZZjhDNWNVeDJHcWphRHFCMDN2U2Y5ZW81VzB3am1MNlF3M3RRLW1CQTh6cXhQVUUtWk5iTzN5Wmc1YWZKOHU0QnFmZktXS3k4eUl2X09GMFlSSnNMUmFDUnJPNlh3OXdnT1FlWHdiemVzWVRFQ3VuejhqYzRyUFlQNHprZzNGeXFSc0kybW85dHltVkQ40gHAAUFVX3lxTE5mYUhYZnJOaks3aVJWX05XaE9RTlZ2YU1yRFJXR3BDaUNodk9xZXRZZXJJczNiUE8tM2wwWUZDZE5tbXJ0RU95UGdNM1FVb191cG5QUGQyZFpTYXNrZ1h6Q2dubUZwdm1ZM0JCOFd1b1gySWt5SVA0NEpSa01nWlc4eHNKMTZRdDZweWFlbUU3Unk0eGEwUUVyREFjbGdyZ2tET3BhVGRlcEdKWXVoMERWNUg2NUVXX2J4RXoxSVE3Zw?oc=5",
@@ -658,6 +684,19 @@
   "found_at": "2026-10-12",
   "snippet": "Ohio man arrested in Lyon County grooming sting KTIV",
   "formal_hint": null,
+  "ai": null,
+  "status": "new",
+  "matches": null
+ },
+ {
+  "id": "8b0ffecbbcd6",
+  "title": "Ohio man arrested in Lyon County grooming sting",
+  "url": "https://www.ktiv.com/2026/02/03/ohio-man-arrested-lyon-county-grooming-sting/",
+  "source": "ktiv.com",
+  "published": "2026-02-03",
+  "found_at": "2026-10-26",
+  "snippet": "LYON COUNTY, Iowa (Sioux County Radio) -An Ohio man has been arrested in Lyon County following a sting operation that led to felony and misdemeanor charges involving alleged online communication with ...",
+  "formal_hint": true,
   "ai": null,
   "status": "new",
   "matches": null

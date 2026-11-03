@@ -1,5 +1,15 @@
 <!doctype html>
 <meta charset="utf-8">
 <title>Chris Graham</title>
-<meta http-equiv="refresh" content="0; url=/">
-<script>location.replace("/");</script>
+<meta name="robots" content="noindex">
+<noscript><meta http-equiv="refresh" content="0; url=/"></noscript>
+<script>
+(function () {
+  var known = ['/coaching', '/pete', '/group', '/studio'];
+  var cur = location.pathname;
+  var p = cur.toLowerCase().replace(/\/+$/, '').replace(/\.html$/, '');
+  var tail = location.search + location.hash;
+  // Only jump to a known page if the path actually changed, so a missing known page can't loop.
+  location.replace(p !== cur && known.indexOf(p) !== -1 ? p + tail : '/' + tail);
+})();
+</script>

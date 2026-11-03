@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-03 10:02 UTC",
+ "as_of": "2026-11-03 12:34 UTC",
  "last_sweep": "2026-11-03 10:02 UTC",
  "count": 61,
  "cases": [
@@ -1149,18 +1149,5 @@
    "aka": "keesee;megachurch;faith life"
   }
  ],
- "candidates": [
-  {
-   "id": "2825bcc0b14d",
-   "title": "High-profile sex abuse case brings test for new Ohio anti-grooming law - The Highland County Press",
-   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQYWpkbUNVUVlrc1oxcDlPZU5BM21KMVg2VlQ1cUZmZGdTSEliRXBVaDhzRm1CeU9hWHc0YklyWnkwTUc2MEhxekhjY2VIRloxbUxOWVFGbTdEV09IanJHM2NlRlR0amNKb2xVckhhV3B0ZkZXVlE1QWpkcjhKSWlXcGdMLXVVXzloWDdVazdlMzJtZ0lpVm41eWVRMEt4c2JhU3huY19OQzFIOGZP?oc=5",
-   "source": "The Highland County Press",
-   "published": "2026-11-03",
-   "found_at": "2026-11-03",
-   "snippet": "High-profile sex abuse case brings test for new Ohio anti-grooming law The Highland County Press",
-   "formal_hint": false,
-   "status": "new",
-   "matches": null
-  }
- ]
+ "candidates": []
 }

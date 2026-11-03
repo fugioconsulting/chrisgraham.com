@@ -1,0 +1,35 @@
+name: grooming tracker sweep
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["data/grooming/**", "scripts/grooming/**"]
+permissions:
+  contents: write
+concurrency:
+  group: grooming-sweep
+  cancel-in-progress: false
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Crawl news for new grooming charges
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 scripts/grooming/crawl.py
+      - name: Build the page
+        run: python3 scripts/grooming/build.py
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name "grooming-tracker bot"
+          git config user.email "bot@chrisgraham.com"
+          git add data/grooming docs/grooming
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "grooming: sweep $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push

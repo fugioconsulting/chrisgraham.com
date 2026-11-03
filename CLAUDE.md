@@ -12,7 +12,7 @@ Details and one-time setup: `DEPLOY.md`.
 
 ## Layout
 
-- `docs/index.html` homepage, `docs/coaching.html`, `docs/pete.html`. Pages resolves `/coaching` to `coaching.html`.
+- `docs/` is the only served directory (there is no `public/`; do not recreate it). `docs/index.html` homepage, `docs/coaching.html`, `docs/pete.html`. Pages resolves `/coaching` to `coaching.html`.
 - `docs/404.html` redirects unknown paths to `/`.
 - `docs/CNAME` holds the custom domain. Do not delete it.
 - `docs/robots.txt` and `docs/sitemap.xml` are hand-kept. Add a new page to the sitemap when it ships.

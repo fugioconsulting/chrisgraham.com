@@ -70,13 +70,12 @@ def main():
             r = who[0]
             if r["thumb"]: report.append(f"SKIP {req} {label}: {r['name']} already has a photo"); continue
             if r["name"] in saved: continue
-            lx, ly, rx, ry = map(float, f[3:7]); cx, cy = (lx + rx) / 2, (ly + ry) / 2
-            im = Image.open(p).convert("RGB"); W, H = im.size
-            s = min(W, H, max(abs(rx - lx) * 4.5, 120)); x0 = min(max(cx - s / 2, 0), W - s); y0 = min(max(cy - s * .4, 0), H - s)
+            im = Image.open(p).convert("RGB")
+            # keep the whole record photo (the tracker aligns eyes from it); only shrink the longest side to 700px
             key = f"{int(r['num']):02d}_{re.sub(r'[^a-z]', '', r['name'].split()[-1].lower() if r['name'].split()[-1].lower() not in ('jr.','jr','ii','iii') else r['name'].split()[-2].lower())}.jpg"
             report.append(f"PHOTO {req} {label} -> {r['name']} ({why}){'' if apply else ' [report only]'}")
             if apply:
-                im.crop((x0, y0, x0 + s, y0 + s)).resize((300, 300), Image.LANCZOS).save(os.path.join(IMG, key), quality=88)
+                im.thumbnail((700, 700), Image.LANCZOS); im.save(os.path.join(IMG, key), quality=88)
                 r["thumb"] = key; saved.append(r["name"])
                 new = not os.path.exists(SOURCES)
                 with open(SOURCES, "a", newline="") as o:

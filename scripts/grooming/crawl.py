@@ -1,19 +1,16 @@
 #!/usr/bin/env python3
-"""Find new Ohio grooming-charge stories, judge them, and add the ones that pass to cases.csv.
-Stdlib only. Run: python3 scripts/grooming/crawl.py
-With ANTHROPIC_API_KEY set, a Claude model reads each new story (and every queued story it has not
-read yet) and returns a verdict plus the row fields. A story is appended to cases.csv only when the
-model says "promote" AND the code checks pass: a named person, an Ohio county, a formal ORC 2907.071
-count (charged, indicted, pleaded or convicted), a reputable source, and the name and the word
-grooming both in the story text. Anything unsure stays queued in candidates.json; it is never promoted.
-No person reviews cases. AI calls are capped per run (MAX_AI)."""
+"""Find new Ohio grooming-charge stories and queue them, then apply the judge's verdicts. Stdlib only, no paid API.
+  python3 scripts/grooming/crawl.py               sweep the news feeds (GitHub Actions, daily at 5am ET)
+  python3 scripts/grooming/crawl.py --apply FILE  apply the verdicts the Claude scheduled task on Chris's Mac wrote (JUDGE.md)
+The sweep drops stories about people already listed and queues the rest in candidates.json. --apply appends a candidate to
+cases.csv only when the judge said promote AND the code checks pass: a named person, an Ohio county, a reputable source, a
+verbatim quote naming the person and the grooming count, and not already listed. Rejects and coverage go to seen.json; anything
+unsure stays queued and is judged again next morning. No person reviews cases."""
 import csv, json, os, re, sys, hashlib, html, datetime, urllib.request, urllib.parse, urllib.error, ssl, time
 import xml.etree.ElementTree as ET
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 D = os.path.join(ROOT, "data", "grooming")
 UA = "Mozilla/5.0 (compatible; chrisgraham.com grooming tracker; +https://chrisgraham.com/grooming)"
-MAX_AI = int(os.environ.get("GROOMING_MAX_AI", "60"))
-MODEL = os.environ.get("GROOMING_MODEL", "claude-sonnet-5-5")
 NOW = datetime.datetime.now(datetime.timezone.utc)
 CTX = ssl.create_default_context()
 
@@ -48,7 +45,13 @@ CITIES = ["columbus","cleveland","cincinnati","toledo","akron","dayton","youngst
           "miamisburg","centerville","springboro","new philadelphia","coshocton","bellefontaine","ashtabula","painesville","chardon",
           "van wert","paulding","kenton","wauseon","lima","eaton","batavia","whitewater township","claridon","jackson township"]
 CHARGE_WORDS = re.compile(r"\b(charg|indict|arrest|plead|guilty|sentenc|count|convict|bond|jail)", re.I)
+COUNTY_SET = {c for c in COUNTIES if c not in ("van", "wert")} | {"van wert"}
 GROOM = re.compile(r"\bgroom", re.I)
+# What the judge's quote must say: grooming as the object of a charge, plea or conviction, or the statute number. "Groomed" never counts.
+EVIDENCE_FORMAL = re.compile(r"\b(charged with|charges? of|counts? of|indicted (on|for)|plead(ed|s)? (guilty|no contest) to|convicted of|found guilty of|sentenced (on|for))\b[^.;]{0,120}\bgrooming\b"
+                             r"|\bgrooming,? an? (first|second|third|fourth|fifth)[- ]degree (felony|misdemeanor)|\b2907\.071", re.I)
+ELSEWHERE = re.compile(r"\b(kentucky|ky\.|indiana|ind\.|illinois|ill\.|michigan|mich\.|pennsylvania|pa\.|west virginia|w\.va\.|krs|federal|u\.s\. (district|attorney))", re.I)
+BROWSER_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
 FORMAL = re.compile(r"(charged with|counts? of|charge of|indicted (on|for)|plead(ed|s)? guilty to|convicted of|found guilty of)[^.]{0,140}\bgrooming\b|\bgrooming\b[^.]{0,80}\b(charge|count|indictment|felony|misdemeanor)|2907\.071", re.I)
 # Ohio gate: the word Ohio, or an Ohio county name followed by "county" paired with the word Ohio elsewhere, or a known Ohio city.
 OHIO = re.compile(r"\bohio\b|\b(" + "|".join(re.escape(c) for c in CITIES) + r")\b", re.I)
@@ -65,10 +68,9 @@ OHIO_OUTLETS = ("wcpo","fox19","wlwt","local12","wkrc","wxix","nbc4i","10tv","ab
 UNREPUTABLE = ("facebook.com", "instagram.com", "tiktok.com", "x.com", "twitter.com", "reddit.com", "youtube.com", "nextdoor.com",
   "mugshot", "bustednewspaper", "arrests.org", "jailbase", "recentlybooked", "headtopics", "newsbreak.com", "einpresswire", "prnewswire",
   "medium.com", "substack.com", "blogspot", "wordpress.com", "news.google.com")
-API_DEAD = False   # set when the key is rejected, so one bad key does not burn the whole budget on 401s
 
-def get(url, timeout=20):
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "*/*"})
+def get(url, timeout=20, ua=UA):
+    req = urllib.request.Request(url, headers={"User-Agent": ua, "Accept": "*/*"})
     with urllib.request.urlopen(req, timeout=timeout, context=CTX) as r:
         return r.read()
 
@@ -111,85 +113,62 @@ def iso(pub):
 def norm_title(t): return re.sub(r"[^a-z0-9]+", " ", t.lower()).strip()
 def cid(url, title): return hashlib.sha1((url.rstrip("/") + "|" + norm_title(title)).encode()).hexdigest()[:12]
 
-def ai_read(text, title, url):
-    """Ask Claude for a verdict and the cases.csv fields. Returns a dict, or None if no key / the call failed."""
-    global API_DEAD
-    key = os.environ.get("ANTHROPIC_API_KEY")
-    if not key or API_DEAD: return None
-    prompt = ("You judge news stories for a public tracker of people charged under Ohio's grooming statute, ORC 2907.071 "
-              "(HB 322, effective April 9, 2025). Real people are named, so be strict.\n"
-              "verdict rules:\n"
-              "- \"promote\": the story names one person and says, as fact, that this person was charged, indicted, pleaded guilty or was "
-              "convicted on a grooming count in an Ohio court. Formal count only: words like \"groomed\" or \"a grooming pattern\" "
-              "describing behavior are not enough, and neither are \"grooming-related offenses\".\n"
-              "- \"reject\": not Ohio, not a person (pet grooming, etc.), federal charges only, other statutes only, or grooming is "
-              "only descriptive. Also reject sting roundups with no grooming count.\n"
-              "- \"unsure\": anything else, including a story that is truncated, paywalled, or names more than one possible defendant.\n"
-              "When in doubt, say unsure. Never guess a field; use null.\n"
-              "Answer with JSON only, keys: verdict, reason (one short line), name (full name as printed), age (int or null), "
-              "city (or null), county (Ohio county name without the word County, or null), charged (month and year of the charge "
-              "or indictment like \"Oct 2026\", or null), charges (short list with grooming first, e.g. \"Grooming, 2 sexual battery\"), "
-              "companion (\"hands-on\" if rape, sexual battery, gross sexual imposition or unlawful sexual conduct is charged; "
-              "\"exploitation\" if abuse material, pandering, importuning, trafficking or voyeurism; \"none\" if grooming alone; "
-              "else \"unspecified\"), status (short, e.g. \"Pending, pleaded not guilty\"), resolved (\"convicted\", "
-              "\"pleaded guilty\", \"plea on other counts\", \"dismissed\", or \"\" if open), "
-              "summary (one neutral sentence under 45 words: who, age, town, county, month, the charges; for open cases say "
-              "\"was charged\" or \"was indicted\", never imply guilt).\n\n"
-              f"TITLE: {title}\nURL: {url}\nTEXT:\n{text[:14000]}")
-    body = json.dumps({"model": MODEL, "max_tokens": 700, "messages": [{"role": "user", "content": prompt}]}).encode()
-    req = urllib.request.Request("https://api.anthropic.com/v1/messages", data=body, headers={
-        "content-type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01", "User-Agent": UA})
-    try:
-        with urllib.request.urlopen(req, timeout=90, context=CTX) as r:
-            resp = json.loads(r.read())
-        txt = "".join(b.get("text", "") for b in resp.get("content", []))
-        m = re.search(r"\{.*\}", txt, re.S)
-        return json.loads(m.group(0)) if m else None
-    except urllib.error.HTTPError as e:
-        if e.code in (401, 403):
-            API_DEAD = True
-            print(f"::error::Anthropic API returned {e.code}: the ANTHROPIC_API_KEY secret is invalid. Reset it with "
-                  "gh secret set ANTHROPIC_API_KEY --repo fugioconsulting/chrisgraham.com", file=sys.stderr)
-        else: print("  ai error:", e.code, e.read()[:300], file=sys.stderr)
-        return None
-    except Exception as e:
-        print("  ai error:", e, file=sys.stderr); return None
-
 def norm_name(n): return re.sub(r"[^a-z ]+", "", re.sub(r"\b(jr|sr|ii|iii|iv)\b\.?", "", (n or "").lower())).split()
 
+def flat(t): return " " + " ".join(re.sub(r"[^a-z0-9]+", " ", (t or "").lower()).split()) + " "
+
 def same_person(name, county, row):
-    """True when this name is already on the list as row (same first and last name, or same last name in the same county)."""
+    """'same' when first and last name match a row; 'maybe' when only the last name matches in the same county; else None."""
     x, y = norm_name(name), norm_name(row["name"])
-    if not x or not y: return False
-    return (x[0] == y[0] and x[-1] == y[-1]) or (x[-1] == y[-1] and bool(county) and county.lower() == row.get("county", "").lower())
+    if not x or not y or x[-1] != y[-1]: return None
+    if x[0] == y[0]: return "same"
+    return "maybe" if county and county.lower() == (row.get("county") or "").lower() else None
 
-def passes(ai, text, url, cases):
-    """The code half of the rules. Returns (ok, reason). The model's 'promote' is necessary, never sufficient."""
-    if not ai or ai.get("verdict") != "promote": return False, "model did not say promote"
-    name = (ai.get("name") or "").strip()
-    if len(norm_name(name)) < 2: return False, "no full name"
-    county = (ai.get("county") or "").replace("County", "").strip().title()
-    if county.lower() not in COUNTIES and county.lower() != "van wert": return False, f"county not in Ohio: {county!r}"
+def page_has_name(name, text):
+    """First name, then up to two middle names or initials, then last name."""
+    n = norm_name(name)
+    return bool(re.search(rf"\b{re.escape(n[0])}\b(\s+\w+){{0,2}}\s+{re.escape(n[-1])}\b", " ".join(norm_name(text))))
+
+def passes(v, text, url, cases, excluded):
+    """The code half of the rules. The judge's 'promote' is necessary, never sufficient. text is the page the code itself fetched.
+    Returns (ok, reason, route): route 'coverage' when the person or source is already listed, else 'hold' (stays queued)."""
+    if v.get("verdict") != "promote": return False, "judge did not say promote", "hold"
+    name = (v.get("name") or "").strip(); n = norm_name(name)
+    if len(n) < 2: return False, "no full name", "hold"
+    county = (v.get("county") or "").replace("County", "").strip()
+    if county.lower() not in COUNTY_SET: return False, f"county not in Ohio: {county!r}", "hold"
     host = urllib.parse.urlparse(url).netloc.lower()
-    if any(b in host for b in UNREPUTABLE): return False, f"source not reputable: {host}"
-    low = text.lower()
-    if norm_name(name)[-1] not in low: return False, "name not in story text"
-    if not GROOM.search(text): return False, "grooming not in story text"
-    if not FORMAL.search(text): return False, "no formal grooming wording"
-    if not ai.get("charges") or "groom" not in ai["charges"].lower(): return False, "charges do not list grooming"
-    if any(same_person(name, county, c) for c in cases): return False, "already listed"
-    return True, ""
+    if not host or any(b in host for b in UNREPUTABLE): return False, f"source not reputable: {host or url}", "hold"
+    if url.rstrip("/") in {r["source_url"].rstrip("/") for r in cases + excluded}: return False, "source already used", "coverage"
+    for r in cases:
+        m = same_person(name, county, r)
+        if m == "same": return False, f"already listed as {r['name']}", "coverage"
+        if m == "maybe": return False, f"possible duplicate of {r['name']}; say coverage, or promote by hand after checking", "hold"
+    for r in excluded:
+        if same_person(name, county, r): return False, f"matches not-counted {r['name']}; excluded.csv decisions are not overridden here", "hold"
+    ev = v.get("evidence") or ""
+    if not (f" {n[0]} " in flat(ev) and f" {n[-1]} " in flat(ev)): return False, "quote must give first and last name", "hold"
+    if not EVIDENCE_FORMAL.search(ev): return False, "quote does not state a formal grooming count", "hold"
+    if ELSEWHERE.search(ev): return False, "quote mentions another state or a federal case", "hold"
+    if len(text) < 1500: return False, "page not readable by code (blocked or too short); give a readable copy in alt_urls", "hold"
+    if flat(ev).strip() not in flat(text): return False, "quote is not on the fetched page", "hold"
+    if not page_has_name(name, text): return False, "full name not on the fetched page", "hold"
+    if not (re.search(r"\bohio\b", text, re.I) or f" {county.lower()} county " in flat(text)): return False, "page never says Ohio or the county", "hold"
+    if "groom" not in (v.get("charges") or "").lower(): return False, "charges do not list grooming", "hold"
+    return True, "", ""
 
-def promote(ai, url, cases, cols, centroids):
-    county = ai["county"].replace("County", "").strip().title()
+def promote(v, url, cases, cols, centroids):
+    county = v["county"].replace("County", "").strip().title()
     lat, lon = centroids.get(county, ["", ""])
+    thumb = v.get("thumb") or ""
+    if thumb and not os.path.exists(os.path.join(ROOT, "docs", "grooming", "img", thumb)): thumb = ""
     row = {k: "" for k in cols}
-    row.update(num=str(max([int(c["num"]) for c in cases] + [0]) + 1), name=ai["name"].strip(), age=str(ai.get("age") or ""),
-               city=ai.get("city") or "", county=county, charged=ai.get("charged") or "", charges=ai["charges"],
-               companion=ai.get("companion") if ai.get("companion") in ("hands-on", "exploitation", "none", "unspecified") else "unspecified",
-               status=ai.get("status") or "Pending",
-               resolved=ai.get("resolved") if ai.get("resolved") in ("convicted", "pleaded guilty", "plea on other counts", "dismissed") else "",
-               source_url=url, thumb="", aka=norm_name(ai["name"])[-1], summary=ai.get("summary") or "", lat=str(lat), lon=str(lon))
+    row.update(num=str(max([int(c["num"]) for c in cases] + [0]) + 1), name=v["name"].strip(), age=str(v.get("age") or ""),
+               city=v.get("city") or "", county=county, charged=v.get("charged") or "", charges=v["charges"],
+               companion=v.get("companion") if v.get("companion") in ("hands-on", "exploitation", "none", "unspecified") else "unspecified",
+               status=v.get("status") or "Pending",
+               resolved=v.get("resolved") if v.get("resolved") in ("convicted", "pleaded guilty", "plea on other counts", "dismissed") else "",
+               source_url=url, thumb=thumb, aka=norm_name(v["name"])[-1], summary=v.get("summary") or "", lat=str(lat), lon=str(lon))
     cases.append(row)
     return row
 
@@ -202,75 +181,65 @@ def resolve_google(it):
     except Exception: pass
     return None
 
-def main():
-    cases_path = os.path.join(D, "cases.csv")
-    with open(cases_path, encoding="utf-8") as f:
+def load():
+    with open(os.path.join(D, "cases.csv"), encoding="utf-8") as f:
         rd = csv.DictReader(f); cols = rd.fieldnames; cases = list(rd)
     excluded = list(csv.DictReader(open(os.path.join(D, "excluded.csv"), encoding="utf-8")))
-    centroids = json.load(open(os.path.join(D, "county_centroids.json")))
+    def js(name, empty):   # a missing file is empty; a corrupt one stops the run rather than silently wiping the queue
+        p = os.path.join(D, name)
+        return json.load(open(p)) if os.path.exists(p) else empty
+    cands, seen = js("candidates.json", []), js("seen.json", {})
     dismissed = {l.split("#")[0].strip() for l in open(os.path.join(D, "dismissed.txt")) if l.split("#")[0].strip()}
-    def known_urls(): return {c["source_url"].rstrip("/") for c in cases} | {e["source_url"].rstrip("/") for e in excluded}
-    # A story is about a listed person when it has their first and last name, their last name plus their town or county,
-    # or one of their multi-word aka phrases. A bare surname like "Arthur" or "Hammer" would swallow stories about new people.
-    def listed(blob):
-        b = " " + " ".join(norm_name(blob)) + " "
-        for c in cases + excluded:
-            n = norm_name(c["name"])
-            places = [p for p in (c.get("city", ""), c.get("county", "")) if p]
-            if f" {n[0]} {n[-1]} " in b or (f" {n[-1]} " in b and any(f" {' '.join(norm_name(p))} " in b for p in places)) \
-               or any(" " in a.strip() and f" {' '.join(norm_name(a))} " in b for a in (c.get("aka") or "").split(";")):
-                return c["name"]
-        return None
-    try: cands = json.load(open(os.path.join(D, "candidates.json")))
-    except Exception: cands = []
-    try: seen = json.load(open(os.path.join(D, "seen.json")))
-    except Exception: seen = {}
-    by_id = {c["id"]: c for c in cands}
-    budget = [MAX_AI]
-    added, found = [], 0
+    return cols, cases, excluded, {c["id"]: c for c in cands}, seen, dismissed
 
-    def judge(c):
-        """Fetch, read, and either promote, drop, or keep queued. Returns the new status."""
-        url = c["url"]
-        if "news.google.com" in url:
+def save(cols, cases, by_id, seen, cases_changed):
+    if cases_changed:
+        with open(os.path.join(D, "cases.csv"), "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(cases)
+    cands = sorted(by_id.values(), key=lambda c: (c.get("published") or c.get("found_at") or ""), reverse=True)[:200]
+    json.dump(cands, open(os.path.join(D, "candidates.json"), "w"), indent=1)
+    json.dump(seen, open(os.path.join(D, "seen.json"), "w"), indent=0)
+    return cands
+
+def settle(c, status, by_id, seen, note=""):
+    if status == "new":
+        c["status"] = "new"; by_id[c["id"]] = c; return
+    by_id.pop(c["id"], None)
+    seen[c["id"]] = {"url": c["url"], "title": c["title"], "first_seen": c.get("found_at") or NOW.isoformat(),
+                     "reason": status + (f": {note}" if note else "")}
+
+def listed_in(blob, people):
+    """Who a headline is about, as (name, sure). Sure: first and last name, or a curated multi-word aka. Not sure: last name plus
+    their town or county; that stays queued with the hint so the judge decides. A bare surname never matches."""
+    b = flat(blob); maybe = None
+    for c in people:
+        n = norm_name(c["name"])
+        if page_has_name(c["name"], blob) or any(" " in a.strip() and flat(a) in b for a in (c.get("aka") or "").split(";")):
+            return c["name"], True
+        places = [p for p in (c.get("city", ""), c.get("county", "")) if p]
+        if not maybe and f" {n[-1]} " in b and any(flat(p) in b for p in places): maybe = c["name"]
+    return maybe, False
+
+def sweep():
+    cols, cases, excluded, by_id, seen, dismissed = load()
+    known = {c["source_url"].rstrip("/") for c in cases} | {e["source_url"].rstrip("/") for e in excluded}
+
+    def classify(c):
+        if "news.google.com" in c["url"]:
             real = resolve_google(c)
-            if real: c["url"] = url = real
-        if url.rstrip("/") in known_urls(): return "known"
-        who = listed(c["title"] + " " + c.get("snippet", ""))
-        if who: c["matches"] = who; return "coverage"
-        if "news.google.com" in url or budget[0] <= 0 or not os.environ.get("ANTHROPIC_API_KEY") or API_DEAD: return "new"
-        try: text = strip_html(get(url).decode("utf-8", "ignore"))
-        except Exception as e:
-            print(f"  fetch failed {url}: {e}", file=sys.stderr); return "new"
-        c["formal_hint"] = bool(FORMAL.search(text)) and bool(OHIO.search(text))
-        ai = ai_read(text, c["title"], url); budget[0] -= 1; time.sleep(1)
-        if ai is None: return "new"
-        c["ai"] = ai
-        if ai.get("name") and any(same_person(ai["name"], (ai.get("county") or "").replace("County", "").strip(), x) for x in cases + excluded):
-            c["matches"] = ai["name"]; return "coverage"
-        ok, why = passes(ai, text, url, cases)
-        c["why"] = why
-        if ok:
-            row = promote(ai, url, cases, cols, centroids); added.append(row)
-            print(f"  PROMOTED #{row['num']} {row['name']} ({row['county']}) <- {url}")
-            return "promoted"
-        if ai.get("verdict") == "reject": return "rejected"
-        return "new"   # unsure, or the model said promote but a code check failed: stay queued, never promote
+            if real: c["url"] = real
+        if c["url"].rstrip("/") in known: return "known", ""
+        who, sure = listed_in(c["title"] + " " + c.get("snippet", ""), cases + excluded)
+        c["matches"] = who
+        if sure: return "coverage", who
+        try: c["formal_hint"] = bool(FORMAL.search(strip_html(get(c["url"]).decode("utf-8", "ignore"))))
+        except Exception: pass
+        return "new", ""
 
-    def settle(c, status):
-        if status in ("promoted", "known", "coverage", "rejected"):
-            by_id.pop(c["id"], None)
-            seen[c["id"]] = {"url": c["url"], "title": c["title"], "first_seen": c.get("found_at") or NOW.isoformat(),
-                             "reason": status + (f": {c.get('matches')}" if status == "coverage" else "") +
-                                       (f": {(c.get('ai') or {}).get('reason', '')}" if status == "rejected" else "")}
-        else:
-            c["status"] = "new"; by_id[c["id"]] = c
-
-    # 1. re-judge everything already queued that the model has not read yet
-    for c in list(by_id.values()):
+    for c in list(by_id.values()):   # tidy the queue: dismissed ids, and stories that became known since
         if c["id"] in dismissed or c["url"].rstrip("/") in dismissed: by_id.pop(c["id"]); continue
-        if c.get("ai") is None or c.get("status") == "coverage": settle(c, judge(c))
-    # 2. sweep the feeds
+        st, note = classify(c); settle(c, st, by_id, seen, note)
+    found = 0
     for kind, furl in FEEDS:
         try: items = parse_feed(kind, get(furl))
         except Exception as e:
@@ -292,19 +261,50 @@ def main():
                 seen[i] = {"url": it["url"], "title": it["title"], "first_seen": NOW.isoformat(), "reason": reason}
                 continue
             c = {"id": i, "title": it["title"], "url": it["url"], "source": it["source"], "published": pubd,
-                 "found_at": NOW.strftime("%Y-%m-%d"), "snippet": it["snippet"][:300], "formal_hint": None, "ai": None,
-                 "status": "new", "matches": None}
-            st = judge(c); settle(c, st); found += 1
+                 "found_at": NOW.strftime("%Y-%m-%d"), "snippet": it["snippet"][:300], "formal_hint": None, "status": "new", "matches": None}
+            st, note = classify(c); settle(c, st, by_id, seen, note); found += 1
             print(f"+ {it['title']} [{it['source']}] -> {st}")
-    if added:
-        with open(cases_path, "w", newline="", encoding="utf-8") as f:
-            w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(cases)
-    cands = sorted(by_id.values(), key=lambda c: (c.get("published") or c.get("found_at") or ""), reverse=True)[:200]
-    json.dump(cands, open(os.path.join(D, "candidates.json"), "w"), indent=1)
-    json.dump(seen, open(os.path.join(D, "seen.json"), "w"), indent=0)
+    cands = save(cols, cases, by_id, seen, False)
     open(os.path.join(D, "last_sweep.txt"), "w").write(NOW.strftime("%Y-%m-%d %H:%M UTC"))
-    print(f"sweep done: {found} new stories, {len(added)} promoted to cases.csv, {len(cands)} still queued, "
-          f"{MAX_AI - budget[0]} AI reads, {len(seen)} seen" + (" (API key rejected)" if API_DEAD else ""))
+    print(f"sweep done: {found} new stories, {len(cands)} queued for the judge, {len(seen)} seen")
+
+def apply(path):
+    """Apply the judge's verdicts (a JSON list, one object per candidate id; format in JUDGE.md)."""
+    cols, cases, excluded, by_id, seen, dismissed = load()
+    centroids = json.load(open(os.path.join(D, "county_centroids.json")))
+    added = []
+    for v in json.load(open(path)):
+        c = by_id.get(v.get("id"))
+        if not c: print(f"  skip {v.get('id')}: not in the queue"); continue
+        verdict = v.get("verdict")
+        c["judge"] = {"verdict": verdict, "reason": v.get("reason", ""), "on": NOW.strftime("%Y-%m-%d")}
+        if verdict == "promote":
+            url, text = v.get("url") or c["url"], ""
+            for u in [url] + list(v.get("alt_urls") or []):   # the first copy the code itself can read that carries the quote
+                if "news.google.com" in u: continue
+                try: t = strip_html(get(u, ua=BROWSER_UA).decode("utf-8", "ignore"))
+                except Exception as e: print(f"  fetch failed {u}: {e}", file=sys.stderr); continue
+                if len(t) >= 1500 and flat(v.get("evidence")).strip() in flat(t): text = t; break
+                if not text: text = t
+            ok, why, route = passes(v, text, url, cases, excluded)
+            if ok:
+                c["url"] = url
+                row = promote(v, url, cases, cols, centroids); added.append(row)
+                settle(c, "promoted", by_id, seen, row["name"])
+                print(f"  PROMOTED #{row['num']} {row['name']} ({row['county']}) <- {url}")
+            elif route == "coverage":
+                settle(c, "coverage", by_id, seen, why); print(f"  COVERAGE {v.get('name')}: {why}")
+            else:
+                c["judge"]["held"] = why; settle(c, "new", by_id, seen)
+                print(f"  HELD {v.get('name')}: {why}")
+        elif verdict in ("reject", "coverage"):
+            settle(c, "rejected" if verdict == "reject" else "coverage", by_id, seen, v.get("matches") or v.get("reason", ""))
+        else:
+            settle(c, "new", by_id, seen)
+    cands = save(cols, cases, by_id, seen, bool(added))
+    print(f"applied: {len(added)} promoted to cases.csv, {len(cands)} still queued")
+    return added
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) == 3 and sys.argv[1] == "--apply": apply(sys.argv[2])
+    else: sweep()

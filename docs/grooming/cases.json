@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-03 05:04 UTC",
+ "as_of": "2026-11-03 05:24 UTC",
  "last_sweep": "2026-11-03 05:04 UTC",
  "count": 53,
  "cases": [
@@ -52,7 +52,7 @@
    "resolved": "",
    "source_url": "https://local12.com/news/local/joshua-telford-cincinnati-man-arrested-after-traveling-to-sexually-abuse-12-year-old-cleveland-girl-allegations-investigation-launched-crime-criminal-activity-pandering-obscenity-involving-minor-enticement-charges-grooming-unlawful-sexual-conduct-elyria",
    "thumb": "03_telford.jpg",
-   "aka": "telford;elyria girl",
+   "aka": "telford",
    "summary": "Joshua Telford, 35, of Cincinnati, was indicted in Lorain County in February 2026 on grooming and rape charges for allegedly traveling to abuse a 12-year-old, and is held without bond.",
    "lat": "41.3683",
    "lon": "-82.1077"
@@ -70,7 +70,7 @@
    "resolved": "",
    "source_url": "https://tiffinohio.net/posts/deshler-pastor-christopher-walter-charged-sexual-battery-grooming/",
    "thumb": "05_walter.jpg",
-   "aka": "deshler pastor;deshler;walter;lutheran pastor and bus driver;drove school children;patrick henry",
+   "aka": "deshler pastor;deshler;walter;lutheran pastor and bus driver",
    "summary": "Christopher Walter, 52, a Deshler pastor, was indicted in Henry County in June 2026 on grooming and two counts of sexual battery, and has pleaded not guilty.",
    "lat": "41.2064",
    "lon": "-83.8988"
@@ -214,7 +214,7 @@
    "resolved": "pleaded guilty",
    "source_url": "https://yahoo.com/news/us/articles/austintown-man-pleads-guilty-inappropriately-155735064.html",
    "thumb": "14_west.jpg",
-   "aka": "james west;austintown man pleads",
+   "aka": "james west",
    "summary": "James West, 72, of Austintown, pleaded guilty in 2026 to sexual battery and grooming, with sentencing set for November 2026.",
    "lat": "41.1009",
    "lon": "-80.7645"
@@ -484,7 +484,7 @@
    "resolved": "plea on other counts",
    "source_url": "https://www.whio.com/news/local/bus-driver-learns-punishment-allegedly-grooming-student/FEKY4SKRCJCCFAKLIL7ZAECRTU/",
    "thumb": "30_kimball.jpg",
-   "aka": "kimball;twin valley",
+   "aka": "kimball",
    "summary": "James R. Kimball, 44, a Twin Valley South bus driver, was charged in Eaton Municipal Court in October 2025 with grooming a 16-year-old student, pleaded guilty to a reduced misdemeanor attempt, and was sentenced in June 2026 to 90 days, 75 suspended.",
    "lat": "39.744",
    "lon": "-84.636"
@@ -736,7 +736,7 @@
    "resolved": "convicted",
    "source_url": "https://cnycentral.com/news/nation-world/former-high-school-staffer-in-ohio-sentenced-for-inappropriate-relationship-with-student-greenville-high-school-sexual-relations-battery-grooming-greenville-city-schools-conviction-convicted",
    "thumb": "31_travis.jpg",
-   "aka": "greenville high school;travis",
+   "aka": "travis",
    "summary": "Justin Travis, 39, a former Greenville High School staff member, was convicted in Darke County of grooming, two counts of sexual battery, and two counts of unlawful sexual conduct with a minor, and sentenced to at least four years in prison.",
    "lat": "40.1028",
    "lon": "-84.6330"
@@ -966,7 +966,7 @@
    "charges": "70 counts of sexual battery and unlawful sexual conduct",
    "why": "Conduct 2005 to 2010, before the law existed. Grooming is described by prosecutors, not charged.",
    "source_url": "https://www.fox19.com/2026/06/23/bethel-police-chiefs-secret-indictment-unsealed/",
-   "aka": "police chief;bethel;essert"
+   "aka": "essert;bethel police chief"
   },
   {
    "name": "Jordan Wheeler",
@@ -993,7 +993,7 @@
    "charges": "Federal sexual exploitation and enticement",
    "why": "Federal case. Groomed is narrative, not an Ohio grooming count.",
    "source_url": "https://www.wtrf.com/top-stories/ohio-man-accused-of-grooming-multiple-teenage-girls-online-paying-for-sexual-pictures-threatening-to-kill-victims-if-reported/",
-   "aka": "chandler;mount orab"
+   "aka": "chandler"
   },
   {
    "name": "Gary Thomas Keesee Jr.",

@@ -1,7 +1,7 @@
 name: grooming tracker sweep
 on:
   schedule:
-    - cron: "17 */6 * * *"
+    - cron: "0 10 * * *"   # 5am ET (6am in summer); the judge runs on Chris's Mac after this, see JUDGE.md
   workflow_dispatch:
   push:
     branches: [main]
@@ -20,8 +20,6 @@ jobs:
         with:
           python-version: "3.12"
       - name: Crawl news for new grooming charges
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python3 scripts/grooming/crawl.py
       - name: Build the page
         run: python3 scripts/grooming/build.py

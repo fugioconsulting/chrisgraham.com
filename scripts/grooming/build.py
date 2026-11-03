@@ -195,7 +195,7 @@ main .wrap {{ padding-left:max(20px, env(safe-area-inset-left)); padding-right:m
     <div class="tile"><p class="n">{with_comp} of {n}</p><p class="l">Also face other child-abuse charges</p></div>
     <div class="tile"><p class="n">{len(open_cases)}</p><p class="l">Open cases, presumed innocent</p></div>
   </div>
-  <p class="stamp">Page built {built}.{(" Last news sweep " + last_sweep + ".") if last_sweep else ""} The crawler runs every six hours. Count as of the latest confirmed case.</p>
+  <p class="stamp">Page built {built}.{(" Last news sweep " + last_sweep + ".") if last_sweep else ""} The crawler runs every morning. Count as of the latest confirmed case.</p>
 </section>
 
 <section class="wrap" id="bigger-win">
@@ -251,7 +251,7 @@ main .wrap {{ padding-left:max(20px, env(safe-area-inset-left)); padding-right:m
 
 <section class="wrap" id="method">
   <h2>How this page is kept</h2>
-  <p>There is no official statewide tally of grooming charges, so this is a case-by-case sweep of news, prosecutor releases, and court dockets. Every six hours a crawler searches news feeds for Ohio stories pairing grooming with a charge and drops anything already listed. A Claude model reads each new story, and the case is added only when the model and a set of fixed checks agree: a named person, an Ohio court, a formal grooming count under ORC 2907.071 (charged, indicted, pleaded, or convicted), and a reputable source that says so. Anything less stays in the queue above. Big multi-agency stings (Operation Next Door, Operation Guardians' Watch, Operation Lifeboat) produced solicitation and importuning counts, not grooming, and are listed only where a grooming count appears.</p>
+  <p>There is no official statewide tally of grooming charges, so this is a case-by-case sweep of news, prosecutor releases, and court dockets. Every morning a crawler searches news feeds for Ohio stories pairing grooming with a charge and drops anything already listed. Claude then reads each new story, and the case is added only when Claude and a set of fixed checks agree: a named person, an Ohio court, a formal grooming count under ORC 2907.071 (charged, indicted, pleaded, or convicted), and a reputable source that says so. Anything less stays in the queue above. Big multi-agency stings (Operation Next Door, Operation Guardians' Watch, Operation Lifeboat) produced solicitation and importuning counts, not grooming, and are listed only where a grooming count appears.</p>
   <p>Corrections and additions: <a href="/">contact Chris Graham</a>. The research brief behind this page is a Fugio Consulting document.</p>
   <div class="btns">
     <a class="btn ghost" href="Charged-With-Grooming-in-Ohio-Fugio-Consulting-LLC.pdf">Read the brief (PDF)</a>

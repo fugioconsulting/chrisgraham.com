@@ -13,6 +13,8 @@ A story is **promote** only if all four hold:
 
 **Never automate posting a police report or any raw records file (Chris, 2026-11-03).** They name victims and minors; an automated post can become one more failure for a survivor. Public pages cite a court case page or the court plus the case number. Exceptions are Chris's call, one record at a time, blacked out by hand. A records reply is cited as the court's case page or search page plus the case number (status reads "(case NUMBER)"), never as a link to the record itself.
 
+**Case numbers (Chris, 2026-11-03).** Whenever any source shows the court case number, put it in `status` as "(case NUMBER)", e.g. "Pending, $100,000 bond (case B 2602888)". The tracker prints it on the card. Do the same when coverage of a listed person shows a number the row lacks.
+
 Other verdicts:
 - **coverage:** the story is about someone already in `data/grooming/cases.csv` or `excluded.csv`. A queued item whose `matches` field names a listed person is a hint, not a ruling: read the story and decide. If it reports a new outcome for a listed person (plea, conviction, sentence, dismissal), also edit that row's `status` and `resolved` in `cases.csv` (open the story first; note the outlet and date in the status, e.g. "Convicted, 4 years (WCPO, Nov 2026)").
 - **reject:** fails a rule for good (out of state, pet grooming, no grooming count, federal only).

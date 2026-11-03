@@ -1,8 +1,8 @@
 {
-  "name": "hello-there",
+  "name": "chrisgraham-com",
   "version": "1.0.0",
   "private": true,
-  "description": "Static clone of chrisgraham.com/hello-there",
+  "description": "Local preview server for chrisgraham.com (GitHub Pages serves docs/)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

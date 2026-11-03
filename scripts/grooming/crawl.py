@@ -47,6 +47,9 @@ CITIES = ["columbus","cleveland","cincinnati","toledo","akron","dayton","youngst
 CHARGE_WORDS = re.compile(r"\b(charg|indict|arrest|plead|guilty|sentenc|count|convict|bond|jail)", re.I)
 COUNTY_SET = {c for c in COUNTIES if c not in ("van", "wert")} | {"van wert"}
 GROOM = re.compile(r"\bgroom", re.I)
+# Pet grooming: animal or grooming-shop words and no child words. "Pet groomer charged with grooming a 14-year-old" stays in.
+PET = re.compile(r"\b(dogs?|cats?|pets?|puppy|puppies|kittens?|animals?|salon|groomers?|kennel|humane)\b", re.I)
+CHILD = re.compile(r"\b(child|children|minor|minors|girl|girls|boy|boys|teen|teens|student|juvenile|\d{1,2}-year-old)\b", re.I)
 # What the judge's quote must say: grooming as the object of a charge, plea or conviction, or the statute number. "Groomed" never counts.
 EVIDENCE_FORMAL = re.compile(r"\b(charged with|charges? of|counts? of|indicted (on|for)|plead(ed|s)? (guilty|no contest) to|convicted of|found guilty of|sentenced (on|for))\b[^.;]{0,120}\bgrooming\b"
                              r"|\bgrooming,? an? (first|second|third|fourth|fifth)[- ]degree (felony|misdemeanor)|\b2907\.071", re.I)
@@ -245,11 +248,14 @@ def sweep():
     for c in list(by_id.values()):   # tidy the queue: dismissed ids, and stories that became known since
         if c["id"] in dismissed or c["url"].rstrip("/") in dismissed: by_id.pop(c["id"]); continue
         st, note = classify(c); settle(c, st, by_id, seen, note)
-    found = 0
+    found, ok_feeds = 0, 0
     for kind, furl in FEEDS:
-        try: items = parse_feed(kind, get(furl))
+        try: raw = get(furl)
         except Exception as e:
             print(f"feed error {kind}: {e}", file=sys.stderr); continue
+        if b"<rss" not in raw[:2000] and b"<feed" not in raw[:2000]:
+            print(f"feed error {kind}: not RSS ({len(raw)} bytes)", file=sys.stderr); continue
+        ok_feeds += 1; items = parse_feed(kind, raw)
         for it in items:
             if not it["url"] or not it["title"]: continue
             i = cid(it["url"], it["title"])
@@ -259,6 +265,7 @@ def sweep():
             pubd = iso(it["published_raw"])
             if pubd and pubd < "2025-04-01": reason = "before the law"
             elif not GROOM.search(blob): reason = "no groom word"
+            elif PET.search(blob) and not CHILD.search(blob): reason = "pet grooming"
             elif not CHARGE_WORDS.search(blob): reason = "no charge word"
             elif not (OHIO.search(blob) or "ohio" in it["url"].lower()
                       or OHIO_COUNTY.search(blob) and any(o in it["url"].lower() or o in it["source"].lower() for o in OHIO_OUTLETS)
@@ -270,9 +277,15 @@ def sweep():
                  "found_at": NOW.strftime("%Y-%m-%d"), "snippet": it["snippet"][:300], "formal_hint": None, "status": "new", "matches": None}
             st, note = classify(c); settle(c, st, by_id, seen, note); found += 1
             print(f"+ {it['title']} [{it['source']}] -> {st}")
+    # Unjudged stories older than 90 days stop showing in the queue; they are logged, not promoted.
+    for c in list(by_id.values()):
+        if (c.get("published") or c.get("found_at") or "9999") < (NOW - datetime.timedelta(days=90)).strftime("%Y-%m-%d"):
+            settle(c, "expired", by_id, seen, (c.get("judge") or {}).get("held") or (c.get("judge") or {}).get("reason") or "never settled")
     cands = save(cols, cases, by_id, seen, False)
+    if not ok_feeds:   # don't stamp a sweep fresh when every feed failed; the judge checks this date
+        print(f"sweep failed: 0/{len(FEEDS)} feeds returned RSS", file=sys.stderr); sys.exit(1)
     open(os.path.join(D, "last_sweep.txt"), "w").write(NOW.strftime("%Y-%m-%d %H:%M UTC"))
-    print(f"sweep done: {found} new stories, {len(cands)} queued for the judge, {len(seen)} seen")
+    print(f"sweep done: {ok_feeds}/{len(FEEDS)} feeds ok, {found} new stories, {len(cands)} queued for the judge, {len(seen)} seen")
 
 def apply(path):
     """Apply the judge's verdicts (a JSON list, one object per candidate id; format in JUDGE.md)."""

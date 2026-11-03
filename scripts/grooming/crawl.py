@@ -6,7 +6,7 @@ The sweep drops stories about people already listed and queues the rest in candi
 cases.csv only when the judge said promote AND the code checks pass: a named person, an Ohio county, a reputable source, a
 verbatim quote naming the person and the grooming count, and not already listed. Rejects and coverage go to seen.json; anything
 unsure stays queued and is judged again next morning. No person reviews cases."""
-import csv, json, os, re, sys, hashlib, html, datetime, urllib.request, urllib.parse, urllib.error, ssl, time
+import csv, json, os, re, subprocess, sys, hashlib, html, datetime, urllib.request, urllib.parse, urllib.error, ssl, time
 import xml.etree.ElementTree as ET
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 D = os.path.join(ROOT, "data", "grooming")
@@ -125,11 +125,12 @@ def same_person(name, county, row):
     return "maybe" if county and county.lower() == (row.get("county") or "").lower() else None
 
 def page_has_name(name, text):
-    """First name, then up to two middle names or initials, then last name."""
-    n = norm_name(name)
-    return bool(re.search(rf"\b{re.escape(n[0])}\b(\s+\w+){{0,2}}\s+{re.escape(n[-1])}\b", " ".join(norm_name(text))))
+    """First name, up to two middle names or initials, last name; or a court record's "LAST, FIRST" order."""
+    n, t = norm_name(name), " ".join(norm_name(text))
+    f, l = re.escape(n[0]), re.escape(n[-1])
+    return bool(re.search(rf"\b{f}\b(\s+\w+){{0,2}}\s+{l}\b|\b{l}\s+{f}\b", t))
 
-def passes(v, text, url, cases, excluded):
+def passes(v, text, url, cases, excluded, record=False):
     """The code half of the rules. The judge's 'promote' is necessary, never sufficient. text is the page the code itself fetched.
     Returns (ok, reason, route): route 'coverage' when the person or source is already listed, else 'hold' (stays queued)."""
     if v.get("verdict") != "promote": return False, "judge did not say promote", "hold"
@@ -139,7 +140,8 @@ def passes(v, text, url, cases, excluded):
     if county.lower() not in COUNTY_SET: return False, f"county not in Ohio: {county!r}", "hold"
     host = urllib.parse.urlparse(url).netloc.lower()
     if not host or any(b in host for b in UNREPUTABLE): return False, f"source not reputable: {host or url}", "hold"
-    if url.rstrip("/") in {r["source_url"].rstrip("/") for r in cases + excluded}: return False, "source already used", "coverage"
+    if not record and url.rstrip("/") in {r["source_url"].rstrip("/") for r in cases + excluded}:   # records share a court's search page
+        return False, "source already used", "coverage"
     for r in cases:
         m = same_person(name, county, r)
         if m == "same": return False, f"already listed as {r['name']}", "coverage"
@@ -148,12 +150,16 @@ def passes(v, text, url, cases, excluded):
         if same_person(name, county, r): return False, f"matches not-counted {r['name']}; excluded.csv decisions are not overridden here", "hold"
     ev = v.get("evidence") or ""
     if not (f" {n[0]} " in flat(ev) and f" {n[-1]} " in flat(ev)): return False, "quote must give first and last name", "hold"
-    if not EVIDENCE_FORMAL.search(ev): return False, "quote does not state a formal grooming count", "hold"
+    scope = v.get("record_scope_quote") or "" if record else ""   # e.g. the clerk's line saying the list is its 2907.071 cases
+    if not (EVIDENCE_FORMAL.search(ev) or record and re.search(r"\bgrooming\b|2907\.?071", ev + " " + scope, re.I)):
+        return False, "quote does not state a formal grooming count", "hold"
+    if scope and flat(scope).strip() not in flat(text): return False, "record_scope_quote is not in the record", "hold"
     if ELSEWHERE.search(ev): return False, "quote mentions another state or a federal case", "hold"
-    if len(text) < 1500: return False, "page not readable by code (blocked or too short); give a readable copy in alt_urls", "hold"
+    if len(text) < (40 if record else 1500): return False, "page not readable by code (blocked, scanned or too short); give a readable copy in alt_urls", "hold"
     if flat(ev).strip() not in flat(text): return False, "quote is not on the fetched page", "hold"
     if not page_has_name(name, text): return False, "full name not on the fetched page", "hold"
-    if not (re.search(r"\bohio\b", text, re.I) or f" {county.lower()} county " in flat(text)): return False, "page never says Ohio or the county", "hold"
+    if not record and not (re.search(r"\bohio\b", text, re.I) or f" {county.lower()} county " in flat(text)):
+        return False, "page never says Ohio or the county", "hold"   # a records reply comes from the Ohio court itself
     if "groom" not in (v.get("charges") or "").lower(): return False, "charges do not list grooming", "hold"
     return True, "", ""
 
@@ -275,18 +281,30 @@ def apply(path):
     added = []
     for v in json.load(open(path)):
         c = by_id.get(v.get("id"))
+        if not c and v.get("origin") and v.get("url") and v.get("name"):
+            # a person found outside the news queue (an FOI records reply, a docket walk): same checks, it just has no queue item yet
+            i = cid(v["url"], v["name"])
+            if i in seen: print(f"  skip {v['name']}: already settled ({seen[i]['reason']})"); continue
+            c = {"id": i, "title": f"{v['origin']}: {v['name']}", "url": v["url"], "source": v["origin"], "published": "",
+                 "found_at": NOW.strftime("%Y-%m-%d"), "snippet": "", "status": "new", "matches": None}
+            by_id[i] = c
         if not c: print(f"  skip {v.get('id')}: not in the queue"); continue
         verdict = v.get("verdict")
         c["judge"] = {"verdict": verdict, "reason": v.get("reason", ""), "on": NOW.strftime("%Y-%m-%d")}
         if verdict == "promote":
             url, text = v.get("url") or c["url"], ""
-            for u in [url] + list(v.get("alt_urls") or []):   # the first copy the code itself can read that carries the quote
+            rec = v.get("record_file")
+            if rec:   # a clerk's or agency's own reply to the 2907.071 records request (FOI): its text is the page
+                try: text = subprocess.run(["pdftotext", "-layout", rec, "-"], capture_output=True, text=True).stdout if rec.lower().endswith(".pdf") \
+                            else open(rec, encoding="utf-8", errors="ignore").read()
+                except Exception as e: print(f"  cannot read record {rec}: {e}", file=sys.stderr)
+            for u in ([] if rec else [url]) + list(v.get("alt_urls") or []):   # the first copy the code itself can read that carries the quote
                 if "news.google.com" in u: continue
                 try: t = strip_html(get(u, ua=BROWSER_UA).decode("utf-8", "ignore"))
                 except Exception as e: print(f"  fetch failed {u}: {e}", file=sys.stderr); continue
                 if len(t) >= 1500 and flat(v.get("evidence")).strip() in flat(t): text = t; break
                 if not text: text = t
-            ok, why, route = passes(v, text, url, cases, excluded)
+            ok, why, route = passes(v, text, url, cases, excluded, record=bool(rec))
             if ok:
                 c["url"] = url
                 row = promote(v, url, cases, cols, centroids); added.append(row)

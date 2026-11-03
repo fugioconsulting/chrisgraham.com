@@ -2,7 +2,7 @@
 
 This is the prompt for the Claude scheduled task **grooming-judge** on the Mac mini (Minnie). It runs every morning at 5am ET, after the free GitHub Actions sweep (3am ET) has queued new stories in `data/grooming/candidates.json`. It reads each queued story and each new FOI records reply, decides by the rules, adds every case that passes to `data/grooming/cases.csv`, and republishes the Claude artifact, which is the public page (chrisgraham.com/grooming redirects to it). No paid API: this session does the reading. Chris never reviews cases, so never ask him to.
 
-Work in the judge's own worktree, `~/code/grooming-judge`, pinned to `origin/main`. It runs on whichever Mac has the task (the Mac mini, Minnie, since 2026-11-03; Chris's MacBook Pro before). Never work in Chris's own chrisgraham.com checkout itself (`~/code/chrisgraham.com` on the MacBook, `~/chrisgraham.com` on Minnie): that is Chris's checkout, and its local main has commits of its own.
+Work in the judge's own worktree, `~/code/grooming-judge`, pinned to `origin/main`. It runs on whichever Mac has the task. As of 2026-11-03 that is still Chris's MacBook Pro, which fires late when the lid is closed. Minnie has no judge task yet. Never work in Chris's own chrisgraham.com checkout itself (`~/code/chrisgraham.com` on the MacBook, `~/chrisgraham.com` on Minnie): that is Chris's checkout, and its local main has commits of its own.
 
 ## The rules
 A story is **promote** only if all four hold:
@@ -31,7 +31,11 @@ Someone in `data/grooming/held.csv` can be promoted the day a readable source sh
    ```
    If `data/grooming/last_sweep.txt` does not show today's UTC date, the 3am sweep has not run. Run `python3 scripts/grooming/crawl.py` here first (it's free).
 2. List the queue: `python3 -c "import json; [print(c['id'], c['url'], '|', c['title'], '| hint:', c.get('matches'), '| last:', c.get('judge')) for c in json.load(open('data/grooming/candidates.json'))]"`. If it is empty and step 2b finds nothing new, skip to step 10 (the artifact and the note still go out every run).
-2b. FOI records. The anonymous FOI desk on Minnie asked every county clerk of courts, sheriff and many police departments for their R.C. 2907.071 cases, and replies keep arriving. Read them, never write: `cd ~/Code/foi-mail/data && grep -l 2907.071 requests/*/*-out-request.txt` on Minnie (from another Mac, prefix `ssh claw@minnie`) lists the grooming requests. Their replies are the inbound folders `requests/FOI-NNNN/<date>-in-*` (`body.txt` plus attachments). Look only at folders not yet listed in `data/grooming/foi_read.txt`, and copy each one to `$TMPDIR/foi/` with `scp -r`. Read PDFs with `pdftotext -layout`; render scanned ones with `pdftoppm -png` and read the image.
+2b. FOI records. The anonymous FOI desk on Minnie asked every county clerk of courts, sheriff and many police departments for their R.C. 2907.071 cases, and replies keep arriving. Read them, never write: this lists every grooming request's reply folder (run as is on Minnie; from another Mac, wrap it in `ssh claw@minnie '...'`):
+   ```
+   cd ~/Code/foi-mail/data && for f in $(grep -l 2907.071 requests/*/*-out-request.txt); do find $(dirname $f) -mindepth 1 -maxdepth 1 -type d -name '*-in-*'; done | sort
+   ```
+   Each reply folder (`requests/FOI-NNNN/<date>-in-*`) holds `body.txt` plus attachments. (`find`, not a glob: zsh prints an error for every request with no replies.) Then `grep -vxF -f data/grooming/foi_read.txt` leaves only folders not yet read, and copy each one to `$TMPDIR/foi/` with `scp -r`. Read PDFs with `pdftotext -layout`; render scanned ones with `pdftoppm -png` and read the image.
    For every defendant the reply shows with a 2907.071 / grooming count who is not already listed, add a verdict with no `id` and `"origin": "FOI-NNNN <agency>"`. Try to find a news, prosecutor or public docket page first; if you find one, use it as `url` the normal way. Otherwise use the reply itself:
    - `"url"`: the court's public docket search page.
    - `"record_file"`: the local copy of the reply file (body.txt, CSV or a text PDF).

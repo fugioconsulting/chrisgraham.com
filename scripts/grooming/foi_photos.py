@@ -31,6 +31,17 @@ def named(text, rows):
     return [r for r in rows if {r["name"].split()[0].lower(), re.sub(r"[^a-z]", "", r["name"].split()[-1].lower())} <= w
             or (r["name"].split()[-1].lower() in ("jr.", "jr", "iii", "ii") and {r["name"].split()[0].lower(), r["name"].split()[-2].lower()} <= w)]
 
+def surname(r):
+    p = r["name"].lower().split()
+    return re.sub(r"[^a-z]", "", p[-2] if p[-1] in ("jr.", "jr", "ii", "iii") and len(p) > 2 else p[-1])
+
+def by_surname(label, body, rows):
+    """A file named for a last name only (e.g. GAY.jpg): that surname must belong to exactly one listed person, and the
+    same reply (which quotes our request) must name that person in full."""
+    w = words(os.path.splitext(label)[0])
+    hit = [r for r in rows if surname(r) in w]
+    return hit if len(hit) == 1 and named(body, hit) else []
+
 def images(folder):
     """(image path, context text) for every picture in a reply: attachments and pictures inside PDFs."""
     body = open(os.path.join(folder, "body.txt"), errors="ignore").read() if os.path.exists(os.path.join(folder, "body.txt")) else ""
@@ -64,8 +75,9 @@ def main():
             f = faces.get(p, ["", "", "", "NOFACE", "0"])
             if f[3] == "NOFACE": continue
             if f[7] != "1": report.append(f"HOLD {req} {label}: {f[7]} faces"); continue
-            who = named(label, rows) or named(page, rows) or (named(body, rows) if len(one) == 1 else [])
-            why = "file name" if named(label, rows) else "PDF page text" if named(page, rows) else "reply body, only photo in the reply"
+            who = named(label, rows) or named(page, rows) or by_surname(label, body, rows) or (named(body, rows) if len(one) == 1 else [])
+            why = ("file name" if named(label, rows) else "PDF page text" if named(page, rows)
+                   else "file name surname + full name in the reply" if by_surname(label, body, rows) else "reply body, only photo in the reply")
             if len(who) != 1: report.append(f"HOLD {req} {label}: record names {len(who)} listed people with this photo"); continue
             r = who[0]
             if r["thumb"]: report.append(f"SKIP {req} {label}: {r['name']} already has a photo"); continue

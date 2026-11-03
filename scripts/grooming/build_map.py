@@ -21,11 +21,11 @@ seen = {}
 def off(lat, lon):
     key = (round(lat, 1), round(lon, 1)); n = seen.get(key, 0); seen[key] = n + 1
     return lat + (n // 3) * 0.14, lon + (n % 3) * 0.14
-RED, BLUE = "#b3261e", "#1f4e9c"
+RED, BLUE, GRAY = "#b3261e", "#1f4e9c", "#8a8f98"
 for c in cases:
     if not c.get("lat") or not c.get("lon"): continue
     la, lo = off(float(c["lat"]), float(c["lon"]))
-    col = RED if c["resolved"] in ("convicted", "pleaded guilty") else BLUE
+    col = RED if c["resolved"] in ("convicted", "pleaded guilty", "plea on other counts") else GRAY if c["resolved"] == "dismissed" else BLUE
     ax.scatter([lo], [la], s=340, c=col, edgecolors="white", linewidths=1.3, zorder=5)
     ax.text(lo, la, c["num"], color="white", ha="center", va="center", fontsize=8.5, fontweight="bold", zorder=6)
 for name, la, lo in [("Cleveland", 41.4993, -81.6944), ("Columbus", 39.9612, -82.9988), ("Cincinnati", 39.1031, -84.5120),
@@ -34,7 +34,8 @@ for name, la, lo in [("Cleveland", 41.4993, -81.6944), ("Columbus", 39.9612, -82
     ax.annotate(name, (lo, la), xytext=(4, -9), textcoords="offset points", fontsize=7.5, color="#333")
 ax.set_xlim(-85.1, -80.3); ax.set_ylim(38.2, 42.1); ax.set_aspect(1 / 0.78); ax.axis("off")
 ax.legend(handles=[Patch(facecolor=RED, edgecolor="white", label="Convicted / pleaded guilty"),
-                   Patch(facecolor=BLUE, edgecolor="white", label="Charge pending (allegation)")],
+                   Patch(facecolor=BLUE, edgecolor="white", label="Charge pending (allegation)"),
+                   Patch(facecolor=GRAY, edgecolor="white", label="Grooming count dismissed")],
           loc="lower left", fontsize=9, frameon=True, framealpha=0.95)
 ax.set_title(f"Where Ohio's {len(cases)} Grooming-Charge Cases Were Brought", fontsize=13, fontweight="bold", pad=8)
 plt.tight_layout()

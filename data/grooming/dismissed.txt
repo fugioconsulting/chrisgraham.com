@@ -1,2 +1,35 @@
 # one candidate id or URL per line; hidden from the page
 40ee40cd88b5  # Ohio man arrested in Lyon County (out of state)
+63fd432d228b  # Ohio man arrested in Lyon County, Minnesota (out of state)
+8b0ffecbbcd6  # Ohio man arrested in Lyon County, Minnesota (out of state)
+cc80a8d011bb  # pet grooming business, animal cruelty
+9a8661011f91  # Graves County, Kentucky case syndicated on Cleveland 19 (out of state)
+5b0d666894d6  # McLean County, Illinois case syndicated on Cleveland 19 (out of state)
+1c39cf34cecb  # Mad River teacher John Stalcup: disseminating matter harmful to juveniles, no grooming count
+c92ad71f1fa6  # Michael Waldron: "grooming-related offenses" only; listed under not counted
+bb828ab35cb7  # Michael Waldron: "grooming-related offenses" only; listed under not counted
+7b4e06fa9487  # Ohio Capital Journal analysis of the Scott Hartman case (coverage)
+2162404bc123  # WKRC on Joshua Telford (coverage)
+2f32391249f8  # coverage of Scott Richard Hartman
+2f8c975d27ee  # coverage of Diego Montoya Gonzales
+c1c333ebde67  # coverage of Joshua A. Vanwey
+aa3c1ea95618  # coverage of James Ryan Grubbs
+cc0286cecb17  # coverage of Michael and Amanda Rowland
+0fbcb8e4c7d6  # coverage of Dustin Eugene McCoy
+8158fa062b7c  # coverage of James R. Kimball
+8fe771a2a44f  # coverage of Steven Smetana
+6d48e86ee391  # coverage of Christopher Walter
+3fa14fe2d7c6  # coverage of Christopher Helmer
+2b5e72223122  # coverage of Paul Banovich Jr.
+1e56485171cc  # coverage of Keylan Behanan
+3352addb62be  # coverage of Keylan Behanan
+ed2856d07cf3  # coverage of Joshua Telford
+788005ffcf60  # coverage of Joshua Telford
+5f532f73f154  # coverage of Joshua Telford
+9b7058829ca7  # coverage of Joshua Telford
+6a514b1a6aa5  # coverage of Joshua Telford
+45b3ea065626  # coverage of Joshua Telford
+a5f67f99bc98  # coverage of Joshua Telford
+b57b723db671  # coverage of Mark H. Barnes
+d0c0b186bb71  # coverage of Gary Thomas Keesee Jr. (not counted)
+d08484628f21  # coverage of Gary Thomas Keesee Jr. (not counted)

@@ -60,7 +60,7 @@ page = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ohio Grooming Charge Tracker</title>
+<title>Ohio Grooming Tracker</title>
 <meta http-equiv="refresh" content="0; url={ARTIFACT}">
 <link rel="canonical" href="{ARTIFACT}">
 <meta name="description" content="Every Ohioan charged under Ohio's grooming law, ORC 2907.071, with a source on every case.">
@@ -71,7 +71,7 @@ page = f'''<!DOCTYPE html>
 <meta name="twitter:card" content="summary_large_image">
 <script>location.replace("{ARTIFACT}")</script>
 </head>
-<body><p><a href="{ARTIFACT}">Ohio Grooming Charge Tracker</a></p></body>
+<body><p><a href="{ARTIFACT}">Ohio Grooming Tracker</a></p></body>
 </html>
 '''
 open(os.path.join(OUT, "index.html"), "w", encoding="utf-8").write(page)

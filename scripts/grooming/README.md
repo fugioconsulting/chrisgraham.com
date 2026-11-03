@@ -40,7 +40,7 @@ If the Mac is off, stories simply wait in the queue; nothing is lost.
 Edit the row in `cases.csv` (open the source first), then `python3 scripts/grooming/build.py` and push to main. For a photo, save a 300px square JPEG in `docs/grooming/img/` and name it in `thumb`. When counties change, regenerate the map: `python3 scripts/grooming/build_map.py`.
 
 ## The Claude artifact
-The "Ohio Grooming Charge Tracker" artifact (https://claude.ai/artifact/L2qaA61k6neUampn7kD24R) is a mirror of this CSV, not a separate list. It was built from `grooming-tracker/` in fugioconsulting/claude-skills; that folder's CSV is retired as a source. To refresh the artifact, republish it from `docs/grooming/cases.json` and the photos here.
+The "Ohio Grooming Tracker" artifact (https://claude.ai/artifact/L2qaA61k6neUampn7kD24R) is a mirror of this CSV, not a separate list. It was built from `grooming-tracker/` in fugioconsulting/claude-skills; that folder's CSV is retired as a source. To refresh the artifact, republish it from `docs/grooming/cases.json` and the photos here.
 
 ## Run locally
     python3 scripts/grooming/crawl.py && python3 scripts/grooming/build.py

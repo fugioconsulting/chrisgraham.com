@@ -6,7 +6,7 @@
 (function () {
   var LINKS = [
     { label: 'Home', href: '/' },
-    { label: 'Podcasting', href: 'https://champeonsofemployeeownership.com' },
+    { label: 'Podcasting', href: 'https://thechampeons.com/' },
     { label: 'AI Coaching', href: '/coaching' },
     { label: 'Employee Ownership', href: '/pete#employee-ownership' },
     { label: 'Pete the Pigeon', href: '/pete' }

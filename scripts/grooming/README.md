@@ -22,6 +22,7 @@ The page uses charged-not-convicted wording for every open case.
 - `data/grooming/county_centroids.json`: map position for a promoted case.
 - `scripts/grooming/crawl.py`: the sweep (Bing News + Google News RSS, seven queries, stdlib only; Google links resolved to the publisher URL through Bing) and `--apply FILE`, which applies the judge's verdicts.
 - `scripts/grooming/JUDGE.md`: the prompt for the scheduled task `grooming-judge` (Claude desktop app, scheduled tasks, on Chris's MacBook Pro), every morning after the sweep.
+- `scripts/grooming/foi_photos.py` (+ `eyes.swift`): booking photos from FOI records replies; ties a photo to a person only when the record names them on it, one face, no existing photo. Sources logged in `data/grooming/photo_sources.csv`.
 - `scripts/grooming/build.py`: writes `docs/grooming/cases.json` (the data feed other systems can read) and `docs/grooming/index.html` (a redirect to the artifact).
 - `data/grooming/foi_read.txt`: FOI reply folders on Minnie the judge has already read.
 - `scripts/grooming/build_map.py`: draws `docs/grooming/img/ohio_map.png` (local only, needs geopandas).

@@ -15,6 +15,7 @@ Details and one-time setup: `DEPLOY.md`.
 - `docs/index.html` homepage, `docs/coaching.html`, `docs/pete.html`. Pages resolves `/coaching` to `coaching.html`.
 - `docs/404.html` redirects unknown paths to `/`.
 - `docs/CNAME` holds the custom domain. Do not delete it.
+- `docs/robots.txt` and `docs/sitemap.xml` are hand-kept. Add a new page to the sitemap when it ships.
 - `docs/.nojekyll` stops Pages from running Jekyll. Keep it.
 - `docs/assets`, `docs/img`, `docs/fonts` are the ClickFunnels export. Root-relative paths.
 - `docs/grooming/` is the self-updating grooming-charge tracker (chrisgraham.com/grooming). Built by `scripts/grooming/build.py` from `data/grooming/cases.csv`; fed by `scripts/grooming/crawl.py` on a six-hour GitHub Actions schedule (`.github/workflows/grooming.yml`), which commits to main. Never hand-edit `docs/grooming/index.html`; edit the CSV and rebuild. Details: `scripts/grooming/README.md`.

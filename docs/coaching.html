@@ -6,18 +6,19 @@
   <link rel="icon" type="image/x-icon" href="/img/c2e3b450f67cc23d729637b56ec75c23.png" rel="shortcut icon">
 
   <title>AI Coaching for Leaders</title>
+  <link rel="canonical" href="https://chrisgraham.com/coaching">
   <meta name="description" content="Schedule a discovery call with Chris Graham — coach &amp; consultant trusted by Emmy®, Grammy®, Oscar® &amp; Tony® winners, creative leaders, &amp; legislators.">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://chrisgraham.com/coaching">
   <meta property="og:title" content="AI Coaching for Leaders">
   <meta property="og:description" content="Coach &amp; consultant trusted by Emmy®, Grammy®, Oscar® &amp; Tony® winners, creative leaders, &amp; legislators.">
-  <meta property="og:image" content="/img/ab17fb0ba68068fead4afcd7e8b7734d.jpg">
+  <meta property="og:image" content="https://chrisgraham.com/img/ab17fb0ba68068fead4afcd7e8b7734d.jpg">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AI Coaching for Leaders">
   <meta name="twitter:description" content="Coach &amp; consultant trusted by Emmy®, Grammy®, Oscar® &amp; Tony® winners, creative leaders, &amp; legislators.">
-  <meta name="twitter:image" content="/img/ab17fb0ba68068fead4afcd7e8b7734d.jpg">
+  <meta name="twitter:image" content="https://chrisgraham.com/img/ab17fb0ba68068fead4afcd7e8b7734d.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,7 +91,7 @@
     /* ---------- hero ---------- */
     .hero {
       text-align: center;
-      padding: 76px 0 12px;
+      padding: 76px 24px 12px;
     }
 
     .eyebrow {
@@ -237,6 +238,15 @@
       border: 0;
     }
 
+    .booking-fallback {
+      text-align: center;
+      margin: 16px 0 0;
+      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    .booking-fallback a { color: var(--lavender); }
+
     /* ---------- footer ---------- */
     .site-footer {
       margin-top: 96px;
@@ -251,9 +261,15 @@
     .site-footer a:hover { color: var(--lavender); }
 
     @media (max-width: 640px) {
-      .hero { padding: 52px 0 8px; }
-      .booking-frame iframe { height: 620px; }
+      .hero { padding: 52px 24px 8px; }
+      .booking-frame iframe { height: 1450px; }
       .booking { margin-top: 56px; }
+    }
+
+    /* site-nav.js shows its fixed hamburger at top-left below 760px;
+       push the brand clear of it (burger right edge is 56px). */
+    @media (max-width: 759px) {
+      .site-header .wrap { padding-left: 68px; }
     }
   </style>
 </head>
@@ -291,9 +307,10 @@
 
       <div class="booking-frame">
         <!-- Google Calendar Appointment Scheduling begin -->
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1-VGVWWYNfrSQrDKYHftvYSVGdpfXllBoDmyraeJPamM7YJJi-oJP6w_nvDw68OPglKfl-gIrf?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1-VGVWWYNfrSQrDKYHftvYSVGdpfXllBoDmyraeJPamM7YJJi-oJP6w_nvDw68OPglKfl-gIrf?gv=true" style="border: 0" width="100%" height="600" frameborder="0" title="Book a time with Chris Graham"></iframe>
         <!-- end Google Calendar Appointment Scheduling -->
       </div>
+      <p class="booking-fallback"><a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1-VGVWWYNfrSQrDKYHftvYSVGdpfXllBoDmyraeJPamM7YJJi-oJP6w_nvDw68OPglKfl-gIrf?gv=true" target="_blank" rel="noopener">Open booking page</a></p>
     </section>
   </main>
 

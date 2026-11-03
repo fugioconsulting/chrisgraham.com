@@ -37,7 +37,8 @@ except Exception: last_sweep = ""
 built = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
 n = len(cases)
-resolved = [c for c in cases if c["resolved"]]
+resolved = [c for c in cases if c["resolved"] and c["resolved"] != "dismissed"]
+dismissed_cases = [c for c in cases if c["resolved"] == "dismissed"]
 hands = [c for c in cases if c["companion"] == "hands-on"]
 expl = [c for c in cases if c["companion"] == "exploitation"]
 unspec = [c for c in cases if c["companion"] == "unspecified"]
@@ -57,6 +58,7 @@ def badge_status(c):
     r = c["resolved"]
     if r == "convicted": return '<span class="badge red">Convicted</span>'
     if r == "pleaded guilty": return '<span class="badge red">Pleaded guilty</span>'
+    if r == "dismissed": return '<span class="badge gray">Grooming count dismissed</span>'
     if r: return '<span class="badge amber">Plea on other counts</span>'
     return '<span class="badge blue">Charged, pending</span>'
 def badge_comp(c):
@@ -177,6 +179,7 @@ td.n {{ text-align:right; white-space:nowrap; }}
 .btn.ghost {{ background:transparent; color:var(--lavender); border:1px solid var(--lavender); }}
 .site-footer {{ padding:40px 0 70px; border-top:1px solid var(--hairline); font-family:'Open Sans',Helvetica,Arial,sans-serif; font-size:13px; color:var(--muted); }}
 .site-footer a {{ color:var(--muted); }}
+main .wrap {{ padding-left:max(20px, env(safe-area-inset-left)); padding-right:max(20px, env(safe-area-inset-right)); }}
 @media (max-width:560px) {{ .case {{ grid-template-columns:26px 72px 1fr; gap:10px; }} .case img,.noimg {{ width:72px; height:72px; }} body {{ font-size:18px; }} }}
 </style>
 </head>
@@ -206,12 +209,13 @@ td.n {{ text-align:right; white-space:nowrap; }}
     <tr><td>Grooming only</td><td class="n">{len(alone)}</td><td>{H(", ".join(lastname(c) for c in alone)) or "none"}</td></tr>
   </table>
   <p>Resolved so far: {H("; ".join(f'{c["name"]} ({c["status"].lower()})' for c in resolved))}.</p>
+  {('<p>Dismissed: ' + H("; ".join(f'{c["name"]} ({c["status"][0].lower() + c["status"][1:]})' for c in dismissed_cases)) + '.</p>') if dismissed_cases else ''}
 </section>
 
 <section class="wrap" id="map">
   <h2>Where the cases were brought</h2>
   <img class="map" src="img/ohio_map.png" alt="Map of Ohio counties with numbered arrest locations" width="1200" height="1100" loading="lazy">
-  <p class="cap">Numbers match the case list. Red is convicted or pleaded guilty. Blue is pending. Leading counties: {H(", ".join(f"{k} ({v})" for k,v in top_counties))}. The cluster in southwest Ohio most likely reflects which prosecutors moved fastest to use the new statute, not where grooming happens.</p>
+  <p class="cap">Numbers match the case list. Red is convicted or pleaded guilty, on grooming or other counts. Blue is pending. Gray is dismissed. Leading counties: {H(", ".join(f"{k} ({v})" for k,v in top_counties))}. The cluster in southwest Ohio most likely reflects which prosecutors moved fastest to use the new statute, not where grooming happens.</p>
 </section>
 
 <section class="wrap" id="cases">
@@ -223,8 +227,8 @@ td.n {{ text-align:right; white-space:nowrap; }}
 </section>
 
 <section class="wrap" id="new">
-  <h2>Newly found, awaiting verification</h2>
-  <p class="lede">Stories the crawler found that pair the word grooming with a charge, arrest, indictment, plea, or sentence in Ohio. They are not counted above until a person reads the source and confirms a formal ORC 2907.071 count.</p>
+  <h2>Queued: found, not yet confirmed</h2>
+  <p class="lede">Stories the crawler found that pair grooming with a charge in Ohio but could not yet be confirmed: the source was unreadable, the name or county was missing, or the model and the checks did not agree. They are not counted. Each sweep reads them again and adds any that pass.</p>
   <ul class="cands">
 {cands_html}
   </ul>
@@ -241,13 +245,13 @@ td.n {{ text-align:right; white-space:nowrap; }}
 
 <section class="wrap" id="timing">
   <h2>The law is being applied backwards</h2>
-  <p>No one was charged in the gap between signing and the effective date. But prosecutors have charged grooming for conduct that predates the statute: James Blair's grooming counts cover abuse reportedly beginning in 2018, and David Souza's cover 2024. Charging a brand-new offense for earlier conduct raises an ex post facto problem under both the Ohio and United States Constitutions. No defense challenge or appellate ruling has tested it yet.</p>
+  <p>No one was charged in the gap between signing and the effective date. But prosecutors have charged grooming for conduct that predates the statute: James Blair's grooming counts cover abuse reportedly beginning in 2018. Charging a brand-new offense for earlier conduct raises an ex post facto problem under both the Ohio and United States Constitutions. No defense challenge or appellate ruling has tested it yet.</p>
   <p>The Bethel police chief shows the line. Chad Essert was indicted on 70 felony counts in June 2026 and prosecutors say he began grooming the alleged victim at age 12, yet he was not charged with grooming: the alleged conduct ran from 2005 to 2010, fifteen years before the statute existed.</p>
 </section>
 
 <section class="wrap" id="method">
   <h2>How this page is kept</h2>
-  <p>There is no official statewide tally of grooming charges, so this is a case-by-case sweep of news and prosecutor releases. Every six hours a crawler searches news feeds for Ohio stories pairing grooming with a charge, drops anything already listed, reads each new story, and posts what passes to the lane above. A person confirms each case before it joins the count. Big multi-agency stings (Operation Next Door, Operation Guardians' Watch, Operation Lifeboat) produced solicitation and importuning counts, not grooming, and are not listed.</p>
+  <p>There is no official statewide tally of grooming charges, so this is a case-by-case sweep of news, prosecutor releases, and court dockets. Every six hours a crawler searches news feeds for Ohio stories pairing grooming with a charge and drops anything already listed. A Claude model reads each new story, and the case is added only when the model and a set of fixed checks agree: a named person, an Ohio court, a formal grooming count under ORC 2907.071 (charged, indicted, pleaded, or convicted), and a reputable source that says so. Anything less stays in the queue above. Big multi-agency stings (Operation Next Door, Operation Guardians' Watch, Operation Lifeboat) produced solicitation and importuning counts, not grooming, and are listed only where a grooming count appears.</p>
   <p>Corrections and additions: <a href="/">contact Chris Graham</a>. The research brief behind this page is a Fugio Consulting document.</p>
   <div class="btns">
     <a class="btn ghost" href="Charged-With-Grooming-in-Ohio-Fugio-Consulting-LLC.pdf">Read the brief (PDF)</a>

@@ -1,6 +1,6 @@
 # chrisgraham.com/grooming
 
-A public, self-updating record of every Ohioan charged under Ohio's grooming statute (ORC 2907.071, HB 322, effective 2025-04-09). No person reviews cases: the sweep adds every story that passes the rules, and keeps anything doubtful out.
+A public, self-updating record of every Ohioan charged under Ohio's grooming statute (ORC 2907.071, HB 322, effective 2025-04-09). No person reviews cases, and no paid API is used. A free crawler queues stories every morning. A Claude scheduled task on Chris's MacBook Pro reads them and adds every one that passes the rules. Anything doubtful stays out.
 
 ## The rules (a case is counted only if all hold)
 1. Ohio court.
@@ -11,26 +11,26 @@ A public, self-updating record of every Ohioan charged under Ohio's grooming sta
 The page uses charged-not-convicted wording for every open case.
 
 ## Files
-- `data/grooming/cases.csv`: the confirmed list, and the only source for the page. One row per person. Columns: num, name, age, city, county, charged, charges, companion (`hands-on` | `exploitation` | `none` | `unspecified`), status, resolved (`convicted` | `pleaded guilty` | `plea on other counts` | `dismissed` | blank), source_url, thumb (file in `docs/grooming/img/`, may be blank), aka (`;`-separated: the surname plus specific multi-word phrases headlines use for this person, never generic ones like "miami county"), summary (one neutral sentence), lat, lon.
+- `data/grooming/cases.csv`: the confirmed list, and the only source for the page. One row per person. Columns: num, name, age, city, county, charged, charges, companion (`hands-on` | `exploitation` | `none` | `unspecified`), status, resolved (`convicted` | `pleaded guilty` | `plea on other counts` | `dismissed` | blank), source_url, thumb (file in `docs/grooming/img/`, may be blank), aka (`;`-separated: the surname plus specific multi-word phrases headlines use for this person and nobody else, never generic ones like "miami county" or "police chief"; a multi-word aka in a headline settles a story as coverage), summary (one neutral sentence), lat, lon.
 - `data/grooming/excluded.csv`: grooming described but no formal count. Shown under "not counted".
 - `data/grooming/held.csv`: people another tracker listed but whose only source could not be opened or did not show the count. Not rendered. Re-check before adding.
-- `data/grooming/candidates.json`: stories the crawler could not settle yet (unreadable, no name, or the model and the checks disagree). Shown in the "Queued" lane, never counted.
+- `data/grooming/candidates.json`: stories waiting for the morning judge, or that it could not settle (unreadable, no name, a code check failed: see each item's `judge`). Shown in the "Queued" lane, never counted.
 - `data/grooming/dismissed.txt`: candidate ids or URLs to hide, with the reason (out of state, pet grooming, coverage of a listed person).
 - `data/grooming/seen.json`: everything the crawler already settled, with the reason (promoted, rejected, coverage, no groom word, not ohio...).
 - `data/grooming/county_centroids.json`: map position for a promoted case.
-- `scripts/grooming/crawl.py`: the sweep. Bing News + Google News RSS, seven queries, stdlib only. Google links are resolved to the publisher URL through Bing.
+- `scripts/grooming/crawl.py`: the sweep (Bing News + Google News RSS, seven queries, stdlib only; Google links resolved to the publisher URL through Bing) and `--apply FILE`, which applies the judge's verdicts.
+- `scripts/grooming/JUDGE.md`: the prompt for the scheduled task `grooming-judge` (Claude desktop app, scheduled tasks, on Chris's MacBook Pro), every morning after the sweep.
 - `scripts/grooming/build.py`: renders `docs/grooming/index.html` and `docs/grooming/cases.json`.
 - `scripts/grooming/build_map.py`: draws `docs/grooming/img/ohio_map.png` (local only, needs geopandas).
-- `.github/workflows/grooming.yml`: runs crawl + build every six hours and commits to main. Pages publishes the commit.
+- `.github/workflows/grooming.yml`: runs crawl + build daily at 10:00 UTC (5am ET) and commits to main. Pages publishes the commit. No secrets.
 
 ## How a story becomes a case
-For each new story, and each queued story the model has not read yet:
-1. Drop it if its URL is already a source, or it names a listed person (first and last name, surname plus their town or county, or a multi-word aka). That is coverage.
-2. Fetch the article. Claude (`GROOMING_MODEL`, default `claude-sonnet-5-5`) returns a verdict (`promote` | `reject` | `unsure`) plus every `cases.csv` field.
-3. `promote` is necessary but not sufficient. The code also checks: full name, an Ohio county, a non-blocklisted source host, the surname and the word grooming in the article text, formal charge wording near grooming, grooming in the charges, and not already listed. All pass: the row is appended to `cases.csv` with the next number and a map position.
-4. `reject`: logged to `seen.json`. Anything else stays queued and is read again next sweep.
+1. **Sweep (GitHub Actions, 5am ET, free).** New stories that pass the Ohio/charge/grooming word filters are checked against the list. A known source URL, or a headline with a listed person's first and last name or a curated multi-word aka, drops out as coverage. A surname plus that person's town or county is only a hint (`matches`) for the judge. The rest go to `candidates.json`.
+2. **Judge (Mac scheduled task `grooming-judge`, every morning at 7:30, in its own worktree `/Users/h/code/grooming-judge`).** Claude opens each queued story and writes a verdict (`promote` | `reject` | `coverage` | `unsure`) with every `cases.csv` field and a verbatim quote, following `JUDGE.md`. It also updates the status of listed people when coverage reports a plea, conviction or dismissal.
+3. **Apply (`crawl.py --apply`).** `promote` is necessary but not sufficient. The code fetches the page itself (or a readable copy the judge lists in `alt_urls`) and re-checks: full name and an Ohio county; a non-blocklisted host; the judge's quote is on the page word for word, names the person, and states a formal count (charged with / counts of / indicted on / pleaded guilty to ... grooming, or 2907.071); the full name and Ohio are on the page; no other state or federal court in the quote; not already listed (first and last name, or the same source URL), which makes it coverage; not a surname-and-county near match or an `excluded.csv` person, which stays held. All pass: the row is appended with the next number and a map position. A failed check keeps the story queued with the reason. `reject` and `coverage` go to `seen.json`. `unsure` waits for tomorrow.
+4. Build, commit, push to main. Pages publishes in about a minute.
 
-`GROOMING_MAX_AI` caps model calls per run (default 60). If the API key is rejected (401/403) the run logs a `::error::` annotation, stops calling the model, and still commits the sweep.
+If the Mac is off, stories simply wait in the queue; nothing is lost.
 
 ## Fix or add a case by hand
 Edit the row in `cases.csv` (open the source first), then `python3 scripts/grooming/build.py` and push to main. For a photo, save a 300px square JPEG in `docs/grooming/img/` and name it in `thumb`. When counties change, regenerate the map: `python3 scripts/grooming/build_map.py`.

@@ -88,6 +88,8 @@
     background: var(--white);
   }
   .booking-frame iframe { display: block; width: 100%; height: 600px; border: 0; }
+  .booking-fallback { text-align: center; margin: 1rem 0 0; font-size: 0.9rem; color: var(--slate); }
+  @media (max-width: 640px) { .booking-frame iframe { height: 1450px; } }
 
   /* Footer */
   .site-footer { border-top: 1px solid var(--line); }
@@ -228,8 +230,9 @@
       <p class="lede">Pick a time. We&rsquo;ll talk about your team, what you&rsquo;re hoping to get out of AI, and whether the workshop is a good fit.</p>
       <!-- Google Calendar Appointment Scheduling begin -->
       <div class="booking-frame">
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1-VGVWWYNfrSQrDKYHftvYSVGdpfXllBoDmyraeJPamM7YJJi-oJP6w_nvDw68OPglKfl-gIrf?gv=true" style="border: 0" width="100%" height="600" frameborder="0" title="Book a discovery call"></iframe>
+        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1-VGVWWYNfrSQrDKYHftvYSVGdpfXllBoDmyraeJPamM7YJJi-oJP6w_nvDw68OPglKfl-gIrf?gv=true" style="border: 0" width="100%" height="600" frameborder="0" loading="lazy" title="Book a discovery call"></iframe>
       </div>
+      <p class="booking-fallback"><a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1-VGVWWYNfrSQrDKYHftvYSVGdpfXllBoDmyraeJPamM7YJJi-oJP6w_nvDw68OPglKfl-gIrf?gv=true" target="_blank" rel="noopener">Open booking page</a></p>
       <!-- end Google Calendar Appointment Scheduling -->
     </div>
   </section>

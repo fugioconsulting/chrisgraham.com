@@ -1,7 +1,7 @@
 name: grooming tracker sweep
 on:
   schedule:
-    - cron: "0 10 * * *"   # 5am ET (6am in summer); the judge runs on Chris's Mac after this, see JUDGE.md
+    - cron: "0 8 * * *"    # 3am ET (4am in summer); the judge runs on Chris's Mac after this, see JUDGE.md
   workflow_dispatch:
   push:
     branches: [main]

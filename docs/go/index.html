@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Opening Claude</title>
+<style>body{font:17px/1.5 -apple-system,Helvetica,sans-serif;max-width:520px;margin:48px auto;padding:0 16px;color:#1c1a17;background:#fff}a.b{display:inline-block;background:#1c1a17;color:#fff;padding:12px 18px;border-radius:6px;text-decoration:none;font-weight:600}p{color:#5b564e}</style>
+</head><body>
+<h1>Opening Claude…</h1>
+<p><a class="b" id="go" href="#">Open in Claude</a></p>
+<p id="msg"></p>
+<script>
+// Hands an email link off to a claude:// or claude-cli:// deep link (mail apps strip custom schemes).
+// Only those two schemes are allowed, so this can't be used as an open redirect.
+var u = new URLSearchParams(location.search).get("u") || "";
+var ok = /^claude(-cli)?:\/\//.test(u);
+var go = document.getElementById("go"), msg = document.getElementById("msg");
+if (!ok) { go.style.display = "none"; msg.textContent = "Nothing to open."; }
+else {
+  go.href = u;
+  if (/iPhone|iPad|Android/.test(navigator.userAgent)) msg.textContent = "This link opens Claude Code on a Mac. Open the email there.";
+  else { location.href = u; msg.textContent = "If nothing happened, click the button."; }
+}
+</script>
+</body></html>

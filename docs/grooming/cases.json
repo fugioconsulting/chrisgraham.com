@@ -1,6 +1,6 @@
 {
- "as_of": "2026-11-03 17:16 UTC",
- "last_sweep": "2026-11-03 17:16 UTC",
+ "as_of": "2026-11-03 18:35 UTC",
+ "last_sweep": "2026-11-03 18:35 UTC",
  "count": 61,
  "cases": [
   {
@@ -609,7 +609,7 @@
    "status": "Pending, $100,000 bond",
    "resolved": "",
    "source_url": "https://www.courtclerk.org/data/case_summary.php?court[CCR]=on&casenumber=B%202602888&validate_case_number=1",
-   "thumb": "",
+   "thumb": "34_merkle.jpg",
    "aka": "merkle",
    "summary": "Hunter Merkle, 25, was indicted in Hamilton County in August 2026 on one count of grooming, five counts of unlawful sexual conduct with a minor, and two counts of illegal use of a minor in nudity-oriented material (docket B 2602888).",
    "lat": "39.1031",
@@ -825,7 +825,7 @@
    "status": "Pending, $170,000 bond",
    "resolved": "",
    "source_url": "https://www.courtclerk.org/data/case_summary.php?court[CCR]=on&casenumber=B%202600372&validate_case_number=1",
-   "thumb": "",
+   "thumb": "46_mcghee.jpg",
    "aka": "mcghee",
    "summary": "Carlton McGhee was indicted in Hamilton County in January 2026 on one count of grooming and three counts of rape (docket B 2600372).",
    "lat": "39.1031",
@@ -861,7 +861,7 @@
    "status": "Grooming and sexual battery counts dismissed Aug 14, 2026; community control on aggravated assault",
    "resolved": "dismissed",
    "source_url": "https://www.courtclerk.org/data/case_summary.php?court[CCR]=on&casenumber=B%202506673&validate_case_number=1",
-   "thumb": "",
+   "thumb": "48_gay.jpg",
    "aka": "arnold gay",
    "summary": "Arnold Gay, 43, was indicted in Hamilton County in December 2025 on grooming, sexual battery, and aggravated assault; the grooming and sexual battery counts were dismissed in August 2026 (docket B 2506673).",
    "lat": "39.1031",

@@ -1,6 +1,6 @@
 {
- "as_of": "2026-11-04 00:30 UTC",
- "last_sweep": "2026-11-04 00:30 UTC",
+ "as_of": "2026-11-04 02:19 UTC",
+ "last_sweep": "2026-11-04 02:19 UTC",
  "count": 66,
  "cases": [
   {
@@ -336,12 +336,12 @@
    "charged": "Nov 2025",
    "charges": "40 counts incl. grooming, rape, GSI",
    "companion": "hands-on",
-   "status": "Pending",
-   "resolved": "",
-   "source_url": "https://local12.com/news/local/sexual-contact-minor-clermont-county-13-years-old-grooming-rape-allegedly-charges-indicted-grooming",
+   "status": "Convicted at trial on all 40 counts including grooming; 80 years to life (Sep 2026)",
+   "resolved": "convicted",
+   "source_url": "https://www.wlwt.com/article/clermont-county-sex-crimes-sentence-richard-hauke/73608864",
    "thumb": "21_hauke.jpg",
    "aka": "hauke",
-   "summary": "Richard Todd Hauke, 57, was indicted by a Clermont County grand jury in November 2025 on a 40-count indictment including grooming, rape, gross sexual imposition, and unlawful sexual conduct with a minor, over alleged sexual contact with three minors under 13.",
+   "summary": "Richard Todd Hauke, 57, was indicted by a Clermont County grand jury in November 2025 on a 40-count indictment including grooming, rape, gross sexual imposition, and unlawful sexual conduct with a minor, over alleged sexual contact with three minors under 13. After a jury trial he was convicted on all 40 charges, including grooming, and on Sept. 3, 2026 was sentenced to 80 years to life in prison (WLWT).",
    "lat": "39.077",
    "lon": "-84.1772"
   },
@@ -534,12 +534,12 @@
    "charged": "Nov 2025",
    "charges": "Grooming, multiple rape of a minor",
    "companion": "hands-on",
-   "status": "Pending, jailed, additional charges pending",
+   "status": "Pending, jailed; indicted Dec 10, 2025 on 2 rape and 2 sexual battery, grooming not in the indictment",
    "resolved": "",
    "source_url": "https://wchstv.com/news/local/man-accused-of-grooming-raping-minor-in-meigs-county-deputies-say",
    "thumb": "32_hair.jpg",
    "aka": "jonathon hair",
-   "summary": "Jonathon Hair, 47, of Racine, was charged in November 2025 by the Meigs County Sheriff's Office with multiple counts of rape of a minor and grooming violations, and was held at Southeast Regional Jail with more charges pending.",
+   "summary": "Jonathon Hair, 47, of Racine, was charged in November 2025 by the Meigs County Sheriff's Office with multiple counts of rape of a minor and grooming violations, and was held at Southeast Regional Jail with more charges pending. A Meigs County grand jury indicted him Dec. 10, 2025 on two counts of rape and two counts of sexual battery; the grooming charge from his arrest was not in the indictment (WV News).",
    "lat": "38.97",
    "lon": "-81.91"
   },
@@ -804,12 +804,12 @@
    "charged": "Feb 2026",
    "charges": "Grooming (misdemeanor), disseminating matter harmful to juveniles, pandering obscenity, weapons under disability",
    "companion": "exploitation",
-   "status": "Pending",
-   "resolved": "",
-   "source_url": "https://www.sent-trib.com/2026/02/11/wayne-man-indicted-for-sex-related-crimes/",
+   "status": "Pleaded guilty to grooming (misdemeanor), disseminating and pandering obscenity (May 2026); 5 years community control with 90 days in jail (Jul 2026)",
+   "resolved": "pleaded guilty",
+   "source_url": "https://www.sent-trib.com/2026/07/11/wayne-man-sentenced-for-sex-crimes-against-teen/",
    "thumb": "",
    "aka": "hammer",
-   "summary": "Robert Joseph Hammer, 60, of Wayne, was indicted in Wood County on February 4, 2026, on a misdemeanor grooming count, disseminating matter harmful to juveniles, pandering obscenity, and having weapons while under disability.",
+   "summary": "Robert Joseph Hammer, 60, of Wayne, was indicted in Wood County on February 4, 2026, on a misdemeanor grooming count, disseminating matter harmful to juveniles, pandering obscenity, and having weapons while under disability. He pleaded guilty in May 2026 to grooming, a second-degree misdemeanor, plus disseminating matter harmful to juveniles and pandering obscenity, and in July 2026 was sentenced to five years of community control with 90 days in jail (Sentinel-Tribune).",
    "lat": "41.3011",
    "lon": "-83.4752"
   },
@@ -1239,5 +1239,18 @@
    "aka": "keesee;megachurch;faith life"
   }
  ],
- "candidates": []
+ "candidates": [
+  {
+   "id": "e37a08e0e25b",
+   "title": "High-profile sex abuse case brings test for new Ohio anti-grooming law",
+   "url": "https://www.bishop-accountability.org/2026/11/high-profile-sex-abuse-case-brings-test-for-new-ohio-anti-grooming-law/",
+   "source": "bishop-accountability.org",
+   "published": "2026-10-21",
+   "found_at": "2026-11-04",
+   "snippet": "The arrest of a former executive at a Catholic charity organization in Columbus stands as a high-profile test of a new anti-grooming law passed just last year by Ohio lawmakers.",
+   "formal_hint": true,
+   "status": "new",
+   "matches": null
+  }
+ ]
 }

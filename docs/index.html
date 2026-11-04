@@ -4535,6 +4535,47 @@ iframe { max-width: 100% !important; }
 }
 </style>
 
+<style id="static-clone-ipad-media">
+/* iPad: media timeline rows stack as big image -> headline -> quote -> date.
+   Each row is col_left (date paragraph + image) beside col_right (headline +
+   quote); flattening col_left with display: contents lets us reorder its
+   children around col_right without touching the markup. */
+@media (min-width: 771px) and (max-width: 1199px),
+       (min-width: 771px) and (max-width: 1366px) and (hover: none) and (pointer: coarse) {
+  .id-6Z-VeKDnO-7675 .row:not([data-show-only="none"]):has(> .col_left > .col-inner > .elParagraphWrapper + .elImageWrapper) {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    margin-bottom: 56px !important;
+  }
+  .id-6Z-VeKDnO-7675 .row:not([data-show-only="none"]):has(> .col_left > .col-inner > .elParagraphWrapper + .elImageWrapper) > .col_left,
+  .id-6Z-VeKDnO-7675 .row:not([data-show-only="none"]):has(> .col_left > .col-inner > .elParagraphWrapper + .elImageWrapper) > .col_left > .col-inner {
+    display: contents !important;
+  }
+  .id-6Z-VeKDnO-7675 .row:not([data-show-only="none"]):has(> .col_left > .col-inner > .elParagraphWrapper + .elImageWrapper) .elImageWrapper {
+    order: 1;
+    width: 100% !important;
+    max-width: 760px !important;
+    margin: 0 auto 16px !important;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
+  }
+  .id-6Z-VeKDnO-7675 .row:not([data-show-only="none"]):has(> .col_left > .col-inner > .elParagraphWrapper + .elImageWrapper) .elImageWrapper img {
+    width: 100% !important;
+  }
+  .id-6Z-VeKDnO-7675 .row:not([data-show-only="none"]):has(> .col_left > .col-inner > .elParagraphWrapper + .elImageWrapper) > .col_right {
+    order: 2;
+    width: 100% !important;
+    max-width: 760px !important;
+  }
+  .id-6Z-VeKDnO-7675 .row:not([data-show-only="none"]):has(> .col_left > .col-inner > .elParagraphWrapper + .elImageWrapper) > .col_left .elParagraphWrapper {
+    order: 3;
+    margin: 4px 0 0 !important;
+  }
+}
+</style>
+
+
 </head>
 <body>
 <script id="__cf_fetcher" data-turbo-eval="false">

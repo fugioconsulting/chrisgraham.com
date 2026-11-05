@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-05 21:47 UTC",
+ "as_of": "2026-11-05 22:01 UTC",
  "last_sweep": "2026-11-05 21:47 UTC",
- "count": 73,
+ "count": 74,
  "cases": [
   {
    "num": "1",
@@ -1316,6 +1316,24 @@
    "summary": "Jenna Anderson, 31, of Eaton was arrested in Preble County in September 2025 on a grooming count under R.C. 2907.071 per the sheriff's report; grooming was not indicted and she pleaded guilty to other sex offenses, receiving three years.",
    "lat": "39.7442",
    "lon": "-84.6363"
+  },
+  {
+   "num": "74",
+   "name": "Steven Howard Winkhart",
+   "age": "54",
+   "city": "Springfield",
+   "county": "Clark",
+   "charged": "Sep 2026",
+   "charges": "Grooming",
+   "companion": "none",
+   "status": "Pending (Booking No. 26-0710)",
+   "resolved": "",
+   "source_url": "https://commonpleas.clarkcountyohio.gov/eservices/home.page.2",
+   "thumb": "",
+   "aka": "Winkhart",
+   "summary": "Steven Howard Winkhart, 54, of Springfield, was charged in Clark County in September 2026 with grooming under ORC 2907.071(B), according to a Clark County Sheriff's Office arrest record.",
+   "lat": "39.945",
+   "lon": "-83.7903"
   }
  ],
  "not_counted": [

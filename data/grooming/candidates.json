@@ -1,1 +1,19 @@
-[]
+[
+ {
+  "id": "a90e740b2c93",
+  "title": "FOI-0105 Clark County Sheriff's Office: Steven Howard Winkhart",
+  "url": "https://commonpleas.clarkcountyohio.gov/eservices/home.page.2",
+  "source": "FOI-0105 Clark County Sheriff's Office",
+  "published": "",
+  "found_at": "2026-11-05",
+  "snippet": "",
+  "status": "new",
+  "matches": null,
+  "judge": {
+   "verdict": "promote",
+   "reason": "",
+   "on": "2026-11-05",
+   "held": "record_scope_quote is not in the record"
+  }
+ }
+]

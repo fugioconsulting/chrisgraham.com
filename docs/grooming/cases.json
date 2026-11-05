@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-05 10:06 UTC",
+ "as_of": "2026-11-05 17:04 UTC",
  "last_sweep": "2026-11-05 10:06 UTC",
- "count": 71,
+ "count": 72,
  "cases": [
   {
    "num": "1",
@@ -1280,6 +1280,24 @@
    "summary": "Austin S. Reinerts was charged in Tuscarawas County in October 2026 with four counts of grooming under R.C. 2907.071 (case 2026 CR 10 0305), per the Tuscarawas County Clerk of Courts' records; the case is undisposed.",
    "lat": "40.4021",
    "lon": "-81.4911"
+  },
+  {
+   "num": "72",
+   "name": "James Moore III",
+   "age": "",
+   "city": "",
+   "county": "Morrow",
+   "charged": "Jul 2025",
+   "charges": "Grooming",
+   "companion": "unspecified",
+   "status": "Pleaded guilty (case 2025 CR 0077)",
+   "resolved": "pleaded guilty",
+   "source_url": "https://clerkofcourts.morrowcountyohio.gov/eservices/",
+   "thumb": "",
+   "aka": "moore",
+   "summary": "James Moore III pleaded guilty in Morrow County Common Pleas Court (case 2025 CR 0077) to a grooming count under R.C. 2907.071; the case was filed July 2025 and disposed May 2026.",
+   "lat": "40.5203",
+   "lon": "-82.7926"
   }
  ],
  "not_counted": [

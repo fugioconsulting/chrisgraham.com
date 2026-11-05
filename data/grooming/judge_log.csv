@@ -9,3 +9,4 @@ started_utc,finished_utc,queued,foi_read,added,held,rejected,unsure,published,no
 2026-11-05T10:04Z,2026-11-05T10:06Z,2,0,0,0,2,0,yes,yes,
 2026-11-05T17:05Z,2026-11-05T17:07Z,0,6,1,0,0,0,no,no,10 no artifact tool in session
 2026-11-05T18:20Z,2026-11-05T18:29Z,0,4,1,0,0,0,no,no,9 push to main denied by harness; 10 no artifact tool in session
+2026-11-05T19:19Z,2026-11-05T19:19Z,0,2,0,0,0,0,no,no,FOI prefilter (code + cheap models)

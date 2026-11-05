@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-05 08:09 UTC",
+ "as_of": "2026-11-05 10:04 UTC",
  "last_sweep": "2026-11-05 08:09 UTC",
  "count": 71,
  "cases": [
@@ -1329,30 +1329,5 @@
    "aka": "keesee;megachurch;faith life"
   }
  ],
- "candidates": [
-  {
-   "id": "b8cf3b8a81f1",
-   "title": "Graves Co. teacher charged with grooming again after initial dismissal - FOX19 | Cincinnati",
-   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNMWU5aW9SMGFlYjlqOVZiYVlBZnN2alpmZXpzcHJKTEplZUpwUEo2SFVFX0xkNGo3RkhZQTZ4QWlHUFpfcXBhWXdsN04tdWF5ZUJJckl1Q0VBTGlrazljRTNyOXk1SVJMODNqNVhLeE5SbGJYZlNYMzFPaTdiMFpMcTV5Mi1iN0piczRnanQ2Umt6eFRaTjc0OW5WOG9XVHdjQ2JCY19n?oc=5",
-   "source": "FOX19 | Cincinnati",
-   "published": "2026-09-24",
-   "found_at": "2026-11-04",
-   "snippet": "Graves Co. teacher charged with grooming again after initial dismissal FOX19 | Cincinnati",
-   "formal_hint": false,
-   "status": "new",
-   "matches": null
-  },
-  {
-   "id": "b512a22c72c0",
-   "title": "Middle school teacher charged with grooming student, sheriff\u2019s office says - FOX19 | Cincinnati",
-   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPRWdkUDVNVVZWTXljc21XQzlIVzlBR3RCOWdJRm9PWU1sX0FUUWYyWDBzR01HSnZSMDk2LTNFbkl5R0dwRlpQRGYxVXpyVVVfMTJVN2kzTnJRejFkd0FnZ2N0UjJwWDB0QUoxNFdYcFlteHhYYWh0NTBTRnUxbUVta1puNGFCNnlHM1E2M3lYV2tzQ0JROGFlVU1PNnBhWFYyMnpWTzZvZm5kdw?oc=5",
-   "source": "FOX19 | Cincinnati",
-   "published": "2026-08-10",
-   "found_at": "2026-11-04",
-   "snippet": "Middle school teacher charged with grooming student, sheriff\u2019s office says FOX19 | Cincinnati",
-   "formal_hint": false,
-   "status": "new",
-   "matches": null
-  }
- ]
+ "candidates": []
 }

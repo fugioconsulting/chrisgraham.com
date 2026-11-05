@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-05 17:08 UTC",
+ "as_of": "2026-11-05 18:27 UTC",
  "last_sweep": "2026-11-05 17:08 UTC",
- "count": 72,
+ "count": 73,
  "cases": [
   {
    "num": "1",
@@ -753,7 +753,7 @@
    "status": "Pending",
    "resolved": "",
    "source_url": "https://www.wlwt.com/article/clermont-county-child-sex-crimes-investigation-batavia/70784872",
-   "thumb": "",
+   "thumb": "42_boyd.jpg",
    "aka": "landerous",
    "summary": "Landerous Boyd was indicted in Clermont County in March 2026 on one count of grooming, twelve counts of gross sexual imposition, three counts of rape, importuning, and four counts of intimidation of a victim or witness.",
    "lat": "39.0770",
@@ -1298,6 +1298,24 @@
    "summary": "James Moore III pleaded guilty in Morrow County Common Pleas Court (case 2025 CR 0077) to a grooming count under R.C. 2907.071; the case was filed July 2025 and disposed May 2026.",
    "lat": "40.5203",
    "lon": "-82.7926"
+  },
+  {
+   "num": "73",
+   "name": "Jenna Anderson",
+   "age": "31",
+   "city": "Eaton",
+   "county": "Preble",
+   "charged": "Sep 2025",
+   "charges": "Grooming (not indicted), unlawful sexual conduct with a minor, 3 gross sexual imposition, 2 sexual imposition",
+   "companion": "hands-on",
+   "status": "Sentenced to 3 years; grooming not indicted, convicted of other sex offenses (Register Herald, Dec 2025)",
+   "resolved": "plea on other counts",
+   "source_url": "https://www.registerherald.com/2025/12/15/anderson-to-serve-three-years-in-prison-for-sex-crimes/",
+   "thumb": "",
+   "aka": "anderson",
+   "summary": "Jenna Anderson, 31, of Eaton was arrested in Preble County in September 2025 on a grooming count under R.C. 2907.071 per the sheriff's report; grooming was not indicted and she pleaded guilty to other sex offenses, receiving three years.",
+   "lat": "39.7442",
+   "lon": "-84.6363"
   }
  ],
  "not_counted": [

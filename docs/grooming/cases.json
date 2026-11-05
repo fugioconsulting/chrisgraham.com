@@ -1,6 +1,6 @@
 {
- "as_of": "2026-11-05 22:08 UTC",
- "last_sweep": "2026-11-05 22:08 UTC",
+ "as_of": "2026-11-05 22:12 UTC",
+ "last_sweep": "2026-11-05 22:12 UTC",
  "count": 74,
  "cases": [
   {
@@ -1326,7 +1326,7 @@
    "charged": "Sep 2026",
    "charges": "Grooming",
    "companion": "none",
-   "status": "Pending (Booking No. 26-0710)",
+   "status": "Pending (Booking No. 26-07170)",
    "resolved": "",
    "source_url": "https://commonpleas.clarkcountyohio.gov/eservices/home.page.2",
    "thumb": "",

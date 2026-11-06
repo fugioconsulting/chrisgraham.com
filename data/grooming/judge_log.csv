@@ -13,3 +13,4 @@ started_utc,finished_utc,queued,foi_read,added,held,rejected,unsure,published,no
 2026-11-05T19:30Z,2026-11-05T19:30Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
 2026-11-05T20:15Z,2026-11-05T20:16Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
 2026-11-05T20:10Z,2026-11-05T22:06Z,0,1,1,0,0,0,yes,no,step 10 artifact not accessible from Minnie FOI session
+2026-11-06T10:04Z,2026-11-06T10:06Z,0,0,0,0,0,0,yes,yes,

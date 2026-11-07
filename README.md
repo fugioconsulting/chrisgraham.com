@@ -1,15 +1,13 @@
-# hello-there
+# chrisgraham.com
 
-Static clone of `chrisgraham.com/hello-there`. Self-contained: HTML, CSS, JS bundles, and all images live in `docs/` (served by GitHub Pages).
+Static site, served by GitHub Pages from `docs/` on `main`. Merge to `main` to deploy. See `DEPLOY.md` for setup and verification, and `CLAUDE.md` for the layout and rules.
 
-## Local
+## Local preview
 
 ```bash
 npm install
 npm start
-# open http://localhost:3000
+# open http://localhost:3000 (or set PORT)
 ```
 
-## Railway
-
-`Procfile` runs `node server.js`. Railway sets `PORT`. No env vars required.
+`server.js` serves `docs/` the way Pages does, including the `docs/404.html` fallback. It is a local preview only and is not deployed anywhere.

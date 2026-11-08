@@ -18,3 +18,4 @@ started_utc,finished_utc,queued,foi_read,added,held,rejected,unsure,published,no
 2026-11-06T19:03Z,2026-11-06T19:03Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
 2026-11-06T19:30Z,2026-11-06T19:30Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
 2026-11-06T20:30Z,2026-11-06T20:30Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
+2026-11-08T18:59:38Z,2026-11-08T18:59:38Z,0,0,0,0,0,0,no,no,"10 artifact publish denied by auto-mode classifier; 11 Minnie ssh timed out (FOI 2b/2c skipped, notify not sent)"

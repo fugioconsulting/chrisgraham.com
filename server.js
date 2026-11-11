@@ -1,5 +1,4 @@
-// Static server for the hello-there clone.
-// Serves /public on the port Railway provides.
+// Local preview of docs/ (GitHub Pages). Not deployed.
 const express = require("express");
 const path = require("path");
 
@@ -21,14 +20,14 @@ app.use(
 );
 
 app.get("/health", (_req, res) => {
-  res.json({ status: "ok", app: "hello-there", ts: new Date().toISOString() });
+  res.json({ status: "ok", app: "chrisgraham.com", ts: new Date().toISOString() });
 });
 
-// Anything else falls back to index.html so deep links work.
-app.get("*", (_req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+// Unknown paths get docs/404.html, same as Pages (it redirects to /).
+app.use((_req, res) => {
+  res.status(404).sendFile(path.join(__dirname, "docs", "404.html"));
 });
 
 app.listen(PORT, () => {
-  console.log(`hello-there clone listening on :${PORT}`);
+  console.log(`chrisgraham.com local preview listening on :${PORT}`);
 });

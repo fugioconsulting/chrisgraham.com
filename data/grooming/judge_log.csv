@@ -1,0 +1,24 @@
+started_utc,finished_utc,queued,foi_read,added,held,rejected,unsure,published,notified,failed_step
+2026-11-03T16:00:25Z,2026-11-03T16:01:51Z,0,0,0,0,0,0,yes,yes,
+2026-11-03T17:12:55Z,2026-11-03T17:15:35Z,0,10,0,0,0,0,yes,yes,
+2026-11-03T20:35:50Z,2026-11-03T20:37:00Z,0,7,5,0,0,0,no,no,10 artifact publish (no Artifact tool in session)
+2026-11-03T21:04Z,2026-11-03T21:04Z,0,1,0,0,0,0,no,no,10 artifact publish skipped (nothing added; no Artifact tool in session)
+2026-11-04T10:03Z,2026-11-04T10:06Z,1,0,0,0,0,0,yes,yes,
+2026-11-04T17:11Z,2026-11-04T17:11Z,0,7,5,0,0,0,no,no,10 artifact publish skipped (no Artifact tool in session)
+2026-11-04T21:05Z,2026-11-04T21:05Z,0,3,0,0,0,0,no,no,10 artifact publish skipped (nothing added; no Artifact tool in session)
+2026-11-05T10:04Z,2026-11-05T10:06Z,2,0,0,0,2,0,yes,yes,
+2026-11-05T17:05Z,2026-11-05T17:07Z,0,6,1,0,0,0,no,no,10 no artifact tool in session
+2026-11-05T18:20Z,2026-11-05T18:29Z,0,4,1,0,0,0,no,no,9 push to main denied by harness; 10 no artifact tool in session
+2026-11-05T19:19Z,2026-11-05T19:19Z,0,2,0,0,0,0,no,no,FOI prefilter (code + cheap models)
+2026-11-05T19:30Z,2026-11-05T19:30Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
+2026-11-05T20:15Z,2026-11-05T20:16Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
+2026-11-05T20:10Z,2026-11-05T22:06Z,0,1,1,0,0,0,yes,no,step 10 artifact not accessible from Minnie FOI session
+2026-11-06T10:04Z,2026-11-06T10:06Z,0,0,0,0,0,0,yes,yes,
+2026-11-06T17:00Z,2026-11-06T17:00Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
+2026-11-06T19:03Z,2026-11-06T19:03Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
+2026-11-06T19:30Z,2026-11-06T19:30Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
+2026-11-06T20:30Z,2026-11-06T20:30Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
+2026-11-08T18:59:38Z,2026-11-08T18:59:38Z,0,0,0,0,0,0,no,no,"10 artifact publish denied by auto-mode classifier; 11 Minnie ssh timed out (FOI 2b/2c skipped, notify not sent)"
+2026-11-09T10:06:43Z,2026-11-09T10:06:43Z,0,0,0,0,0,0,yes,no,"2b/2c FOI skipped: Minnie ssh timed out; 11 notify not sent"
+2026-11-09T14:15Z,2026-11-09T14:15Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
+2026-11-11T15:40Z,2026-11-11T15:41Z,0,5,0,0,0,0,no,no,FOI prefilter (code + cheap models)

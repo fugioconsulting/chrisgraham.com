@@ -4,7 +4,11 @@ Static site, served by GitHub Pages from the `docs/` folder on `main`. `server.j
 
 ## Deploy
 
-Merge to `main`. GitHub Pages rebuilds in about a minute. No Railway, no VM, no Mac. The only Actions workflow is the grooming tracker sweep, which commits data and the rebuilt page to main; the morning judge on Chris's Mac also pushes grooming data to main. The site left Railway in the 2026-09-11/12 New Albany cutover and left the `pete` VM for Pages on 2026-10-08.
+Merge to `main`. GitHub Pages rebuilds in about a minute. No Railway, no VM, no Mac.
+
+**`/prod` ships it.** Label a PR `prod-ready`, then press the **Ship it** workflow: `gh workflow run prod-train.yml --repo fugioconsulting/chrisgraham.com` (`-f dry_run=true` for the plan only). It runs `bin/prod-train` on a GitHub-hosted runner: squash-merges every open, non-draft `prod-ready` PR with no conflicts and no red checks (fixes first, then oldest, pinned to the labeled commit), asks Pages to rebuild, waits for Pages to build main's commit, checks the site answers, and comments "landed" or "held" on each PR. A held PR keeps its label and rides the next train once fixed. Don't `gh pr merge` by hand. Merges made by the train do not trigger other workflows, so a PR that touches `data/grooming/**` gets its page rebuilt by the next daily sweep, not at once.
+
+Two Actions workflows: Ship it, and the grooming tracker sweep, which commits data and the rebuilt page to main; the morning judge on Chris's Mac also pushes grooming data to main. The site left Railway in the 2026-09-11/12 New Albany cutover and left the `pete` VM for Pages on 2026-10-08.
 
 **Verify after merge:** `curl -s https://chrisgraham.com/ | grep -c fugio-framework` (expect > 0). Hard refresh client-side.
 

@@ -5,6 +5,11 @@
 GitHub Pages serves the `docs/` folder of `main`. Merge to `main`, wait
 about a minute, hard refresh. That is the whole deploy.
 
+Merges go through the Ship it train, not by hand: label the PR `prod-ready`
+and run `gh workflow run prod-train.yml` (or type `/prod` in a Claude
+session). It merges every labeled PR that has no conflicts, waits for Pages
+to build, and comments landed or held on each PR. See `bin/prod-train`.
+
 ## One-time setup (done once, in the browser)
 
 1. **Repo visibility.** Pages on a private repo needs GitHub Pro. Either

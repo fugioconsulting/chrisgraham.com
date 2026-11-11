@@ -1,0 +1,32 @@
+name: Ship it
+# The engine behind /prod for this repo. Press it with:
+#   gh workflow run prod-train.yml --repo fugioconsulting/chrisgraham.com
+# It merges every open, non-draft PR labeled `prod-ready` that has no conflicts and no red
+# checks, then waits for GitHub Pages to build main and checks the live site. See bin/prod-train.
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print the plan, merge nothing"
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  pull-requests: write
+  pages: write
+concurrency:
+  group: prod-train
+  cancel-in-progress: false
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - name: Run the train
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: bin/prod-train

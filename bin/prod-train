@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+# prod-train: the engine behind /prod for chrisgraham.com.
+#
+# Merges every open PR into main that is labeled `prod-ready`, is not a draft, has no
+# conflicts and no red or running checks. Fixes first, then oldest. Each merge is a squash
+# pinned to the commit the label was read against. Then it asks GitHub Pages to rebuild,
+# waits until Pages has built main's commit, and checks the live site answers.
+#
+# This site is static and Pages serves docs/ on main, so "deploy" is the merge itself.
+# Run by .github/workflows/prod-train.yml. Needs gh, jq and GH_TOKEN.
+#
+#   DRY_RUN=true   print the plan, merge nothing
+#   REPO           owner/name (default: $GITHUB_REPOSITORY)
+#   SITE           live URL to check (default: https://chrisgraham.com)
+set -u
+
+REPO="${REPO:-${GITHUB_REPOSITORY:-fugioconsulting/chrisgraham.com}}"
+SITE="${SITE:-https://chrisgraham.com}"
+DRY_RUN="${DRY_RUN:-false}"
+LABEL="prod-ready"
+RUN_URL="${GITHUB_SERVER_URL:-https://github.com}/$REPO/actions/runs/${GITHUB_RUN_ID:-local}"
+
+say() { printf '%s\n' "$*"; }
+comment() { gh pr comment "$1" --repo "$REPO" --body "$2" >/dev/null 2>&1 || true; }
+
+# One line per PR: "<kind> <createdAt> <number>", fixes (kind 0) first, then oldest.
+queue() {
+  gh pr list --repo "$REPO" --base main --state open --label "$LABEL" --limit 100 \
+    --json number,createdAt,headRefName,isDraft \
+    --jq '.[] | select(.isDraft | not)
+          | [(if (.headRefName | test("^(fix|hotfix)/")) then 0 else 1 end), .createdAt, .number]
+          | @tsv' | sort | awk '{print $3}'
+}
+
+# Prints "ok <sha>" or "hold <reason>". GitHub computes mergeable lazily, so retry UNKNOWN.
+verdict() {
+  local n="$1" j m sha bad pending i
+  for i in 1 2 3 4 5 6; do
+    j="$(gh pr view "$n" --repo "$REPO" --json mergeable,headRefOid,statusCheckRollup,state,isDraft)" || { echo "hold could not read the PR"; return; }
+    m="$(jq -r .mergeable <<<"$j")"
+    [ "$m" != UNKNOWN ] && break
+    sleep 5
+  done
+  sha="$(jq -r .headRefOid <<<"$j")"
+  [ "$(jq -r .state <<<"$j")" = OPEN ] || { echo "hold not open"; return; }
+  [ "$m" = CONFLICTING ] && { echo "hold conflicts with main"; return; }
+  [ "$m" = MERGEABLE ] || { echo "hold mergeable=$m"; return; }
+  bad="$(jq '[.statusCheckRollup[]? | (.conclusion // .state // "") | ascii_upcase
+              | select(. == "FAILURE" or . == "ERROR" or . == "CANCELLED" or . == "TIMED_OUT"
+                       or . == "ACTION_REQUIRED" or . == "STARTUP_FAILURE")] | length' <<<"$j")"
+  [ "$bad" -gt 0 ] && { echo "hold checks red"; return; }
+  pending="$(jq '[.statusCheckRollup[]? | select((.status // "COMPLETED") != "COMPLETED" or (.state // "") == "PENDING")] | length' <<<"$j")"
+  [ "$pending" -gt 0 ] && { echo "hold checks still running"; return; }
+  echo "ok $sha"
+}
+
+PRS="$(queue)"
+if [ -z "$PRS" ]; then
+  say "Nothing labeled $LABEL. Nothing to ship."
+  exit 0
+fi
+
+MERGED=""; HELD=""
+for n in $PRS; do
+  v="$(verdict "$n")"
+  if [ "${v%% *}" != ok ]; then
+    why="${v#hold }"
+    say "held #$n: $why"
+    HELD="$HELD #$n"
+    [ "$DRY_RUN" = true ] || comment "$n" "prod train: held ($why). Fix it and it rides the next train; the label stays. $RUN_URL"
+    continue
+  fi
+  sha="${v#ok }"
+  if [ "$DRY_RUN" = true ]; then
+    say "would merge #$n at ${sha:0:8}"
+    continue
+  fi
+  if out="$(gh pr merge "$n" --repo "$REPO" --squash --match-head-commit "$sha" 2>&1)"; then
+    say "merged #$n at ${sha:0:8}"
+    MERGED="$MERGED #$n"
+  else
+    why="$(printf '%s' "$out" | tr '\n' ' ' | cut -c1-160)"
+    say "held #$n: merge refused: $why"
+    HELD="$HELD #$n"
+    comment "$n" "prod train: held (merge refused: $why). $RUN_URL"
+  fi
+done
+
+if [ "$DRY_RUN" = true ]; then
+  say "Dry run. Nothing merged."
+  exit 0
+fi
+if [ -z "$MERGED" ]; then
+  say "Nothing merged.${HELD:+ Held:$HELD}"
+  exit 0
+fi
+
+# Deploy = Pages building main. A merge made with the workflow token may not start a
+# build on its own, so ask for one, then wait for Pages to report main's commit as built.
+MAIN="$(gh api "repos/$REPO/git/ref/heads/main" --jq .object.sha)"
+gh api -X POST "repos/$REPO/pages/builds" >/dev/null 2>&1 || say "note: could not request a Pages build; waiting for the automatic one"
+
+built=""
+for i in $(seq 1 40); do
+  b="$(gh api "repos/$REPO/pages/builds/latest" --jq '[.status, .commit] | @tsv' 2>/dev/null)" || b=""
+  st="${b%%	*}"; c="${b##*	}"
+  if [ "$c" = "$MAIN" ] && [ "$st" = built ]; then built=1; break; fi
+  if [ "$c" = "$MAIN" ] && [ "$st" = errored ]; then break; fi
+  sleep 10
+done
+
+code="$(curl -s -o /dev/null -w '%{http_code}' -L "$SITE/")"
+if [ -n "$built" ] && [ "$code" = 200 ]; then
+  say "LIVE ${MAIN:0:8}:$MERGED on $SITE${HELD:+ (held:$HELD)}"
+  for n in $MERGED; do comment "${n#\#}" "prod train: landed. Live on $SITE at ${MAIN:0:8}. $RUN_URL"; done
+  exit 0
+fi
+say "DEPLOY PROBLEM: merged$MERGED into main ${MAIN:0:8} but Pages build is '${st:-unknown}' and $SITE answered $code"
+for n in $MERGED; do comment "${n#\#}" "prod train: merged, but the Pages build did not confirm (build '${st:-unknown}', site HTTP $code). $RUN_URL"; done
+exit 1

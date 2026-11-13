@@ -24,3 +24,4 @@ started_utc,finished_utc,queued,foi_read,added,held,rejected,unsure,published,no
 2026-11-11T15:40Z,2026-11-11T15:41Z,0,5,0,0,0,0,no,no,FOI prefilter (code + cheap models)
 2026-11-11T17:04Z,2026-11-11T17:07Z,0,0,0,0,0,0,yes,no,"2b/2c FOI skipped: Minnie offline (ssh timed out); 11 notify not sent"
 2026-11-12T10:04Z,2026-11-12T10:07Z,0,0,0,0,0,0,yes,no,"2b/2c FOI skipped: Minnie offline (ssh timed out); 11 notify not sent"
+2026-11-13T12:34Z,2026-11-13T12:38Z,1,0,0,0,0,0,yes,no,"2b/2c FOI skipped: Minnie offline (ssh timed out); 11 notify not sent"

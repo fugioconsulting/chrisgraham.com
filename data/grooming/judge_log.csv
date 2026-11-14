@@ -26,3 +26,4 @@ started_utc,finished_utc,queued,foi_read,added,held,rejected,unsure,published,no
 2026-11-12T10:04Z,2026-11-12T10:07Z,0,0,0,0,0,0,yes,no,"2b/2c FOI skipped: Minnie offline (ssh timed out); 11 notify not sent"
 2026-11-13T12:34Z,2026-11-13T12:38Z,1,0,0,0,0,0,yes,no,"2b/2c FOI skipped: Minnie offline (ssh timed out); 11 notify not sent"
 2026-11-13T15:57Z,2026-11-13T15:57Z,0,1,0,0,0,0,no,no,"10 artifact not republished (no artifact tool in this run); 11 notify skipped by instruction; 2c photo script needs PIL, but reply has no booking photo"
+2026-11-14T10:03Z,2026-11-14T10:06Z,0,0,0,0,0,0,yes,yes,

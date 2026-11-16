@@ -33,3 +33,4 @@ started_utc,finished_utc,queued,foi_read,added,held,rejected,unsure,published,no
 2026-11-16T16:00Z,2026-11-16T16:00Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
 2026-11-16T16:15Z,2026-11-16T16:15Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
 2026-11-16T16:16Z,2026-11-16T16:16Z,0,1,0,1,0,0,no,no,FOI-only judge; Kidd (Huron 20260505) held: crawl.py page_has_name glues lines so 'Kidd' fails word boundary
+2026-11-16T20:00Z,2026-11-16T20:00Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)

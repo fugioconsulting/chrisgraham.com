@@ -4543,6 +4543,21 @@ iframe { max-width: 100% !important; }
     order: 3;
     margin: 4px 0 0 !important;
   }
+  /* Headlines: use the full column width (desktop side padding squeezed them
+     to ~360px) and break between phrases, not inside them. Authored <br>s
+     already mark the phrase break; balance evens out the rest. */
+  .id-6Z-VeKDnO-7675 .row:not([data-show-only="none"]):has(> .col_left > .col-inner > .elParagraphWrapper + .elImageWrapper) > .col_right .elSubheadlineWrapper {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .id-6Z-VeKDnO-7675 .row:not([data-show-only="none"]):has(> .col_left > .col-inner > .elParagraphWrapper + .elImageWrapper) > .col_right .elSubheadline {
+    width: 100% !important;
+    max-width: none !important;
+    text-wrap: balance;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+  }
 }
 </style>
 

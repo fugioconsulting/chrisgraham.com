@@ -40,3 +40,4 @@ started_utc,finished_utc,queued,foi_read,added,held,rejected,unsure,published,no
 2026-11-17T17:00Z,2026-11-17T17:00Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
 2026-11-17T18:15Z,2026-11-17T18:15Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
 2026-11-17T20:00Z,2026-11-17T20:00Z,0,1,0,0,0,0,no,no,10 artifact not republished (FOI-only run); foi_photos.py needs PIL (PDF has no images)
+2026-11-18T09:00Z,2026-11-18T10:09Z,0,0,0,0,0,0,yes,yes,

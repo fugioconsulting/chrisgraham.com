@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-18 15:50 UTC",
+ "as_of": "2026-11-18 18:20 UTC",
  "last_sweep": "2026-11-18 15:50 UTC",
- "count": 74,
+ "count": 75,
  "cases": [
   {
    "num": "1",
@@ -1334,6 +1334,24 @@
    "summary": "Steven Howard Winkhart, 54, of Springfield, was charged in Clark County in September 2026 with grooming under ORC 2907.071(B), according to a Clark County Sheriff's Office arrest record.",
    "lat": "39.945",
    "lon": "-83.7903"
+  },
+  {
+   "num": "75",
+   "name": "Nicholas A. Kidd",
+   "age": "",
+   "city": "",
+   "county": "Huron",
+   "charged": "Aug 2026",
+   "charges": "Grooming",
+   "companion": "unspecified",
+   "status": "Pending (case 20260505)",
+   "resolved": "",
+   "source_url": "https://apps.huroncountyclerk.com/",
+   "thumb": "",
+   "aka": "kidd",
+   "summary": "Nicholas A. Kidd was charged in Huron County in August 2026 with grooming under R.C. 2907.071(B) and (C) (case 20260505); the case is pending, per the Huron County Clerk of Courts' reply to a records request.",
+   "lat": "41.1605",
+   "lon": "-82.5876"
   }
  ],
  "not_counted": [

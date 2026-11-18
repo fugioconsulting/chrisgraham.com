@@ -129,7 +129,7 @@ def same_person(name, county, row):
 
 def page_has_name(name, text):
     """First name, up to two middle names or initials, last name; or a court record's "LAST, FIRST" order."""
-    n, t = norm_name(name), " ".join(norm_name(text))
+    n, t = norm_name(name), " ".join(norm_name(re.sub(r"[\s,;:]+", " ", text or "")))   # a line break or comma is a word break, not nothing ("Kidd\nFiled" was read as "kiddfiled")
     f, l = re.escape(n[0]), re.escape(n[-1])
     return bool(re.search(rf"\b{f}\b(\s+\w+){{0,2}}\s+{l}\b|\b{l}\s+{f}\b", t))
 

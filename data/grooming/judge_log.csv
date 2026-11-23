@@ -53,3 +53,4 @@ started_utc,finished_utc,queued,foi_read,added,held,rejected,unsure,published,no
 2026-11-20T13:45Z,2026-11-20T13:45Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
 2026-11-20T16:15Z,2026-11-20T16:15Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
 2026-11-22T10:04Z,2026-11-22T10:11Z,0,0,0,0,0,0,yes,queued,
+2026-11-23T10:31Z,2026-11-23T13:34Z,0,0,0,0,0,0,yes,queued,

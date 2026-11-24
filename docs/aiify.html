@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <title>AIify | Chris Graham</title>
+  <link rel="canonical" href="https://chrisgraham.com/aiify">
+  <meta name="description" content="Four weekly one-hour sessions with Chris Graham. We find your inefficiency tax and automate it with AI.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chrisgraham.com/aiify">
+  <meta property="og:title" content="AIify: stop paying the inefficiency tax">
+  <meta property="og:description" content="Four weekly one-hour sessions with Chris Graham. We find your inefficiency tax and automate it with AI.">
+  <meta property="og:image" content="https://chrisgraham.com/img/ab17fb0ba68068fead4afcd7e8b7734d.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AIify: stop paying the inefficiency tax">
+  <meta name="twitter:description" content="Four weekly one-hour sessions with Chris Graham. We find your inefficiency tax and automate it with AI.">
+  <meta name="twitter:image" content="https://chrisgraham.com/img/ab17fb0ba68068fead4afcd7e8b7734d.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=EB+Garamond:regular,bold,900,100,400,500|Open+Sans:regular,bold,500|&display=swap">
+
+  <style>
+    :root {
+      --purple: #a686c8;
+      --lavender: rgb(193, 151, 238);
+      --ink: #000;
+      --paper: #fff;
+      --muted: rgba(255, 255, 255, 0.62);
+      --hairline: rgba(255, 255, 255, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; padding: 0; background: var(--ink); color: var(--paper); }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 21px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, .price, .cta { text-wrap: balance; }
+    p { text-wrap: pretty; }
+
+    .wrap { width: 100%; max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+    .site-header { padding: 28px 0; border-bottom: 1px solid var(--hairline); }
+    .site-header .wrap { max-width: 1080px; }
+    .brand { font-size: 22px; letter-spacing: 0.02em; color: var(--paper); text-decoration: none; }
+
+    .label {
+      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--lavender);
+      margin: 0 0 16px;
+    }
+
+    .hero { text-align: center; padding: 72px 0 8px; }
+    .hero h1 { font-size: clamp(38px, 8vw, 64px); font-weight: 400; line-height: 1.12; margin: 0; }
+    .hero .lede { color: var(--muted); max-width: 26em; margin: 22px auto 0; }
+
+    section.block { padding: 56px 0 0; }
+    section.block h2 { font-size: clamp(27px, 5vw, 38px); font-weight: 400; line-height: 1.2; margin: 0 0 16px; }
+    section.block p { margin: 0 0 16px; }
+    section.block p.quiet { color: var(--muted); }
+
+    ul.plain { list-style: none; margin: 0; padding: 0; }
+    ul.plain li { padding: 14px 0; border-top: 1px solid var(--hairline); }
+    ul.plain li:last-child { border-bottom: 1px solid var(--hairline); }
+    ul.plain b { font-weight: 500; color: var(--lavender); }
+
+    .offer {
+      margin-top: 56px;
+      padding: 36px 24px 32px;
+      border: 1px solid var(--purple);
+      border-radius: 6px;
+      text-align: center;
+    }
+    .price { font-size: clamp(52px, 12vw, 80px); line-height: 1; margin: 0; }
+    .price-note { margin: 12px 0 0; }
+    .spots { color: var(--muted); margin: 6px 0 0; font-size: 19px; }
+
+    .cta {
+      display: inline-block;
+      margin-top: 26px;
+      padding: 16px 30px;
+      background: var(--purple);
+      color: #000;
+      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .cta:hover { background: var(--lavender); }
+    .cta:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+    .fine { font-family: 'Open Sans', Helvetica, Arial, sans-serif; font-size: 13px; color: var(--muted); margin: 18px 0 0; }
+    .fine a { color: var(--lavender); }
+
+    details.voices { border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+    details.voices summary { cursor: pointer; padding: 16px 0; color: var(--lavender); }
+    details.voices blockquote { margin: 0 0 22px; padding: 0 0 0 16px; border-left: 2px solid var(--purple); }
+    details.voices cite { display: block; font-style: normal; color: var(--muted); font-size: 17px; margin-top: 6px; }
+
+    .site-footer {
+      margin-top: 88px;
+      padding: 32px 0 56px;
+      border-top: 1px solid var(--hairline);
+      text-align: center;
+      font-size: 15px;
+      color: var(--muted);
+    }
+    .site-footer a { color: var(--muted); text-decoration: none; }
+    .site-footer a:hover { color: var(--lavender); }
+
+    @media (max-width: 759px) { .site-header .wrap { padding-left: 68px; } }
+    @media (max-width: 640px) { .hero { padding-top: 48px; } }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Chris Graham</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section class="hero">
+      <p class="label" style="text-transform:none;font-size:15px;letter-spacing:0.12em">AIify</p>
+      <h1>Stop paying the inefficiency&nbsp;tax.</h1>
+      <p class="lede">Four weeks. Four one-hour sessions. We find the work AI should be doing for you, and we automate&nbsp;it.</p>
+    </section>
+
+    <section class="block">
+      <h2>You are paying a tax right&nbsp;now.</h2>
+      <p>I got this idea from Henry Ford's autobiography, and it has never left my head. The longer you wait to automate the thing you are eventually going to automate, the more you pay for waiting. You pay in time, in money, or in&nbsp;energy.</p>
+      <p>I call that the inefficiency tax.</p>
+      <p>There is a lot you could be doing smarter with AI today. You are just not sure how to get from here to there. I can get you there&nbsp;fast.</p>
+      <p>I will find the tax. I will remove it. An AI automation does that work for you from then&nbsp;on.</p>
+    </section>
+
+    <section class="block">
+      <h2>How it works</h2>
+      <ul class="plain">
+        <li><b>Four sessions.</b> One hour on Zoom, once a week, for one month.</li>
+        <li><b>Your real life and business.</b> We look for the places you are paying the inefficiency tax.</li>
+        <li><b>We automate it together.</b> You leave with AI doing that work for you.</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h2>The guarantee</h2>
+      <p>If you are not saving at least an hour a week by the time we are done, I will keep meeting with you for free until you&nbsp;are.</p>
+    </section>
+
+    <section class="block">
+      <h2>Who you are working with</h2>
+      <ul class="plain">
+        <li>I built my first AI-powered automation in 2010, by hand.</li>
+        <li>I have coached Emmy, Grammy, Oscar and Tony winners.</li>
+      </ul>
+    </section>
+
+    <!-- Client quotes render here from the VOICES list in the script below.
+         The section stays hidden while the list is empty. Real quotes only,
+         each one approved by the person quoted. -->
+    <section class="block" id="voices" hidden>
+      <details class="voices">
+        <summary>What clients say</summary>
+        <div id="voices-list"></div>
+      </details>
+    </section>
+
+    <section class="offer" id="offer">
+      <p class="label" id="tier-label">Founding price</p>
+      <p class="price" id="price">$1,500</p>
+      <p class="price-note" id="price-note">for the first 5 people</p>
+      <p class="spots" id="spots"></p>
+      <a class="cta" id="cta" href="mailto:hello@chrisgraham.com?subject=AIify">Claim your spot</a>
+      <p class="fine" id="fine">Questions? Email <a href="mailto:hello@chrisgraham.com?subject=AIify">hello@chrisgraham.com</a>.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      © Chris Graham · Fugio Consulting, LLC · <a href="/">chrisgraham.com</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      /* Real client quotes only. { quote: "...", name: "...", credit: "..." } */
+      var VOICES = [];
+
+      /* Price ladder. Stripe enforces the 5-per-price cap on each payment
+         link; /aiify-status.json (written by scripts/aiify/stripe_sync.py)
+         tells this page how many have sold and where each price checks out. */
+      var PRICES = [1500, 2000, 2500, 3000];
+      var PER_TIER = 5;
+      var MAIL = 'mailto:hello@chrisgraham.com?subject=AIify';
+
+      function money(n) { return '$' + n.toLocaleString('en-US'); }
+      function byId(id) { return document.getElementById(id); }
+
+      function render(status) {
+        var sold = Math.max(0, parseInt(status && status.sold, 10) || 0);
+        var links = (status && status.links) || [];
+        var tier = Math.floor(sold / PER_TIER);
+
+        if (tier >= PRICES.length) {
+          byId('tier-label').textContent = 'Sold out';
+          byId('price').textContent = 'Waitlist';
+          byId('price-note').textContent = 'All ' + (PRICES.length * PER_TIER) + ' spots are taken.';
+          byId('spots').textContent = '';
+          byId('cta').textContent = 'Join the waitlist';
+          byId('cta').href = MAIL + '%20waitlist';
+          return;
+        }
+
+        var left = PER_TIER - (sold % PER_TIER);
+        byId('tier-label').textContent = tier === 0 ? 'Founding price' : 'Current price';
+        byId('price').textContent = money(PRICES[tier]);
+        byId('price-note').textContent = tier === 0 ? 'for the first 5 people' : 'for the next 5 people';
+        var next = tier + 1 < PRICES.length ? ' Then ' + money(PRICES[tier + 1]) + '.' : '';
+        byId('spots').textContent = left + (left === 1 ? ' spot' : ' spots') + ' left at this price.' + next;
+        byId('cta').href = links[tier] || MAIL;
+      }
+
+      render(null);
+      try {
+        fetch('/aiify-status.json', { cache: 'no-store' })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (s) { if (s) render(s); })
+          .catch(function () {});
+      } catch (e) {}
+
+      if (VOICES.length) {
+        var list = byId('voices-list');
+        VOICES.forEach(function (v) {
+          var b = document.createElement('blockquote');
+          b.appendChild(document.createTextNode(v.quote));
+          var c = document.createElement('cite');
+          c.textContent = v.name + (v.credit ? ', ' + v.credit : '');
+          b.appendChild(c);
+          list.appendChild(b);
+        });
+        byId('voices').hidden = false;
+      }
+    })();
+  </script>
+
+  <script src="/assets/site-nav.js"></script>
+</body>
+</html>

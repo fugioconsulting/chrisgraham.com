@@ -17,6 +17,7 @@ Details and one-time setup: `DEPLOY.md`.
 ## Layout
 
 - `docs/index.html` homepage, `docs/coaching.html`, `docs/pete.html`, `docs/group.html`. Pages resolves `/coaching` to `coaching.html` and `/group` to `group.html`.
+- `docs/aiify.html` is the AIify coaching offer (chrisgraham.com/aiify; `docs/404.html` sends /AIify and other capitalizations there, so never add a second file that differs only by case). Its price ladder (5 spots each at $1,500, $2,000, $2,500, $3,000) reads `docs/aiify-status.json`, which the `AIify price ladder` workflow rewrites twice an hour from Stripe with `scripts/aiify/stripe_sync.py` (repo secret `STRIPE_AIIFY_KEY`, a restricted key with Payment Links read; without it the workflow does nothing and the count stays where it is, though Stripe still caps each price at 5 sales). Never hand-edit the JSON once the secret is set. Client quotes go in the `VOICES` list in the page script; real, approved quotes only.
 - `docs/studio.html` is a redirect shell (meta refresh plus `location.replace`) to the Riverside studio page. Not a real page.
 - `docs/` is the only directory Pages serves, and `server.js` previews only `docs/`. Nothing under `public/` is served (there is no `public/`; do not recreate it); put pages in `docs/`.
 - Favicon set, referenced from the page heads: `docs/favicon-32.png`, `docs/favicon.ico`, `docs/apple-touch-icon.png`. `docs/icon-192.png` is currently unused.

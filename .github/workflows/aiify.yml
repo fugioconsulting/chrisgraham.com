@@ -1,0 +1,31 @@
+name: AIify price ladder
+on:
+  schedule:
+    - cron: "7,37 * * * *"   # twice an hour; Stripe itself enforces the 5-per-price cap in between
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: aiify-ladder
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Make missing payment links and count sales
+        env:
+          STRIPE_AIIFY_KEY: ${{ secrets.STRIPE_AIIFY_KEY }}
+        run: python3 scripts/aiify/stripe_sync.py
+      - name: Commit and push if the count or links changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "aiify bot"
+          git config user.email "bot@chrisgraham.com"
+          git add docs/aiify-status.json
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "aiify: sales count $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" >/dev/null 2>&1 || echo "note: could not request a Pages build"

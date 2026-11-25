@@ -59,3 +59,4 @@ started_utc,finished_utc,queued,foi_read,added,held,rejected,unsure,published,no
 2026-11-24T21:01Z,2026-11-24T21:01Z,0,1,0,0,0,0,no,no,FOI prefilter (code + cheap models)
 2026-11-25T10:03Z,2026-11-25T10:08Z,0,0,0,0,0,0,yes,yes,
 2026-11-25T15:31Z,2026-11-25T15:31Z,0,2,0,0,0,0,no,no,FOI prefilter (code + cheap models)
+2026-11-25T15:52Z,2026-11-25T15:52Z,0,1,1,0,0,0,no,no,FOI-only run: step 10 artifact and notify skipped; foi_photos needs PIL (no images in reply)

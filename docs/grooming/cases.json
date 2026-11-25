@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-25 15:31 UTC",
+ "as_of": "2026-11-25 15:52 UTC",
  "last_sweep": "2026-11-25 15:31 UTC",
- "count": 75,
+ "count": 76,
  "cases": [
   {
    "num": "1",
@@ -1352,6 +1352,24 @@
    "summary": "Nicholas A. Kidd was charged in Huron County in August 2026 with grooming under R.C. 2907.071(B) and (C) (case 20260505); the case is pending, per the Huron County Clerk of Courts' reply to a records request.",
    "lat": "41.1605",
    "lon": "-82.5876"
+  },
+  {
+   "num": "76",
+   "name": "Eric S. Pierce",
+   "age": "",
+   "city": "",
+   "county": "Scioto",
+   "charged": "Mar 2026",
+   "charges": "Grooming",
+   "companion": "unspecified",
+   "status": "Dismissed pre-arraignment Aug 28, 2026 (case 26CR000200)",
+   "resolved": "dismissed",
+   "source_url": "https://sciotocountycpcourt.org/eservices/home.page.2",
+   "thumb": "",
+   "aka": "pierce",
+   "summary": "Eric S. Pierce was charged with grooming in Scioto County Common Pleas Court in March 2026 (case 26CR000200); the case was dismissed before arraignment in August 2026.",
+   "lat": "38.8028",
+   "lon": "-82.9668"
   }
  ],
  "not_counted": [
